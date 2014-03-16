@@ -1,0 +1,15 @@
+{
+  "name": "Transient Emacs",
+  "main": "./lib/transient-emacs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Emacs mode with transient mark",
+  "repository": "https://github.com/yasuyuky/transient-emacs",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "underscore-plus": "1.x"
+  }
+}
