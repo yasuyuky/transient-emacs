@@ -21,9 +21,7 @@ class KillRing
   push: (texts) ->
     @buffer.push texts
     atom.clipboard.write texts.join '\n'
-    console.log atom.clipboard.read()
     if @buffer.length > @limit then @buffer.shift()
-    console.log _.last @buffer
     @sealed = false
 
   update: (texts,forward) ->

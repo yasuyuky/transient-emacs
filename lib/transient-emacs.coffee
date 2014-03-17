@@ -31,10 +31,8 @@ module.exports =
     editorView.on "cursor:moved editor:consolidate-selections", (event) => @seal_killring()
 
   set_mark: ->
-    console.log "set mark command"
     editorView = atom.workspaceView.find '.editor.is-focused'
     editorView.toggleClass "transient-marked"
-    console.log atom.workspaceView.find('.transient-marked')
     editor = atom.workspace.getActiveEditor()
     cursor.clearSelection() for cursor in editor.getCursors()
 
