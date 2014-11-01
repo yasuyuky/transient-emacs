@@ -23,8 +23,8 @@
   'ctrl-e':'editor:move-to-end-of-line'
   'ctrl-right':'editor:move-to-beginning-of-next-word'
   'ctrl-left':'editor:move-to-beginning-of-word'
-  'ctrl-up':'emacs:move-to-prev-empty-line'
-  'ctrl-down':'emacs:move-to-next-empty-line'
+  'ctrl-up':'editor:move-to-beginning-of-previous-paragraph'
+  'ctrl-down':'editor:move-to-beginning-of-next-paragraph'
   'ctrl-v':'core:page-down'
   'alt-v':'core:page-up'
   'escape v':'core:page-up'
@@ -48,8 +48,10 @@
 '.find-and-replace':
   'ctrl-s':'find-and-replace:find-next'
 
-'div.editor':
+"atom-text-editor !important, atom-text-editor.mini !important":
   'ctrl-g':'editor:consolidate-selections'
+
+'div.editor':
   'ctrl-g':'core:cancel'
   'ctrl-space':'emacs:set-mark'
 
@@ -67,8 +69,8 @@
   'ctrl-e':'editor:select-to-end-of-line'
   'ctrl-right':'editor:select-to-beginning-of-next-word'
   'ctrl-left':'editor:select-to-beginning-of-word'
-  'ctrl-up':'emacs:select-to-prev-empty-line'
-  'ctrl-down':'emacs:select-to-next-empty-line'
+  'ctrl-up':'editor:select-to-beginning-of-previous-paragraph'
+  'ctrl-down':'editor:select-to-beginning-of-next-paragraph'
   'ctrl-v':'core:select-page-down'
   'alt-<':'core:select-to-top'
   'escape <':'core:select-to-top'

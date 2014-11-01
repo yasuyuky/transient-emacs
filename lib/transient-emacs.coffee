@@ -54,7 +54,7 @@ module.exports =
 
   kill_region: ->
     editor = @_push_regeon_to_killring()
-    editor.cutSelectedText()
+    editor.delete()
 
   copy_region: ->
     editor = @_push_regeon_to_killring()
@@ -66,7 +66,7 @@ module.exports =
     selectionRanges = (s.getScreenRange() for s in editor.getSelections())
     texts = (editor.getTextInRange r for r in selectionRanges)
     @killring.put texts,false
-    editor.cutSelectedText()
+    editor.delete()
     @seal_blocker = texts.length
 
   kill: ->
@@ -75,8 +75,8 @@ module.exports =
     selectionRanges = (s.getScreenRange() for s in editor.getSelections())
     texts = (editor.getTextInRange(r) or '\n' for r in selectionRanges)
     @killring.put texts,true
-    editor.cutSelectedText()
-    @seal_blocker = Math.max 0,_.filter(texts,(t) => t == '\n').length-1
+    editor.delete()
+    @seal_blocker = texts.length
 
   yank: ->
     editor = atom.workspace.getActiveEditor()
