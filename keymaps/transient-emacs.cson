@@ -11,6 +11,12 @@
 'body':
   'ctrl-y':'core:paste'
 
+'.tool-panel.panel-left, .tool-panel.panel-right':
+  'ctrl-g':'tool-panel:unfocus'
+
+'.mini.editor':
+  'ctrl-g':'core:cancel'
+
 '.editor':
   'ctrl-g':'emacs:cancel'
   'ctrl-@':'emacs:set-mark'
