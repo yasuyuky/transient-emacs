@@ -21,6 +21,7 @@ Keybindings
 See keymaps/transient-emacs.cson for detailed keybindings
 
 ```coffee-script
+'ctrl-g':'emacs:cancel'
 'ctrl-@':'emacs:set-mark'
 'ctrl-space':'emacs:set-mark'
 'ctrl-y':'emacs:yank'

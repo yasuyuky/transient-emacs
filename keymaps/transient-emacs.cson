@@ -12,6 +12,7 @@
   'ctrl-y':'core:paste'
 
 '.editor':
+  'ctrl-g':'emacs:cancel'
   'ctrl-@':'emacs:set-mark'
   'ctrl-y':'emacs:yank'
   'ctrl-k':'emacs:kill'
@@ -47,13 +48,6 @@
 
 '.find-and-replace':
   'ctrl-s':'find-and-replace:find-next'
-
-"atom-text-editor !important, atom-text-editor.mini !important":
-  'ctrl-g':'editor:consolidate-selections'
-
-'div.editor':
-  'ctrl-g':'core:cancel'
-  'ctrl-space':'emacs:set-mark'
 
 '.editor.transient-marked':
   'ctrl-g':'emacs:set-mark'

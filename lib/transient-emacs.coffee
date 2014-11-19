@@ -16,6 +16,7 @@ module.exports =
   serialize: ->
 
   enableEmacs: (editorView) ->
+    editorView.command "emacs:cancel", (e) => @cancel e
     editorView.command "emacs:set-mark", => @set_mark()
     editorView.command "emacs:yank", => @yank()
     editorView.command "emacs:kill", => @kill()
@@ -29,6 +30,26 @@ module.exports =
     editorView.command "emacs:select-to-prev-empty-line", => @move_or_select_to_empty_line(false,true)
 
     editorView.on "cursor:moved editor:consolidate-selections", (event) => @seal_killring()
+
+  cancel: (e)->
+    editor = atom.workspace.getActiveEditor()
+    return true if @clear_selections editor
+    return true if @consolidate_selections editor
+    atom.workspaceView.trigger "core:cancel"
+
+  clear_selections: (editor)->
+    return true if editor.getSelections().some (sel) ->
+      unless sel.isEmpty()
+        sel.clear()
+      false
+    false
+
+  consolidate_selections: (editor)->
+    cursors = editor.getCursors()
+    if cursors.length > 1
+      editor.setCursorBufferPosition editor.getCursorBufferPositions()[0]
+      return true
+    false
 
   set_mark: ->
     editorView = atom.workspaceView.find '.editor.is-focused'
