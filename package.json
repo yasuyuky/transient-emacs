@@ -3,11 +3,11 @@
   "main": "./lib/transient-emacs",
   "version": "0.4.1",
   "private": true,
-  "description": "Emacs mode using transient mark",
+  "description": "Emacs mode using transient mark (for OSX)",
   "repository": "https://github.com/yasuyuky/transient-emacs",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">0.149.0"
   },
   "dependencies": {
     "underscore-plus": "1.x"

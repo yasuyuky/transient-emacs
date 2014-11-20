@@ -3,6 +3,8 @@ Transient Emacs for Atom Editor
 
 Emacs (transient mark mode) for Atom Editor.
 
+**(Currently only works with OSX)**
+
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
 
@@ -20,10 +22,36 @@ Keybindings
 
 See keymaps/transient-emacs.cson for detailed keybindings
 
+Curently this package uses [Incremental Search Package](https://atom.io/packages/incremental-search)
+for search key-bindings.
+It's good enough to me ;)
+
 ```coffee-script
+'body':
+'ctrl-x b':'fuzzy-finder:toggle-buffer-finder'
+'ctrl-x ctrl-b':'fuzzy-finder:toggle-file-finder'
+'ctrl-x ctrl-f':'application:open'
+'ctrl-x ctrl-c':'application:quit'
+
+'ctrl-x 2':'pane:split-right'
+'ctrl-x 3':'pane:split-down'
+'ctrl-x 0':'pane:close'
+'ctrl-x ctrl-w':'core:close'
+'ctrl-x o':'window:focus-next-pane'
+
+'ctrl-g':'core:cancel'
+
+'.tool-panel.panel-left, .tool-panel.panel-right':
+'ctrl-g':'tool-panel:unfocus'
+
+'atom-text-editor[mini]':
+'ctrl-g':'core:cancel'
+'ctrl-k':'editor:cut-to-end-of-line'
+'ctrl-y':'core:paste'
+
+'atom-text-editor':
 'ctrl-g':'emacs:cancel'
 'ctrl-@':'emacs:set-mark'
-'ctrl-space':'emacs:set-mark'
 'ctrl-y':'emacs:yank'
 'ctrl-k':'emacs:kill'
 'ctrl-w':'emacs:kill-region-or-backward-word'
@@ -34,8 +62,8 @@ See keymaps/transient-emacs.cson for detailed keybindings
 'ctrl-e':'editor:move-to-end-of-line'
 'ctrl-right':'editor:move-to-beginning-of-next-word'
 'ctrl-left':'editor:move-to-beginning-of-word'
-'ctrl-up':'emacs:move-to-prev-empty-line'
-'ctrl-down':'emacs:move-to-next-empty-line'
+'ctrl-up':'editor:move-to-beginning-of-previous-paragraph'
+'ctrl-down':'editor:move-to-beginning-of-next-paragraph'
 'ctrl-v':'core:page-down'
 'alt-v':'core:page-up'
 'escape v':'core:page-up'
@@ -44,15 +72,39 @@ See keymaps/transient-emacs.cson for detailed keybindings
 'alt->':'core:move-to-bottom'
 'escape >':'core:move-to-bottom'
 
-'ctrl-s':'find-and-replace:find-next'
+'ctrl-s':'incremental-search:forward'
+'ctrl-r':'incremental-search:backward'
 
 'ctrl-x ctrl-s':'core:save'
-'ctrl-x ctrl-f':'application:open'
-'ctrl-x ctrl-c':'application:quit'
 'ctrl-x u':'core:undo'
 'ctrl-x k':'core:close'
+
+'alt-.':'symbols-view:toggle-file-symbols'
 
 'alt-x':'command-palette:toggle'
 'escape x':'command-palette:toggle'
 'alt-/':'autocomplete:toggle'
+
+'atom-text-editor.transient-marked':
+'ctrl-g':'emacs:set-mark'
+'right':'core:select-right'
+'ctrl-f':'core:select-right'
+'left':'core:select-left'
+'ctrl-b':'core:select-left'
+'up':'core:select-up'
+'ctrl-p':'core:select-up'
+'down':'core:select-down'
+'ctrl-n':'core:select-down'
+'ctrl-a':'editor:select-to-first-character-of-line'
+'ctrl-e':'editor:select-to-end-of-line'
+'ctrl-right':'editor:select-to-beginning-of-next-word'
+'ctrl-left':'editor:select-to-beginning-of-word'
+'ctrl-up':'editor:select-to-beginning-of-previous-paragraph'
+'ctrl-down':'editor:select-to-beginning-of-next-paragraph'
+'ctrl-v':'core:select-page-down'
+'alt-<':'core:select-to-top'
+'escape <':'core:select-to-top'
+'alt->':'core:select-to-bottom'
+'escape >':'core:select-to-bottom'
+
 ```

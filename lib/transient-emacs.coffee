@@ -16,7 +16,7 @@ module.exports =
   serialize: ->
 
   enableEmacs: (editorView) ->
-    editorView.command "emacs:cancel", (e) => @cancel e
+    editorView.command "emacs:cancel", => @cancel()
     editorView.command "emacs:set-mark", => @set_mark()
     editorView.command "emacs:yank", => @yank()
     editorView.command "emacs:kill", => @kill()
@@ -31,7 +31,7 @@ module.exports =
 
     editorView.on "cursor:moved editor:consolidate-selections", (event) => @seal_killring()
 
-  cancel: (e)->
+  cancel: ->
     editor = atom.workspace.getActiveEditor()
     return true if @clear_selections editor
     return true if @consolidate_selections editor

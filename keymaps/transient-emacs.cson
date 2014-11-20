@@ -9,15 +9,28 @@
 # https://atom.io/docs/latest/advanced/keymaps
 
 'body':
-  'ctrl-y':'core:paste'
+  'ctrl-x b':'fuzzy-finder:toggle-buffer-finder'
+  'ctrl-x ctrl-b':'fuzzy-finder:toggle-file-finder'
+  'ctrl-x ctrl-f':'application:open'
+  'ctrl-x ctrl-c':'application:quit'
 
+  'ctrl-x 2':'pane:split-right'
+  'ctrl-x 3':'pane:split-down'
+  'ctrl-x 0':'pane:close'
+  'ctrl-x ctrl-w':'core:close'
+  'ctrl-x o':'window:focus-next-pane'
+  
+  'ctrl-g':'core:cancel'
+      
 '.tool-panel.panel-left, .tool-panel.panel-right':
   'ctrl-g':'tool-panel:unfocus'
 
-'.mini.editor':
+'atom-text-editor[mini]':
   'ctrl-g':'core:cancel'
+  'ctrl-k':'editor:cut-to-end-of-line'
+  'ctrl-y':'core:paste'
 
-'.editor':
+'atom-text-editor':
   'ctrl-g':'emacs:cancel'
   'ctrl-@':'emacs:set-mark'
   'ctrl-y':'emacs:yank'
@@ -40,22 +53,20 @@
   'alt->':'core:move-to-bottom'
   'escape >':'core:move-to-bottom'
 
-  'ctrl-s':'find-and-replace:find-next'
+  'ctrl-s':'incremental-search:forward'
+  'ctrl-r':'incremental-search:backward'
 
   'ctrl-x ctrl-s':'core:save'
-  'ctrl-x ctrl-f':'application:open'
-  'ctrl-x ctrl-c':'application:quit'
   'ctrl-x u':'core:undo'
   'ctrl-x k':'core:close'
 
+  'alt-.':'symbols-view:toggle-file-symbols'
+  
   'alt-x':'command-palette:toggle'
   'escape x':'command-palette:toggle'
   'alt-/':'autocomplete:toggle'
 
-'.find-and-replace':
-  'ctrl-s':'find-and-replace:find-next'
-
-'.editor.transient-marked':
+'atom-text-editor.transient-marked':
   'ctrl-g':'emacs:set-mark'
   'right':'core:select-right'
   'ctrl-f':'core:select-right'
