@@ -1,5 +1,4 @@
 KillRing = require '../lib/kill-ring'
-{WorkspaceView} = require 'atom'
 
 describe "Kill Ring", ->
 

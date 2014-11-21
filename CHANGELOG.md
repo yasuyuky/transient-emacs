@@ -1,3 +1,6 @@
+## 0.6.0
+* Prepare for Atom's new API
+
 ## 0.5.0
 * Add pane commands
 * Use https://atom.io/packages/incremental-search for incremental search

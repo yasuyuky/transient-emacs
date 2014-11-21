@@ -17,12 +17,11 @@
   'ctrl-x 2':'pane:split-right'
   'ctrl-x 3':'pane:split-down'
   'ctrl-x 0':'pane:close'
-  'ctrl-x ctrl-w':'core:close'
   'ctrl-x o':'window:focus-next-pane'
-  
+
   'ctrl-g':'core:cancel'
-      
-'.tool-panel.panel-left, .tool-panel.panel-right':
+
+'atom-panel':
   'ctrl-g':'tool-panel:unfocus'
 
 'atom-text-editor[mini]':
@@ -45,6 +44,10 @@
   'ctrl-left':'editor:move-to-beginning-of-word'
   'ctrl-up':'editor:move-to-beginning-of-previous-paragraph'
   'ctrl-down':'editor:move-to-beginning-of-next-paragraph'
+
+  'ctrl-shift-right':'editor:select-to-beginning-of-next-word'
+  'ctrl-shift-left':'editor:select-to-beginning-of-word'
+
   'ctrl-v':'core:page-down'
   'alt-v':'core:page-up'
   'escape v':'core:page-up'
@@ -57,11 +60,12 @@
   'ctrl-r':'incremental-search:backward'
 
   'ctrl-x ctrl-s':'core:save'
+  'ctrl-x ctrl-w':'core:save-as'
   'ctrl-x u':'core:undo'
   'ctrl-x k':'core:close'
 
   'alt-.':'symbols-view:toggle-file-symbols'
-  
+
   'alt-x':'command-palette:toggle'
   'escape x':'command-palette:toggle'
   'alt-/':'autocomplete:toggle'
