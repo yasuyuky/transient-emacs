@@ -1,6 +1,7 @@
 ## 0.6.0
 * Prepare for Atom's new API
 * Add some tests
+* Remove deprecated function
 
 ## 0.5.0
 * Add pane commands

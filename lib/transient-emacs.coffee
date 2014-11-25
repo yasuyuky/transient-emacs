@@ -22,10 +22,6 @@ module.exports =
      "emacs:copy-region": => @copy_region()
      "emacs:kill-backward-word": => @kill_backward_word()
      "emacs:kill-region-or-backward-word": => @kill_region_or_backward_word()
-     "emacs:move-to-next-empty-line": => @move_or_select_to_empty_line(true)
-     "emacs:move-to-prev-empty-line": => @move_or_select_to_empty_line(false)
-     "emacs:select-to-next-empty-line": => @move_or_select_to_empty_line(true,true)
-     "emacs:select-to-prev-empty-line": => @move_or_select_to_empty_line(false,true)
 
     atom.workspace.getTextEditors().forEach (editor) =>
       @command_listeners.push editor.onDidChangeCursorPosition =>
@@ -122,22 +118,3 @@ module.exports =
       c.selection.insertText top[i] for c,i in cursors
     else if top
       c.selection.insertText top.join '\n' for c in cursors
-
-  move_or_select_to_empty_line: (forward,select=false) ->
-    editor = atom.workspace.getActiveEditor()
-    selections = editor.getSelections()
-    lines = editor.getText().split '\n'
-    all_indices = (i for l,i in lines when /^\s*$/.test l)
-    for s in selections
-      rows = s.getBufferRowRange()
-      cur_row = if s.isReversed() then _.min rows else _.max rows
-      indices = _.filter all_indices, (x) => if forward then x > cur_row else x < cur_row
-      new_row = if forward then _.head indices else _.last indices
-      new_row ?= if forward then lines.length-1 else 0
-      if select
-        if forward
-          s.selectDown() for j in [cur_row..new_row-1]
-        else
-          s.selectUp() for j in [new_row..cur_row-1]
-      else
-        s.setBufferRange new Range [new_row,0],[new_row,0]
