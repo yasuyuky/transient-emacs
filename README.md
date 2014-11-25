@@ -5,6 +5,8 @@ Emacs (transient mark mode) for Atom Editor.
 
 **(Currently only works with OSX)**
 
+[![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
+
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
 
