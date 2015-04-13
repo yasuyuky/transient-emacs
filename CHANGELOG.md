@@ -1,3 +1,6 @@
+## 0.7.0
+* Add keymaps for Windows/Linux
+
 ## 0.6.0
 * Prepare for Atom's new API
 * Add some tests
