@@ -30,8 +30,6 @@
   'ctrl-y':'core:paste'
 
 'atom-workspace atom-text-editor:not([mini])':
-  'backspace':'emacs:backspace'
-  'ctrl-h':'emacs:backspace'
   'ctrl-g':'emacs:cancel'
   'ctrl-@':'emacs:set-mark'
   'ctrl-`':'emacs:set-mark'
@@ -42,7 +40,8 @@
   'escape w':'emacs:copy-region'
 
   'ctrl-d':'core:delete'
-  'ctrl-h':'core:backspace'
+  'backspace':'emacs:backspace'
+  'ctrl-h':'emacs:backspace'
 
   'ctrl-n':'core:move-down'
   'ctrl-p':'core:move-up'
