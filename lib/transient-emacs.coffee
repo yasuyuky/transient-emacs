@@ -14,6 +14,7 @@ module.exports =
   is_user_command: true
   auto_move: 0
   isearch_word: ""
+  isearch_last: ""
   isearch_tile: null
 
   activate: (state) ->
@@ -102,14 +103,16 @@ module.exports =
   activate_isearch: (forward)->
     editor = atom.workspace.getActiveEditor()
     editorView = atom.views.getView editor
-    $(editorView).toggleClass "searching"
+    $(editorView).addClass "searching"
     @isforward = forward
+    @isearch_word = @isearch_last if @isearch_tile? and not @isearch_word
     @isearch @isearch_word
 
   deactivate_isearch: ()->
     if @isearch_tile?
       @isearch_tile?.destroy()
       @isearch_tile = null
+      @isearch_last = @isearch_word
       @isearch_word = ""
       editor = atom.workspace.getActiveEditor()
       editorView = atom.views.getView editor
