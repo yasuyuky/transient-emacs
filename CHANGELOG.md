@@ -1,3 +1,7 @@
+## 0.8.0
+* Add build-in Incremental Search
+* Replace Old APIs
+
 ## 0.7.0
 * Add keymaps for Windows/Linux
 
