@@ -48,7 +48,7 @@ module.exports =
           @isearch_word += e.Text
           @isearch @isearch_word
 
-    @keymap_listener = atom.keymap.onDidMatchBinding (e)=>
+    @keymap_listener = atom.keymaps.onDidMatchBinding (e)=>
       if @isearch_tile
         if e.keystrokes.length == 1
           @isearch_word += e.keystrokes
@@ -59,7 +59,7 @@ module.exports =
         else if e.keystrokes == 'space'
           @isearch_word += ' '
           @isearch @isearch_word
-    @keymap_flistener = atom.keymap.onDidFailToMatchBinding (e)->
+    @keymap_flistener = atom.keymaps.onDidFailToMatchBinding (e)->
       # console.log "Fail",e
 
     @killring = new KillRing()
@@ -76,7 +76,7 @@ module.exports =
     @killring.seal()
 
   cancel: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     return if @deactivate_isearch()
     return if @clear_selections editor
     return if @consolidate_selections editor
@@ -97,11 +97,11 @@ module.exports =
       else
         @deactivate_isearch()
       return false
-    editorView = atom.views.getView atom.workspace.getActiveEditor()
+    editorView = atom.views.getView atom.workspace.getActiveTextEditor()
     atom.commands.dispatch editorView, 'core:backspace'
 
   activate_isearch: (forward)->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).addClass "searching"
     @isforward = forward
@@ -114,7 +114,7 @@ module.exports =
       @isearch_tile = null
       @isearch_last = @isearch_word
       @isearch_word = ""
-      editor = atom.workspace.getActiveEditor()
+      editor = atom.workspace.getActiveTextEditor()
       editorView = atom.views.getView editor
       $(editorView).removeClass "searching"
       return true
@@ -148,7 +148,7 @@ module.exports =
   isearch: (word)->
     @_update_statusbar word,true
     return unless word
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     return if not editor or editor.mini
     buffer_end = editor.getBuffer().getEndPosition()
     re = @_create_re word
@@ -179,20 +179,20 @@ module.exports =
     false
 
   set_mark: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).toggleClass "transient-marked"
     cursor.clearSelection() for cursor in editor.getCursors()
 
   kill_region_or_backward_word: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     if editor.getSelection().isEmpty()
       @kill_backward_word()
     else
       @kill_region()
 
   _push_regeon_to_killring: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).removeClass "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
@@ -210,7 +210,7 @@ module.exports =
 
   kill_backward_word: ->
     @is_user_command = false
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editor.selectToBeginningOfWord()
     texts = (s.getText() for s in editor.getSelections())
     @killring.put texts,false
@@ -219,7 +219,7 @@ module.exports =
 
   kill: ->
     @is_user_command = false
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editor.selectToEndOfLine()
     texts = (s.getText() or '\n' for s in editor.getSelections())
     @killring.put texts,true
@@ -227,7 +227,7 @@ module.exports =
     @is_user_command = true
 
   yank: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     cursors = editor.getCursors()
     top = @killring.top()
     if cursors.length == top?.length
