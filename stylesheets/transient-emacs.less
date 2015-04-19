@@ -4,6 +4,26 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.editor.transient-marked .gutter .line-number.cursor-line {
+atom-text-editor.transient-marked.gutter.line-number.cursor-line {
   background-color: @background-color-selected;
+  //background-color: #00c;
+}
+
+.status-bar .isearch {
+  padding-left: 2;
+  padding-right: 2;
+}
+
+.status-bar .isearch .isearch-text {
+  font-weight: bold;
+  margin-left: 2;
+  margin-right: 2;
+}
+
+.status-bar .isearch .found {
+  color: @text-color-success;
+}
+
+.status-bar .isearch .not-found {
+  color: @text-color-error;
 }
