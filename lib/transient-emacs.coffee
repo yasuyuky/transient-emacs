@@ -186,7 +186,7 @@ module.exports =
 
   kill_region_or_backward_word: ->
     editor = atom.workspace.getActiveTextEditor()
-    if editor.getSelection().isEmpty()
+    if editor.getLastSelection().isEmpty()
       @kill_backward_word()
     else
       @kill_region()

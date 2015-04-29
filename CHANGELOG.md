@@ -1,3 +1,6 @@
+## 0.8.1
+* Replace deprecated API
+
 ## 0.8.0
 * Add build-in Incremental Search
 * Replace Old APIs
