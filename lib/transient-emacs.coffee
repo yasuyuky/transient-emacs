@@ -97,8 +97,7 @@ module.exports =
       else
         @deactivate_isearch()
       return false
-    editorView = atom.views.getView atom.workspace.getActiveTextEditor()
-    atom.commands.dispatch editorView, 'core:backspace'
+    atom.commands.dispatch document.activeElement, 'core:backspace'
 
   activate_isearch: (forward)->
     editor = atom.workspace.getActiveTextEditor()

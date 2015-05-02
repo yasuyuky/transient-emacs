@@ -1,3 +1,6 @@
+## 0.8.2
+* Fix invalid behavior of `emacs:backspace`
+
 ## 0.8.1
 * Replace deprecated API
 
