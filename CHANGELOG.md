@@ -1,3 +1,6 @@
+## 0.8.3
+* Rename style directory from `stylesheets` to `styles`
+
 ## 0.8.2
 * Fix invalid behavior of `emacs:backspace`
 
