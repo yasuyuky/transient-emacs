@@ -1,3 +1,6 @@
+## 0.8.4
+* Just update package.json
+
 ## 0.8.3
 * Rename style directory from `stylesheets` to `styles`
 
