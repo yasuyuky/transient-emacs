@@ -1,3 +1,6 @@
+## 0.8.5
+* Fix Keybindings of split screen
+
 ## 0.8.4
 * Just update package.json
 
