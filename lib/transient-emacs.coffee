@@ -33,20 +33,17 @@ module.exports =
       'emacs:backward-isearch': => @activate_isearch(false)
       'emacs:backspace': => return @backspace()
 
-    atom.workspace.getTextEditors().forEach (editor) =>
+    addEditorEventListner = (editor) =>
+      editorView = $(atom.views.getView(editor))
       @event_listeners.push editor.onDidChangeCursorPosition (e)=>
-        @killring.seal() if @is_user_command
+        @killring?.seal() if @is_user_command
         @deactivate_isearch() if @is_user_command
+      @event_listeners.push editorView.on 'click',(e)=>
+        editorView.removeClass "transient-marked"
 
+    atom.workspace.getTextEditors().forEach addEditorEventListner
     @add_text_editor_listener = atom.workspace.onDidAddTextEditor (event) =>
-      @event_listeners.push event.textEditor.onDidChangeCursorPosition =>
-        @killring.seal() if @is_user_command
-        @deactivate_isearch() if @is_user_command
-      @event_listeners.push event.textEditor.onWillInsertText (e)=>
-        if @isearch_tile
-          e.cancel()
-          @isearch_word += e.Text
-          @isearch @isearch_word
+      addEditorEventListner(event.textEditor)
 
     @keymap_listener = atom.keymaps.onDidMatchBinding (e)=>
       if @isearch_tile
