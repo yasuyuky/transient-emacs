@@ -201,7 +201,8 @@ module.exports =
 
   kill_region: ->
     editor = @_push_regeon_to_killring()
-    s.delete() for s in editor.getSelections() when not s.isEmpty()
+    editor.transact =>
+      s.delete() for s in editor.getSelections() when not s.isEmpty()
 
   copy_region: ->
     editor = @_push_regeon_to_killring()
@@ -210,26 +211,29 @@ module.exports =
   kill_backward_word: ->
     @is_user_command = false
     editor = atom.workspace.getActiveTextEditor()
-    editor.selectToBeginningOfWord()
-    texts = (s.getText() for s in editor.getSelections())
-    @killring.put texts,false
-    s.delete() for s in editor.getSelections() when not s.isEmpty()
+    editor.transact =>
+      editor.selectToBeginningOfWord()
+      texts = (s.getText() for s in editor.getSelections())
+      @killring.put texts,false
+      s.delete() for s in editor.getSelections() when not s.isEmpty()
     @is_user_command = true
 
   kill: ->
     @is_user_command = false
     editor = atom.workspace.getActiveTextEditor()
-    editor.selectToEndOfLine()
-    texts = (s.getText() or '\n' for s in editor.getSelections())
-    @killring.put texts,true
-    editor.delete()
+    editor.transact =>
+      editor.selectToEndOfLine()
+      texts = (s.getText() or '\n' for s in editor.getSelections())
+      @killring.put texts,true
+      editor.delete()
     @is_user_command = true
 
   yank: ->
     editor = atom.workspace.getActiveTextEditor()
-    cursors = editor.getCursors()
-    top = @killring.top()
-    if cursors.length == top?.length
-      c.selection.insertText top[i] for c,i in cursors
-    else if top
-      c.selection.insertText top.join '\n' for c in cursors
+    editor.transact =>
+      cursors = editor.getCursors()
+      top = @killring.top()
+      if cursors.length == top?.length
+        c.selection.insertText top[i] for c,i in cursors
+      else if top
+        c.selection.insertText top.join '\n' for c in cursors
