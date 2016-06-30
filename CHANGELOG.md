@@ -1,3 +1,8 @@
+## 0.8.6
+* Add some missing keybindings
+* Enable transaction
+* Fix to remove `transient-marked` on click
+
 ## 0.8.5
 * Fix Keybindings of split screen
 
