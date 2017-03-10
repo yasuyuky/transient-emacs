@@ -30,8 +30,8 @@ See keymaps/transient-emacs.cson for detailed keybindings
   'ctrl-x ctrl-f':'application:open'
   'ctrl-x ctrl-c':'application:quit'
 
-  'ctrl-x 2':'pane:split-right'
-  'ctrl-x 3':'pane:split-down'
+  'ctrl-x 2':'pane:split-down'
+  'ctrl-x 3':'pane:split-right'
   'ctrl-x 0':'pane:close'
   'ctrl-x o':'window:focus-next-pane'
 
