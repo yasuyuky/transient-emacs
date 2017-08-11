@@ -1,4 +1,4 @@
-{Range} = require 'atom'
+{Range,Pane} = require 'atom'
 {$,$$} = require 'space-pen'
 _ = require 'underscore-plus'
 KillRing = require './kill-ring'
@@ -7,6 +7,11 @@ KillRing = require './kill-ring'
 # String::endsWith   ?= (s) -> s is '' or @[-s.length..] is s
 
 module.exports =
+  config:
+    useLegacySearch:
+      type: 'boolean'
+      default: true
+
   killring: null
   commands: null
   event_listeners: []
@@ -16,6 +21,7 @@ module.exports =
   isearch_word: ""
   isearch_last: ""
   isearch_tile: null
+  isforward: true
 
   activate: (state) ->
     @seal_blocker = 0
@@ -29,8 +35,8 @@ module.exports =
       'emacs:copy-region': => @copy_region()
       'emacs:kill-backward-word': => @kill_backward_word()
       'emacs:kill-region-or-backward-word': => @kill_region_or_backward_word()
-      'emacs:isearch': => @activate_isearch(true)
-      'emacs:backward-isearch': => @activate_isearch(false)
+      'emacs:isearch': (e)=> @search(e,true)
+      'emacs:backward-isearch': (e)=> @search(e,false)
       'emacs:backspace': => return @backspace()
 
     addEditorEventListner = (editor) =>
@@ -38,24 +44,24 @@ module.exports =
       @event_listeners.push editor.onDidChangeCursorPosition (e)=>
         @killring?.seal() if @is_user_command
         @deactivate_isearch() if @is_user_command
-      @event_listeners.push editorView.on 'click',(e)=>
+      @event_listeners.push editorView.on 'click',(e)->
         editorView.removeClass "transient-marked"
 
     atom.workspace.getTextEditors().forEach addEditorEventListner
-    @add_text_editor_listener = atom.workspace.onDidAddTextEditor (event) =>
+    @add_text_editor_listener = atom.workspace.onDidAddTextEditor (event) ->
       addEditorEventListner(event.textEditor)
 
     @keymap_listener = atom.keymaps.onDidMatchBinding (e)=>
       if @isearch_tile
         if e.keystrokes.length == 1
           @isearch_word += e.keystrokes
-          @isearch @isearch_word
+          @search_next @isearch_word
         else if e.keystrokes.startsWith 'shift-'
           @isearch_word += e.keystrokes[-1..]
-          @isearch @isearch_word
+          @search_next @isearch_word
         else if e.keystrokes == 'space'
           @isearch_word += ' '
-          @isearch @isearch_word
+          @search_next @isearch_word
     @keymap_flistener = atom.keymaps.onDidFailToMatchBinding (e)->
       # console.log "Fail",e
 
@@ -90,11 +96,26 @@ module.exports =
     if @isearch_tile
       if @isearch_word.length
         @isearch_word = @isearch_word.slice 0, -1
-        @isearch @isearch_word
+        @search_next @isearch_word
       else
         @deactivate_isearch()
       return false
     atom.commands.dispatch document.activeElement, 'core:backspace'
+
+  search: (e,forward) ->
+    if atom.config.get("transient-emacs.useLegacySearch")
+      @activate_isearch(forward)
+    else
+      findAndReplace = atom.packages.getActivePackage("find-and-replace")
+      if findAndReplace?.mainModule.findPanel?.isVisible()
+        if forward
+          atom.commands.dispatch(e.target, "find-and-replace:find-next")
+          findAndReplace?.mainModule.findView?.focusFindEditor()
+        else
+          atom.commands.dispatch(e.target, "find-and-replace:find-previous")
+          findAndReplace?.mainModule.findView?.focusFindEditor()
+      else
+        atom.commands.dispatch(e.target, "find-and-replace:show")
 
   activate_isearch: (forward)->
     editor = atom.workspace.getActiveTextEditor()
@@ -102,7 +123,7 @@ module.exports =
     $(editorView).addClass "searching"
     @isforward = forward
     @isearch_word = @isearch_last if @isearch_tile? and not @isearch_word
-    @isearch @isearch_word
+    @search_next @isearch_word
 
   deactivate_isearch: ()->
     if @isearch_tile?
@@ -130,19 +151,19 @@ module.exports =
       @isearch_tile = status_bar.addLeftTile(item: istile, priority: 10)
 
   _create_re: (word)->
-    escaped = (_.map word, (c)->"["+c+"]").join ""
-    return new RegExp(escaped,"i") if word == word.toLowerCase()
+    escaped = (_.map word, (c)->if c=="\\" then "\\\\" else "["+c+"]").join ""
+    # return new RegExp(escaped,"i") if word == word.toLowerCase()
     new RegExp(escaped)
 
   _select_scroll: (editor, targets)->
     @is_user_command = false
-    editor.setSelectedBufferRanges targets if targets.length
+    if targets.length
+      editor.setSelectedBufferRanges targets, flash:true
     editor.scrollToCursorPosition()
     @is_user_command = true
 
-
-  isearch: (word)->
-    @_update_statusbar word,true
+  search_next: (word, silent)->
+    @_update_statusbar word,true unless silent
     return unless word
     editor = atom.workspace.getActiveTextEditor()
     return if not editor or editor.mini
@@ -158,14 +179,15 @@ module.exports =
         stop()
       ranges = [new Range(start, buffer_end), new Range([0,0], start)]
       ranges.reverse() unless @isforward
-      for range in ranges
-        editor.scanInBufferRange re, range, selector if @isforward
-        editor.backwardsScanInBufferRange re, range, selector unless @isforward
-        return selection if selection?
-      @_update_statusbar word,false
-      return new Range(sel.end, sel.end)
-    @_select_scroll editor,selections
-
+      for range,i in ranges
+        if @isforward
+          editor.scanInBufferRange re, range, selector
+        else
+          editor.backwardsScanInBufferRange re, range, selector
+        return [selection,i] if selection?
+      @_update_statusbar word,false unless silent
+      return [new Range(sel.end, sel.end),0]
+    @_select_scroll editor,(sel[0] for sel in selections)
 
   consolidate_selections: (editor)->
     cursors = editor.getCursors()

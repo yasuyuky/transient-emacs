@@ -105,6 +105,11 @@
   'alt->':'core:select-to-bottom'
   'escape >':'core:select-to-bottom'
 
+'.find-and-replace':
+  'enter': 'find-and-replace:toggle'
+  'ctrl-s':'emacs:isearch'
+  'ctrl-r':'emacs:backward-isearch'
+
 'atom-workspace atom-text-editor.searching':
   'enter': 'emacs:cancel'
   'space': 'emacs:input-isearch'
