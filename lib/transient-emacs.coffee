@@ -220,7 +220,7 @@ module.exports =
 
   kill_region: ->
     editor = @_push_regeon_to_killring()
-    editor.transact =>
+    editor.transact ->
       s.delete() for s in editor.getSelections() when not s.isEmpty()
 
   copy_region: ->
