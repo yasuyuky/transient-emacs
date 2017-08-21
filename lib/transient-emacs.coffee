@@ -209,7 +209,6 @@ module.exports =
       @kill_region()
 
   _push_regeon_to_killring: (editor) ->
-    editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).removeClass "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
