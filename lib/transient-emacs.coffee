@@ -11,7 +11,6 @@ module.exports =
     useLegacySearch:
       type: 'boolean'
       default: true
-
   killring: null
   commands: null
   event_listeners: []
@@ -209,22 +208,23 @@ module.exports =
     else
       @kill_region()
 
-  _push_regeon_to_killring: ->
+  _push_regeon_to_killring: (editor) ->
     editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).removeClass "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
     @killring.push texts
     @killring.seal()
-    editor
 
   kill_region: ->
-    editor = @_push_regeon_to_killring()
+    editor = atom.workspace.getActiveTextEditor()
+    @_push_regeon_to_killring editor
     editor.transact ->
       s.delete() for s in editor.getSelections() when not s.isEmpty()
 
   copy_region: ->
-    editor = @_push_regeon_to_killring()
+    editor = atom.workspace.getActiveTextEditor()
+    @_push_regeon_to_killring editor
     cursor.clearSelection() for cursor in editor.getCursors()
 
   kill_backward_word: ->
