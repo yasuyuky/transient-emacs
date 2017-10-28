@@ -161,10 +161,15 @@ module.exports =
     editor.scrollToCursorPosition()
     @is_user_command = true
 
+  getEditor: ->
+    pane = atom.workspace.getActivePane()
+    editor = atom.workspace.getActiveTextEditor()
+    return editor if editor == pane.activeItem
+
   search_next: (word, silent)->
     @_update_statusbar word,true unless silent
     return unless word
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
     return if not editor or editor.mini
     buffer_end = editor.getBuffer().getEndPosition()
     re = @_create_re word
@@ -196,13 +201,15 @@ module.exports =
     false
 
   set_mark: ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
+    return unless editor
     editorView = atom.views.getView editor
     $(editorView).toggleClass "transient-marked"
     cursor.clearSelection() for cursor in editor.getCursors()
 
   kill_region_or_backward_word: ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
+    return unless editor
     if editor.getLastSelection().isEmpty()
       @kill_backward_word()
     else
@@ -216,19 +223,22 @@ module.exports =
     @killring.seal()
 
   kill_region: ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
+    return unless editor
     @_push_regeon_to_killring editor
     editor.transact ->
       s.delete() for s in editor.getSelections() when not s.isEmpty()
 
   copy_region: ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
+    return unless editor
     @_push_regeon_to_killring editor
     cursor.clearSelection() for cursor in editor.getCursors()
 
   kill_backward_word: ->
+    editor = @getEditor()
+    return unless editor
     @is_user_command = false
-    editor = atom.workspace.getActiveTextEditor()
     editor.transact =>
       editor.selectToBeginningOfWord()
       texts = (s.getText() for s in editor.getSelections())
@@ -237,8 +247,9 @@ module.exports =
     @is_user_command = true
 
   kill: ->
+    editor = @getEditor()
+    return unless editor
     @is_user_command = false
-    editor = atom.workspace.getActiveTextEditor()
     editor.transact =>
       editor.selectToEndOfLine()
       texts = (s.getText() or '\n' for s in editor.getSelections())
@@ -247,7 +258,8 @@ module.exports =
     @is_user_command = true
 
   yank: ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
+    return unless editor
     editor.transact =>
       cursors = editor.getCursors()
       top = @killring.top()
