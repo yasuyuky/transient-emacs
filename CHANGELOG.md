@@ -1,3 +1,6 @@
+## 0.9.0
+* Use find-and-replace package as isearch
+
 ## 0.8.6
 * Add some missing keybindings
 * Enable transaction
