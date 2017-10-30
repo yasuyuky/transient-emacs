@@ -64,6 +64,8 @@ See keymaps/transient-emacs.cson for detailed keybindings
   'ctrl-f':'core:move-right'
   'ctrl-b':'core:move-left'
 
+  'ctrl-l':'editor:scroll-to-cursor'
+
   'ctrl-a':'editor:move-to-first-character-of-line'
   'ctrl-e':'editor:move-to-end-of-line'
   'ctrl-right':'editor:move-to-beginning-of-next-word'
@@ -90,12 +92,12 @@ See keymaps/transient-emacs.cson for detailed keybindings
   'ctrl-x u':'core:undo'
   'ctrl-x k':'core:close'
 
+  'alt-g g':'go-to-line:toggle'
   'alt-.':'symbols-view:toggle-file-symbols'
 
   'alt-x':'command-palette:toggle'
   'escape x':'command-palette:toggle'
   'alt-/':'autocomplete:toggle'
-
 
 
 ```
