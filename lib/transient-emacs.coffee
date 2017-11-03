@@ -16,7 +16,6 @@ module.exports =
   event_listeners: []
   add_text_editor_listener: null
   is_user_command: true
-  auto_move: 0
   isearch_word: ""
   isearch_last: ""
   isearch_tile: null
