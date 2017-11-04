@@ -22,7 +22,6 @@ module.exports =
   isforward: true
 
   activate: (state) ->
-    @seal_blocker = 0
     @is_user_command = true
     @commands = atom.commands.add 'atom-text-editor',
       'emacs:cancel': => @cancel()
