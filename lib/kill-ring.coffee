@@ -26,9 +26,9 @@ class KillRing
 
   update: (texts,forward) ->
     concat = (t) -> if forward then t[0] + (t[1] or '') else (t[1] or '') + t[0]
-    new_texts = ((concat t) for t in _.zip (_.last @buffer),texts)
+    newTexts = ((concat t) for t in _.zip (_.last @buffer),texts)
     @buffer.pop()
-    @push new_texts
+    @push newTexts
 
   top: ->
     _.last @list()

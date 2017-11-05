@@ -10,63 +10,63 @@ module.exports =
       default: true
   killring: null
   commands: null
-  event_listeners: []
-  add_text_editor_listener: null
-  is_user_command: true
-  isearch_word: ""
-  isearch_last: ""
-  isearch_tile: null
+  eventListeners: []
+  addTextEditorListener: null
+  isUserCommand: true
+  isearchWord: ""
+  isearchLast: ""
+  isearchTile: null
   isforward: true
 
   activate: (state) ->
-    @is_user_command = true
+    @isUserCommand = true
     @commands = atom.commands.add 'atom-text-editor',
       'emacs:cancel': => @cancel()
-      'emacs:set-mark': => @set_mark()
+      'emacs:set-mark': => @setMark()
       'emacs:yank': => @yank()
       'emacs:kill': => @kill()
-      'emacs:kill-region': => @kill_region()
-      'emacs:copy-region': => @copy_region()
-      'emacs:kill-backward-word': => @kill_backward_word()
-      'emacs:kill-region-or-backward-word': => @kill_region_or_backward_word()
+      'emacs:kill-region': => @killRegion()
+      'emacs:copy-region': => @copyRegion()
+      'emacs:kill-backward-word': => @killBackwardWord()
+      'emacs:kill-region-or-backward-word': => @killRegionOrBackwardWord()
       'emacs:isearch': (e)=> @search(e,true)
       'emacs:backward-isearch': (e)=> @search(e,false)
       'emacs:backspace': => return @backspace()
 
     addEditorEventListner = (editor) =>
       editorView = $(atom.views.getView(editor))
-      @event_listeners.push editor.onDidChangeCursorPosition (e)=>
-        @killring?.seal() if @is_user_command
-        @deactivate_isearch() if @is_user_command
-      @event_listeners.push editorView.on 'click',(e)->
+      @eventListeners.push editor.onDidChangeCursorPosition (e)=>
+        @killring?.seal() if @isUserCommand
+        @deactivateISearch() if @isUserCommand
+      @eventListeners.push editorView.on 'click',(e)->
         editorView.removeClass "transient-marked"
 
     atom.workspace.getTextEditors().forEach addEditorEventListner
-    @add_text_editor_listener = atom.workspace.onDidAddTextEditor (event) ->
+    @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
       addEditorEventListner(event.textEditor)
 
-    @keymap_listener = atom.keymaps.onDidMatchBinding (e)=>
-      if @isearch_tile
+    @keymapListener = atom.keymaps.onDidMatchBinding (e)=>
+      if @isearchTile
         if e.keystrokes.length == 1
-          @isearch_word += e.keystrokes
-          @search_next @isearch_word
+          @isearchWord += e.keystrokes
+          @searchNext @isearchWord
         else if e.keystrokes.startsWith 'shift-'
-          @isearch_word += e.keystrokes[-1..]
-          @search_next @isearch_word
+          @isearchWord += e.keystrokes[-1..]
+          @searchNext @isearchWord
         else if e.keystrokes == 'space'
-          @isearch_word += ' '
-          @search_next @isearch_word
-    @keymap_flistener = atom.keymaps.onDidFailToMatchBinding (e)->
+          @isearchWord += ' '
+          @searchNext @isearchWord
+    @keymapFlistener = atom.keymaps.onDidFailToMatchBinding (e)->
       # console.log "Fail",e
 
     @killring = new KillRing()
 
   deactivate: ->
     @commands?.dispose()
-    @event_listeners.forEach (listener) -> listener.dispose()
-    @add_text_editor_listener?.dispose()
-    @keymap_listener?.dispose()
-    @keymap_flistener?.dispose()
+    @eventListeners.forEach (listener) -> listener.dispose()
+    @addTextEditorListener?.dispose()
+    @keymapListener?.dispose()
+    @keymapFlistener?.dispose()
     delete @killring
 
   serialize: ->
@@ -74,12 +74,12 @@ module.exports =
 
   cancel: ->
     editor = atom.workspace.getActiveTextEditor()
-    return if @deactivate_isearch()
-    return if @clear_selections editor
-    return if @consolidate_selections editor
+    return if @deactivateISearch()
+    return if @clearSelections editor
+    return if @consolidateSelections editor
     atom.commands.dispatch atom.views.getView(atom.workspace), 'core:cancel'
 
-  clear_selections: (editor)->
+  clearSelections: (editor)->
     return true if editor.getSelections().some (selection) ->
       unless selection.isEmpty()
         selection.clear()
@@ -87,18 +87,18 @@ module.exports =
     false
 
   backspace: ()->
-    if @isearch_tile
-      if @isearch_word.length
-        @isearch_word = @isearch_word.slice 0, -1
-        @search_next @isearch_word
+    if @isearchTile
+      if @isearchWord.length
+        @isearchWord = @isearchWord.slice 0, -1
+        @searchNext @isearchWord
       else
-        @deactivate_isearch()
+        @deactivateISearch()
       return false
     atom.commands.dispatch document.activeElement, 'core:backspace'
 
   search: (e,forward) ->
     if atom.config.get("transient-emacs.useLegacySearch")
-      @activate_isearch(forward)
+      @activateIsearch(forward)
     else
       findAndReplace = atom.packages.getActivePackage("find-and-replace")
       if findAndReplace?.mainModule.findPanel?.isVisible()
@@ -111,72 +111,71 @@ module.exports =
       else
         atom.commands.dispatch(e.target, "find-and-replace:show")
 
-  activate_isearch: (forward)->
+  activateIsearch: (forward)->
     editor = atom.workspace.getActiveTextEditor()
     editorView = atom.views.getView editor
     $(editorView).addClass "searching"
     @isforward = forward
-    @isearch_word = @isearch_last if @isearch_tile? and not @isearch_word
-    @search_next @isearch_word
+    @isearchWord = @isearchLast if @isearchTile? and not @isearchWord
+    @searchNext @isearchWord
 
-  deactivate_isearch: ()->
-    if @isearch_tile?
-      @isearch_tile?.destroy()
-      @isearch_tile = null
-      @isearch_last = @isearch_word
-      @isearch_word = ""
+  deactivateISearch: ()->
+    if @isearchTile?
+      @isearchTile?.destroy()
+      @isearchTile = null
+      @isearchLast = @isearchWord
+      @isearchWord = ""
       editor = atom.workspace.getActiveTextEditor()
       editorView = atom.views.getView editor
       $(editorView).removeClass "searching"
       return true
 
-  _update_statusbar: (word,found)->
-    status_bar = document.querySelector("status-bar")
-    span_class = if found then "found" else "not-found"
-    if status_bar?
+  updateStatusbar: (word,found)->
+    statusBar = document.querySelector("status-bar")
+    spanClass = if found then "found" else "not-found"
+    if statusBar?
       prefix = if @isforward then "isearch:" else "backword-isearch:"
       istile = $$ ->
         @div class:"isearch inline-block", =>
-          @span class:span_class, =>
+          @span class:spanClass, =>
             @text prefix
-          @span class:span_class+" isearch-text", =>
+          @span class:spanClass+" isearch-text", =>
             @text word
-      @isearch_tile?.destroy()
-      @isearch_tile = status_bar.addLeftTile(item: istile, priority: 10)
+      @isearchTile?.destroy()
+      @isearchTile = statusBar.addLeftTile(item: istile, priority: 10)
 
-  _create_re: (word)->
+  createRegExp: (word)->
     escaped = (_.map word, (c)->if c=="\\" then "\\\\" else "["+c+"]").join ""
-    # return new RegExp(escaped,"i") if word == word.toLowerCase()
     new RegExp(escaped)
 
-  _select_scroll: (editor, targets)->
-    @is_user_command = false
+  selectScroll: (editor, targets)->
+    @isUserCommand = false
     if targets.length
       editor.setSelectedBufferRanges targets, flash:true
     editor.scrollToCursorPosition()
-    @is_user_command = true
+    @isUserCommand = true
 
   getEditor: ->
     pane = atom.workspace.getActivePane()
     editor = atom.workspace.getActiveTextEditor()
     return editor if editor == pane.activeItem
 
-  search_next: (word, silent)->
-    @_update_statusbar word,true unless silent
+  searchNext: (word, silent)->
+    @updateStatusbar word,true unless silent
     return unless word
     editor = @getEditor()
     return if not editor or editor.mini
-    buffer_end = editor.getBuffer().getEndPosition()
-    re = @_create_re word
+    bufferEnd = editor.getBuffer().getEndPosition()
+    re = @createRegExp word
     selections = editor.getSelectedBufferRanges().map (sel)=>
-      selected_text = editor.getTextInBufferRange(sel)
-      matched = (re.exec selected_text)?[0] == selected_text
+      selectedText = editor.getTextInBufferRange(sel)
+      matched = (re.exec selectedText)?[0] == selectedText
       start = if matched ^ @isforward then sel.start else sel.end
       selection = null
       selector = ({match,matchText,range,stop,replace}) ->
         selection ?= range
         stop()
-      ranges = [new Range(start, buffer_end), new Range([0,0], start)]
+      ranges = [new Range(start, bufferEnd), new Range([0,0], start)]
       ranges.reverse() unless @isforward
       for range,i in ranges
         if @isforward
@@ -184,73 +183,73 @@ module.exports =
         else
           editor.backwardsScanInBufferRange re, range, selector
         return [selection,i] if selection?
-      @_update_statusbar word,false unless silent
+      @updateStatusbar word,false unless silent
       return [new Range(sel.end, sel.end),0]
-    @_select_scroll editor,(sel[0] for sel in selections)
+    @selectScroll editor,(sel[0] for sel in selections)
 
-  consolidate_selections: (editor)->
+  consolidateSelections: (editor)->
     cursors = editor.getCursors()
     if cursors.length > 1
       editor.setCursorBufferPosition editor.getCursorBufferPositions()[0]
       return true
     false
 
-  set_mark: ->
+  setMark: ->
     editor = @getEditor()
     return unless editor
     editorView = atom.views.getView editor
     $(editorView).toggleClass "transient-marked"
     cursor.clearSelection() for cursor in editor.getCursors()
 
-  kill_region_or_backward_word: ->
+  killRegionOrBackwardWord: ->
     editor = @getEditor()
     return unless editor
     if editor.getLastSelection().isEmpty()
-      @kill_backward_word()
+      @killBackwardWord()
     else
-      @kill_region()
+      @killRegion()
 
-  _push_regeon_to_killring: (editor) ->
+  pushRegeonToKillring: (editor) ->
     editorView = atom.views.getView editor
     $(editorView).removeClass "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
     @killring.push texts
     @killring.seal()
 
-  kill_region: ->
+  killRegion: ->
     editor = @getEditor()
     return unless editor
-    @_push_regeon_to_killring editor
+    @pushRegeonToKillring editor
     editor.transact ->
       s.delete() for s in editor.getSelections() when not s.isEmpty()
 
-  copy_region: ->
+  copyRegion: ->
     editor = @getEditor()
     return unless editor
-    @_push_regeon_to_killring editor
+    @pushRegeonToKillring editor
     cursor.clearSelection() for cursor in editor.getCursors()
 
-  kill_backward_word: ->
+  killBackwardWord: ->
     editor = @getEditor()
     return unless editor
-    @is_user_command = false
+    @isUserCommand = false
     editor.transact =>
       editor.selectToBeginningOfWord()
       texts = (s.getText() for s in editor.getSelections())
       @killring.put texts,false
       s.delete() for s in editor.getSelections() when not s.isEmpty()
-    @is_user_command = true
+    @isUserCommand = true
 
   kill: ->
     editor = @getEditor()
     return unless editor
-    @is_user_command = false
+    @isUserCommand = false
     editor.transact =>
       editor.selectToEndOfLine()
       texts = (s.getText() or '\n' for s in editor.getSelections())
       @killring.put texts,true
       editor.delete()
-    @is_user_command = true
+    @isUserCommand = true
 
   yank: ->
     editor = @getEditor()

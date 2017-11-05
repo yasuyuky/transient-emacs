@@ -28,7 +28,7 @@ describe "Transient Emacs", ->
   describe "transient-emacs", ->
     it "set-mark", ->
       expect($(editorView).hasClass 'transient-marked').not.toBeTruthy()
-      transient_emacs.set_mark()
+      transient_emacs.setMark()
       expect($(editorView).hasClass 'transient-marked').toBeTruthy()
 
     it "kill and yank", ->
@@ -104,7 +104,7 @@ describe "Transient Emacs", ->
 
     it "kill-backword-word and yank twice", ->
       editor.setCursorBufferPosition [0,7]
-      transient_emacs.kill_backward_word()
+      transient_emacs.killBackwardWord()
       expect(editor.getText()).toBe "foo \nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
@@ -113,8 +113,8 @@ describe "Transient Emacs", ->
 
     it "kill-backword-word twice and yank twice", ->
       editor.setCursorBufferPosition [0,7]
-      transient_emacs.kill_backward_word()
-      transient_emacs.kill_backward_word()
+      transient_emacs.killBackwardWord()
+      transient_emacs.killBackwardWord()
       expect(editor.getText()).toBe "\nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
@@ -123,9 +123,9 @@ describe "Transient Emacs", ->
 
     it "kill-backword-word 3 times and yank twice", ->
       editor.setCursorBufferPosition [0,7]
-      transient_emacs.kill_backward_word()
-      transient_emacs.kill_backward_word()
-      transient_emacs.kill_backward_word()
+      transient_emacs.killBackwardWord()
+      transient_emacs.killBackwardWord()
+      transient_emacs.killBackwardWord()
       expect(editor.getText()).toBe "\nbaz\n"
       transient_emacs.yank()
       transient_emacs.yank()
@@ -133,11 +133,11 @@ describe "Transient Emacs", ->
 
     it "kill-backword-word, move, kill-backword-word and yank twice", ->
       editor.setCursorBufferPosition [0,7]
-      transient_emacs.kill_backward_word()
+      transient_emacs.killBackwardWord()
       expect(editor.getCursorBufferPosition().toArray()).toEqual [0,4]
       editor.setCursorBufferPosition [0,3]
       editor.setCursorBufferPosition [0,4]
-      transient_emacs.kill_backward_word()
+      transient_emacs.killBackwardWord()
       expect(editor.getText()).toBe "\nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo \nbaz\n"
@@ -146,14 +146,14 @@ describe "Transient Emacs", ->
 
     it "kill-region and yank", ->
       editor.setSelectedBufferRange [[0,0],[0,3]]
-      transient_emacs.kill_region()
+      transient_emacs.killRegion()
       expect(editor.getText()).toBe " bar\nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
 
     it "kill multi regions and yank", ->
       editor.setSelectedBufferRanges [[[0,0],[0,3]],[[1,0],[1,3]]]
-      transient_emacs.kill_region()
+      transient_emacs.killRegion()
       expect(editor.getText()).toBe " bar\n\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
@@ -161,21 +161,21 @@ describe "Transient Emacs", ->
     it "kill-region and yank with extra cursor", ->
       editor.setSelectedBufferRange [[0,0],[0,3]]
       editor.addCursorAtBufferPosition [1,0]
-      transient_emacs.kill_region()
+      transient_emacs.killRegion()
       expect(editor.getText()).toBe " bar\nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
 
     it "copy-region and yank", ->
       editor.setSelectedBufferRanges [[[0,0],[0,3]],[[1,0],[1,3]]]
-      transient_emacs.copy_region()
+      transient_emacs.copyRegion()
       expect(editor.getText()).toBe "foo bar\nbaz\n"
       transient_emacs.yank()
       expect(editor.getText()).toBe "foofoo bar\nbazbaz\n"
 
     it "copy-region, kill and yank", ->
       editor.setSelectedBufferRange [[0,0],[0,3]]
-      transient_emacs.copy_region()
+      transient_emacs.copyRegion()
       transient_emacs.kill()
       expect(editor.getText()).toBe "foo\nbaz\n"
       transient_emacs.yank()
