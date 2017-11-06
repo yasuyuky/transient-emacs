@@ -70,6 +70,8 @@
 
   'ctrl-s': 'emacs:isearch'
   'ctrl-r': 'emacs:backward-isearch'
+  'ctrl-alt-s': 'emacs:isearch-regexp'
+  'ctrl-alt-r': 'emacs:backward-isearch-regexp'
 
   'ctrl-x ctrl-s': 'core:save'
   'ctrl-x ctrl-w': 'core:save-as'

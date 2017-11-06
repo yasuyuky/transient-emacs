@@ -29,8 +29,10 @@ module.exports =
       'emacs:copy-region': => @copyRegion()
       'emacs:kill-backward-word': => @killBackwardWord()
       'emacs:kill-region-or-backward-word': => @killRegionOrBackwardWord()
-      'emacs:isearch': (e)=> @search(e,true)
-      'emacs:backward-isearch': (e)=> @search(e,false)
+      'emacs:isearch': (e)=> @search(e,true,false)
+      'emacs:backward-isearch': (e)=> @search(e,false,false)
+      'emacs:isearch-regexp': (e)=> @search(e,true,true)
+      'emacs:backward-isearch-regexp': (e)=> @search(e,false,true)
       'emacs:backspace': => return @backspace()
 
     addEditorEventListner = (editor) =>
@@ -96,7 +98,7 @@ module.exports =
       return false
     atom.commands.dispatch document.activeElement, 'core:backspace'
 
-  search: (e,forward) ->
+  search: (e,forward,useRegex) ->
     if atom.config.get("transient-emacs.useLegacySearch")
       @activateIsearch(forward)
     else
@@ -109,6 +111,10 @@ module.exports =
           atom.commands.dispatch(e.target, "find-and-replace:find-previous")
           findAndReplace?.mainModule.findView?.focusFindEditor()
       else
+        findAndReplace?.mainModule.findOptions?.set 'useRegex':useRegex
+        atom.packages.onDidActivatePackage (pkg)->
+          if pkg.name == "find-and-replace"
+            pkg.mainModule.findOptions?.set 'useRegex':useRegex
         atom.commands.dispatch(e.target, "find-and-replace:show")
 
   activateIsearch: (forward)->
