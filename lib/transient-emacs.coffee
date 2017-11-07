@@ -106,10 +106,9 @@ module.exports =
       if findAndReplace?.mainModule.findPanel?.isVisible()
         if forward
           atom.commands.dispatch(e.target, "find-and-replace:find-next")
-          findAndReplace?.mainModule.findView?.focusFindEditor()
         else
           atom.commands.dispatch(e.target, "find-and-replace:find-previous")
-          findAndReplace?.mainModule.findView?.focusFindEditor()
+        findAndReplace?.mainModule.findView?.findEditor?.element?.focus()
       else
         findAndReplace?.mainModule.findOptions?.set 'useRegex':useRegex
         atom.packages.onDidActivatePackage (pkg)->
