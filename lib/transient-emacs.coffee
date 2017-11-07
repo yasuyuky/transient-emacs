@@ -2,6 +2,7 @@
 {$,$$} = require 'space-pen'
 _ = require 'underscore-plus'
 KillRing = require './kill-ring'
+DOMListener = require 'dom-listener'
 
 module.exports =
   config:
@@ -40,8 +41,9 @@ module.exports =
       @eventListeners.push editor.onDidChangeCursorPosition (e)=>
         @killring?.seal() if @isUserCommand
         @deactivateISearch() if @isUserCommand
-      @eventListeners.push editorView.on 'click',(e)->
         editorView.removeClass "transient-marked"
+      listener = new DOMListener(atom.views.getView(editor))
+      @eventListeners.push listener.add 'atom-text-editor', 'click', (e)->
 
     atom.workspace.getTextEditors().forEach addEditorEventListner
     @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
@@ -66,6 +68,7 @@ module.exports =
   deactivate: ->
     @commands?.dispose()
     @eventListeners.forEach (listener) -> listener.dispose()
+    @eventListeners = []
     @addTextEditorListener?.dispose()
     @keymapListener?.dispose()
     @keymapFlistener?.dispose()
