@@ -1,5 +1,5 @@
 {Range,Pane} = require 'atom'
-{$,$$} = require 'space-pen'
+{$$} = require 'space-pen'
 _ = require 'underscore-plus'
 KillRing = require './kill-ring'
 DOMListener = require 'dom-listener'
@@ -37,13 +37,12 @@ module.exports =
       'emacs:backspace': => return @backspace()
 
     addEditorEventListner = (editor) =>
-      editorView = $(atom.views.getView(editor))
       @eventListeners.push editor.onDidChangeCursorPosition (e)=>
         @killring?.seal() if @isUserCommand
         @deactivateISearch() if @isUserCommand
-        editorView.removeClass "transient-marked"
       listener = new DOMListener(atom.views.getView(editor))
       @eventListeners.push listener.add 'atom-text-editor', 'click', (e)->
+        (atom.views.getView editor).classList.remove("transient-marked")
 
     atom.workspace.getTextEditors().forEach addEditorEventListner
     @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
@@ -121,8 +120,7 @@ module.exports =
 
   activateIsearch: (forward)->
     editor = atom.workspace.getActiveTextEditor()
-    editorView = atom.views.getView editor
-    $(editorView).addClass "searching"
+    (atom.views.getView editor).classList.add "searching"
     @isforward = forward
     @isearchWord = @isearchLast if @isearchTile? and not @isearchWord
     @searchNext @isearchWord
@@ -134,8 +132,7 @@ module.exports =
       @isearchLast = @isearchWord
       @isearchWord = ""
       editor = atom.workspace.getActiveTextEditor()
-      editorView = atom.views.getView editor
-      $(editorView).removeClass "searching"
+      (atom.views.getView editor).classList.remove "searching"
       return true
 
   updateStatusbar: (word,found)->
@@ -205,8 +202,7 @@ module.exports =
   setMark: ->
     editor = @getEditor()
     return unless editor
-    editorView = atom.views.getView editor
-    $(editorView).toggleClass "transient-marked"
+    (atom.views.getView editor).classList.toggle "transient-marked"
     cursor.clearSelection() for cursor in editor.getCursors()
 
   killRegionOrBackwardWord: ->
@@ -218,8 +214,7 @@ module.exports =
       @killRegion()
 
   pushRegeonToKillring: (editor) ->
-    editorView = atom.views.getView editor
-    $(editorView).removeClass "transient-marked"
+    (atom.views.getView editor).classList.remove "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
     @killring.push texts
     @killring.seal()
