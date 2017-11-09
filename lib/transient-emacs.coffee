@@ -113,9 +113,10 @@ module.exports =
         findAndReplace?.mainModule.findView?.findEditor?.element?.focus()
       else
         findAndReplace?.mainModule.findOptions?.set 'useRegex':useRegex
-        atom.packages.onDidActivatePackage (pkg)->
+        tempListener = atom.packages.onDidActivatePackage (pkg)->
           if pkg.name == "find-and-replace"
             pkg.mainModule.findOptions?.set 'useRegex':useRegex
+            tempListener.dispose()
         atom.commands.dispatch(e.target, "find-and-replace:show")
 
   activateIsearch: (forward)->
