@@ -43,6 +43,9 @@ module.exports =
       listener = new DOMListener(atom.views.getView(editor))
       @eventListeners.push listener.add 'atom-text-editor', 'click', (e)->
         (atom.views.getView editor).classList.remove("transient-marked")
+        findAndReplace = atom.packages.getActivePackage("find-and-replace")
+        if findAndReplace?.mainModule.findPanel?.isVisible()
+          findAndReplace?.mainModule.findPanel?.hide()
 
     atom.workspace.getTextEditors().forEach addEditorEventListner
     @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
