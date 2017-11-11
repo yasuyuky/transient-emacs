@@ -1,3 +1,6 @@
+## 0.9.1
+* Improve search behaviors
+
 ## 0.9.0
 * Use find-and-replace package as isearch
 
