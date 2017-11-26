@@ -217,7 +217,7 @@ module.exports =
     else
       @killRegion()
 
-  pushRegeonToKillring: (editor) ->
+  pushRegionToKillring: (editor) ->
     (atom.views.getView editor).classList.remove "transient-marked"
     texts = (s.getText() for s in editor.getSelections())
     @killring.push texts
@@ -226,14 +226,14 @@ module.exports =
   killRegion: ->
     editor = @getEditor()
     return unless editor
-    @pushRegeonToKillring editor
+    @pushRegionToKillring editor
     editor.transact ->
       s.delete() for s in editor.getSelections() when not s.isEmpty()
 
   copyRegion: ->
     editor = @getEditor()
     return unless editor
-    @pushRegeonToKillring editor
+    @pushRegionToKillring editor
     cursor.clearSelection() for cursor in editor.getCursors()
 
   killBackwardWord: ->
