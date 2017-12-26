@@ -51,6 +51,13 @@ module.exports =
     @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
       addEditorEventListner(event.textEditor)
 
+    searchKeybindings = {}
+    searchSelector = 'atom-workspace atom-text-editor.searching'
+    searchKeybindings[searchSelector] = {}
+    for code in [32..126]
+      searchKeybindings[searchSelector][String.fromCharCode(code)] = 'emacs:input-isearch'
+    @isearchKeymaps = atom.keymaps.add("emacs-iserch-keymap", searchKeybindings, 0)
+
     @keymapListener = atom.keymaps.onDidMatchBinding (e)=>
       if @isearchTile
         if e.keystrokes.length == 1
@@ -74,6 +81,7 @@ module.exports =
     @addTextEditorListener?.dispose()
     @keymapListener?.dispose()
     @keymapFlistener?.dispose()
+    @isearchKeymaps?.dispose()
     delete @killring
 
   serialize: ->
