@@ -52,35 +52,25 @@ module.exports =
       addEditorEventListner(event.textEditor)
 
     searchKeybindings = {}
+    isearchCommandMap = {}
     searchSelector = 'atom-workspace atom-text-editor.searching'
     searchKeybindings[searchSelector] = {}
     for code in [32..126]
-      searchKeybindings[searchSelector][String.fromCharCode(code)] = 'emacs:input-isearch'
-    @isearchKeymaps = atom.keymaps.add("emacs-iserch-keymap", searchKeybindings, 0)
-
-    @keymapListener = atom.keymaps.onDidMatchBinding (e)=>
-      if @isearchTile
-        if e.keystrokes.length == 1
-          @isearchWord += e.keystrokes
-          @searchNext @isearchWord
-        else if e.keystrokes.startsWith 'shift-'
-          @isearchWord += e.keystrokes[-1..]
-          @searchNext @isearchWord
-        else if e.keystrokes == 'space'
-          @isearchWord += ' '
-          @searchNext @isearchWord
-    @keymapFlistener = atom.keymaps.onDidFailToMatchBinding (e)->
-      # console.log "Fail",e
+      s = String.fromCharCode(code)
+      command = 'emacs:input-isearch-'+code
+      searchKeybindings[searchSelector][if s==' ' then 'space' else s] = command
+      isearchCommandMap[command] = ((s_)=>(=> @incrementSearch s_))(s)
+    @isearchKeymaps = atom.keymaps.add 'emacs-iserch-keymap', searchKeybindings, 0
+    @isearchCommands = atom.commands.add 'atom-text-editor', isearchCommandMap
 
     @killring = new KillRing()
 
   deactivate: ->
     @commands?.dispose()
+    @isearchCommands?.dispose()
     @eventListeners.forEach (listener) -> listener.dispose()
     @eventListeners = []
     @addTextEditorListener?.dispose()
-    @keymapListener?.dispose()
-    @keymapFlistener?.dispose()
     @isearchKeymaps?.dispose()
     delete @killring
 
@@ -129,6 +119,11 @@ module.exports =
             pkg.mainModule.findOptions?.set 'useRegex':useRegex
             tempListener.dispose()
         atom.commands.dispatch(e.target, "find-and-replace:show")
+
+  incrementSearch: (c)->
+    if @isearchTile
+      @isearchWord += c
+      @searchNext @isearchWord
 
   activateIsearch: (forward)->
     editor = atom.workspace.getActiveTextEditor()
