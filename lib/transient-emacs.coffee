@@ -51,6 +51,10 @@ module.exports =
     @addTextEditorListener = atom.workspace.onDidAddTextEditor (event) ->
       addEditorEventListner(event.textEditor)
 
+    @addIsearchCommands()
+    @killring = new KillRing()
+
+  addIsearchCommands: ->
     searchKeybindings = {}
     isearchCommandMap = {}
     searchSelector = 'atom-workspace atom-text-editor.searching'
@@ -62,8 +66,6 @@ module.exports =
       isearchCommandMap[command] = ((s_)=>(=> @incrementSearch s_))(s)
     @isearchKeymaps = atom.keymaps.add 'emacs-iserch-keymap', searchKeybindings, 0
     @isearchCommands = atom.commands.add 'atom-text-editor', isearchCommandMap
-
-    @killring = new KillRing()
 
   deactivate: ->
     @commands?.dispose()
