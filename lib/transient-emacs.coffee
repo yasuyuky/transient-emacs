@@ -52,6 +52,7 @@ module.exports =
       addEditorEventListner(event.textEditor)
 
     @addIsearchCommands()
+    @addInputCtrlsCommands()
     @killring = new KillRing()
 
   addIsearchCommands: ->
@@ -67,9 +68,23 @@ module.exports =
     @isearchKeymaps = atom.keymaps.add 'emacs-iserch-keymap', searchKeybindings, 0
     @isearchCommands = atom.commands.add 'atom-text-editor', isearchCommandMap
 
+  addInputCtrlsCommands: ->
+    inputCtrlKeybindings = {}
+    inputCtrlCommandMap = {}
+    inputCtrlSelector = 'atom-text-editor'
+    inputCtrlKeybindings[inputCtrlSelector] = {}
+    for code in [0..31]
+      command = 'emacs:input-ctrl-'+code
+      keybind = 'ctrl-q ctrl-'+String.fromCharCode(code+if 0 < code < 27 then 96 else 64)
+      inputCtrlKeybindings[inputCtrlSelector][keybind] = command
+      inputCtrlCommandMap[command] = ((s_)=>(=> @enterControlCharactor s_))(code)
+    @inputCtrlKeymaps = atom.keymaps.add 'emacs-input-ctrl-keymap', inputCtrlKeybindings, 0
+    @inputCtrlCommands = atom.commands.add 'atom-text-editor', inputCtrlCommandMap
+
   deactivate: ->
     @commands?.dispose()
     @isearchCommands?.dispose()
+    @inputCtrlCommands?.dispose()
     @eventListeners.forEach (listener) -> listener.dispose()
     @eventListeners = []
     @addTextEditorListener?.dispose()
@@ -273,3 +288,9 @@ module.exports =
         c.selection.insertText top[i] for c,i in cursors
       else if top
         c.selection.insertText top.join '\n' for c in cursors
+
+  enterControlCharactor: (code)->
+    editor = @getEditor()
+    return unless editor
+    editor.transact ->
+      editor.insertText(String.fromCharCode(code))
