@@ -9,6 +9,9 @@ module.exports =
     useLegacySearch:
       type: 'boolean'
       default: true
+    inputControlCharacter:
+      type: 'boolean'
+      default: false
   killring: null
   commands: null
   eventListeners: []
@@ -52,7 +55,8 @@ module.exports =
       addEditorEventListner(event.textEditor)
 
     @addIsearchCommands()
-    @addInputCtrlsCommands()
+    @addInputCtrlsCommands() if atom.config.get("transient-emacs.inputControlCharacter")
+
     @killring = new KillRing()
 
   addIsearchCommands: ->
