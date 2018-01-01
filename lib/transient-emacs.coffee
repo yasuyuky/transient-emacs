@@ -81,7 +81,7 @@ module.exports =
       command = 'emacs:input-ctrl-'+code
       keybind = 'ctrl-q ctrl-'+String.fromCharCode(code+if 0 < code < 27 then 96 else 64)
       inputCtrlKeybindings[inputCtrlSelector][keybind] = command
-      inputCtrlCommandMap[command] = ((s_)=>(=> @enterControlCharactor s_))(code)
+      inputCtrlCommandMap[command] = ((s_)=>(=> @enterControlCharacter s_))(code)
     @inputCtrlKeymaps = atom.keymaps.add 'emacs-input-ctrl-keymap', inputCtrlKeybindings, 0
     @inputCtrlCommands = atom.commands.add 'atom-text-editor', inputCtrlCommandMap
 
@@ -293,7 +293,7 @@ module.exports =
       else if top
         c.selection.insertText top.join '\n' for c in cursors
 
-  enterControlCharactor: (code)->
+  enterControlCharacter: (code)->
     editor = @getEditor()
     return unless editor
     editor.transact ->
