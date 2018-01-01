@@ -1,3 +1,6 @@
+## 0.10.0
+* Add feature to input control character
+
 ## 0.9.1
 * Improve search behaviors
 
