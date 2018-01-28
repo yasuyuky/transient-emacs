@@ -12,6 +12,6 @@
   "dependencies": {
     "underscore-plus": "1.x",
     "dom-listener": "0.1.2",
-    "space-pen": "^3"
+    "space-pen": "^5"
   }
 }
