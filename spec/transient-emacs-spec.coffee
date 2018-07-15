@@ -1,5 +1,4 @@
 transient_emacs = require '../lib/transient-emacs'
-{$} = require 'space-pen'
 {Pane} = require 'atom'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
@@ -27,9 +26,9 @@ describe "Transient Emacs", ->
 
   describe "transient-emacs", ->
     it "set-mark", ->
-      expect($(editorView).hasClass 'transient-marked').not.toBeTruthy()
+      expect(editorView.classList.contains('transient-marked')).not.toBeTruthy()
       transient_emacs.setMark()
-      expect($(editorView).hasClass 'transient-marked').toBeTruthy()
+      expect(editorView.classList.contains('transient-marked')).toBeTruthy()
 
     it "kill and yank", ->
       editor.setCursorBufferPosition [0,0]
