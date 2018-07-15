@@ -1,4 +1,4 @@
-{Range,Pane} = require 'atom'
+{Range, Pane} = require 'atom'
 _ = require 'underscore-plus'
 KillRing = require './kill-ring'
 DOMListener = require 'dom-listener'
@@ -32,10 +32,10 @@ module.exports =
       'emacs:copy-region': => @copyRegion()
       'emacs:kill-backward-word': => @killBackwardWord()
       'emacs:kill-region-or-backward-word': => @killRegionOrBackwardWord()
-      'emacs:isearch': (e)=> @search(e,true,false)
-      'emacs:backward-isearch': (e)=> @search(e,false,false)
-      'emacs:isearch-regexp': (e)=> @search(e,true,true)
-      'emacs:backward-isearch-regexp': (e)=> @search(e,false,true)
+      'emacs:isearch': (e)=> @search(e, true, false)
+      'emacs:backward-isearch': (e)=> @search(e, false, false)
+      'emacs:isearch-regexp': (e)=> @search(e, true, true)
+      'emacs:backward-isearch-regexp': (e)=> @search(e, false, true)
       'emacs:backspace': => return @backspace()
 
     addEditorEventListner = (editor) =>
@@ -121,7 +121,7 @@ module.exports =
       return false
     atom.commands.dispatch document.activeElement, 'core:backspace'
 
-  search: (e,forward,useRegex) ->
+  search: (e, forward, useRegex) ->
     if atom.config.get("transient-emacs.useLegacySearch")
       @activateIsearch(forward)
     else
@@ -133,10 +133,10 @@ module.exports =
           atom.commands.dispatch(e.target, "find-and-replace:find-previous")
         findAndReplace?.mainModule.findView?.findEditor?.element?.focus()
       else
-        findAndReplace?.mainModule.findOptions?.set 'useRegex':useRegex
+        findAndReplace?.mainModule.findOptions?.set 'useRegex': useRegex
         tempListener = atom.packages.onDidActivatePackage (pkg)->
           if pkg.name == "find-and-replace"
-            pkg.mainModule.findOptions?.set 'useRegex':useRegex
+            pkg.mainModule.findOptions?.set 'useRegex': useRegex
             tempListener.dispose()
         atom.commands.dispatch(e.target, "find-and-replace:show")
 
@@ -162,7 +162,7 @@ module.exports =
       (atom.views.getView editor).classList.remove "searching"
       return true
 
-  updateStatusbar: (word,found)->
+  updateStatusbar: (word, found)->
     statusBar = document.querySelector("status-bar")
     spanClass = if found then "found" else "not-found"
     if statusBar?
@@ -186,7 +186,7 @@ module.exports =
   selectScroll: (editor, targets)->
     @isUserCommand = false
     if targets.length
-      editor.setSelectedBufferRanges targets, flash:true
+      editor.setSelectedBufferRanges targets, flash: true
     editor.scrollToCursorPosition()
     @isUserCommand = true
 
@@ -196,7 +196,7 @@ module.exports =
     return editor if editor == pane.activeItem
 
   searchNext: (word, silent)->
-    @updateStatusbar word,true unless silent
+    @updateStatusbar word, true unless silent
     return unless word
     editor = @getEditor()
     return if not editor or editor.mini
@@ -207,20 +207,20 @@ module.exports =
       matched = (re.exec selectedText)?[0] == selectedText
       start = if matched ^ @isforward then sel.start else sel.end
       selection = null
-      selector = ({match,matchText,range,stop,replace}) ->
+      selector = ({match, matchText, range, stop, replace}) ->
         selection ?= range
         stop()
-      ranges = [new Range(start, bufferEnd), new Range([0,0], start)]
+      ranges = [new Range(start, bufferEnd), new Range([0, 0], start)]
       ranges.reverse() unless @isforward
-      for range,i in ranges
+      for range, i in ranges
         if @isforward
           editor.scanInBufferRange re, range, selector
         else
           editor.backwardsScanInBufferRange re, range, selector
-        return [selection,i] if selection?
-      @updateStatusbar word,false unless silent
-      return [new Range(sel.end, sel.end),0]
-    @selectScroll editor,(sel[0] for sel in selections)
+        return [selection, i] if selection?
+      @updateStatusbar word, false unless silent
+      return [new Range(sel.end, sel.end), 0]
+    @selectScroll editor, (sel[0] for sel in selections)
 
   consolidateSelections: (editor)->
     cursors = editor.getCursors()
@@ -269,7 +269,7 @@ module.exports =
     editor.transact =>
       editor.selectToBeginningOfWord()
       texts = (s.getText() for s in editor.getSelections())
-      @killring.put texts,false
+      @killring.put texts, false
       s.delete() for s in editor.getSelections() when not s.isEmpty()
     @isUserCommand = true
 
@@ -280,7 +280,7 @@ module.exports =
     editor.transact =>
       editor.selectToEndOfLine()
       texts = (s.getText() or '\n' for s in editor.getSelections())
-      @killring.put texts,true
+      @killring.put texts, true
       editor.delete()
     @isUserCommand = true
 
@@ -291,7 +291,7 @@ module.exports =
       cursors = editor.getCursors()
       top = @killring.top()
       if cursors.length == top?.length
-        c.selection.insertText top[i] for c,i in cursors
+        c.selection.insertText top[i] for c, i in cursors
       else if top
         c.selection.insertText top.join '\n' for c in cursors
 

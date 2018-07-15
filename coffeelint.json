@@ -14,10 +14,10 @@
     "level": "error"
   },
   "colon_assignment_spacing": {
-    "level": "ignore",
+    "level": "warn",
     "spacing": {
       "left": 0,
-      "right": 0
+      "right": 1
     }
   },
   "cyclomatic_complexity": {
@@ -127,7 +127,7 @@
     "level": "ignore"
   },
   "spacing_after_comma": {
-    "level": "ignore"
+    "level": "warn"
   },
   "transform_messes_up_line_numbers": {
     "level": "warn"

@@ -2,7 +2,7 @@ _ = require 'underscore-plus'
 
 module.exports =
 class KillRing
-  buffer:[]
+  buffer: []
   sealed: true
   limit: 16
 
@@ -13,7 +13,7 @@ class KillRing
     if @sealed
       @push texts
     else
-      @update texts,forward
+      @update texts, forward
 
   seal: ->
     @sealed = true
@@ -24,9 +24,9 @@ class KillRing
     if @buffer.length > @limit then @buffer.shift()
     @sealed = false
 
-  update: (texts,forward) ->
+  update: (texts, forward) ->
     concat = (t) -> if forward then t[0] + (t[1] or '') else (t[1] or '') + t[0]
-    newTexts = ((concat t) for t in _.zip (_.last @buffer),texts)
+    newTexts = ((concat t) for t in _.zip (_.last @buffer), texts)
     @buffer.pop()
     @push newTexts
 
