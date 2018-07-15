@@ -1,5 +1,4 @@
 {Range,Pane} = require 'atom'
-{$$} = require 'space-pen'
 _ = require 'underscore-plus'
 KillRing = require './kill-ring'
 DOMListener = require 'dom-listener'
@@ -168,12 +167,15 @@ module.exports =
     spanClass = if found then "found" else "not-found"
     if statusBar?
       prefix = if @isforward then "isearch:" else "backword-isearch:"
-      istile = $$ ->
-        @div class:"isearch inline-block", =>
-          @span class:spanClass, =>
-            @text prefix
-          @span class:spanClass+" isearch-text", =>
-            @text word
+      el = (tag, className, children) ->
+        e = document.createElement(tag)
+        e.className = className
+        (e.appendChild c for c in children)
+        e
+      istile = el "div", "isearch inline-block", [
+        el "span", spanClass, [new Text prefix]
+        el "span", spanClass+" isearch-text", [new Text word]
+      ]
       @isearchTile?.destroy()
       @isearchTile = statusBar.addLeftTile(item: istile, priority: 10)
 
