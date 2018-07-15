@@ -172,12 +172,12 @@ module.exports =
         e.className = className
         (e.appendChild c for c in children)
         e
-      istile = el "div", "isearch inline-block", [
+      tile = el "div", "isearch inline-block", [
         el "span", spanClass, [new Text prefix]
         el "span", spanClass+" isearch-text", [new Text word]
       ]
       @isearchTile?.destroy()
-      @isearchTile = statusBar.addLeftTile(item: istile, priority: 10)
+      @isearchTile = statusBar.addLeftTile(item: tile, priority: 10)
 
   createRegExp: (word)->
     escaped = (_.map word, (c)->if c=="\\" then "\\\\" else "["+c+"]").join ""
