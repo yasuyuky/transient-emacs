@@ -1,5 +1,4 @@
 transient_emacs = require '../lib/transient-emacs'
-{Pane} = require 'atom'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
