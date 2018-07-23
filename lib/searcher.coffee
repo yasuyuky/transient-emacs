@@ -102,7 +102,7 @@ class Searcher
       command = 'emacs:input-isearch-'+code
       searchKeybindings[searchSelector][if s==' ' then 'space' else s] = command
       isearchCommandMap[command] = ((s_)=>(=> @incrementSearch s_))(s)
-    @isearchKeymaps = atom.keymaps.add 'emacs-iserch-keymap', searchKeybindings, 0
+    @isearchKeymaps = atom.keymaps.add 'emacs-isearch-keymap', searchKeybindings, 0
     @isearchCommands = atom.commands.add 'atom-text-editor', isearchCommandMap
 
   search: (e, forward, useRegex) ->
