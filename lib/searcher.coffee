@@ -16,12 +16,13 @@ class Searcher
     @isearchKeymaps?.dispose()
 
   incrementSearch: (c)->
-    if @isearchTile
+    editor = @getEditor()
+    if (atom.views.getView editor).classList.contains "searching"
       @isearchWord += c
       @searchNext @isearchWord
 
   activateIsearch: (forward)->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @getEditor()
     (atom.views.getView editor).classList.add "searching"
     @isforward = forward
     @isearchWord = @isearchLast if @isearchTile? and not @isearchWord
@@ -33,7 +34,7 @@ class Searcher
       @isearchTile = null
       @isearchLast = @isearchWord
       @isearchWord = ""
-      editor = atom.workspace.getActiveTextEditor()
+      editor = @getEditor()
       (atom.views.getView editor).classList.remove "searching"
       return true
 
