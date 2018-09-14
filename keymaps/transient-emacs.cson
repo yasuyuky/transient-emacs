@@ -28,6 +28,8 @@
   'ctrl-g': 'core:cancel'
   'ctrl-k': 'editor:cut-to-end-of-line'
   'ctrl-y': 'core:paste'
+  'ctrl-j': 'editor:newline'
+  'ctrl-m': 'editor:newline'
 
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-g': 'emacs:cancel'
@@ -38,6 +40,8 @@
   'ctrl-w': 'emacs:kill-region-or-backward-word'
   'alt-w': 'emacs:copy-region'
   'escape w': 'emacs:copy-region'
+  'ctrl-j': 'editor:newline'
+  'ctrl-m': 'editor:newline'
 
   'ctrl-d': 'core:delete'
   'backspace': 'emacs:backspace'
