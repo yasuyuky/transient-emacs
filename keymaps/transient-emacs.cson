@@ -19,6 +19,8 @@
   'ctrl-x 0': 'pane:close'
   'ctrl-x o': 'window:focus-next-pane'
 
+  'ctrl-j': 'core:confirm'
+  'ctrl-m': 'core:confirm'
   'ctrl-g': 'core:cancel'
 
 'atom-workspace atom-panel':
@@ -28,8 +30,8 @@
   'ctrl-g': 'core:cancel'
   'ctrl-k': 'editor:cut-to-end-of-line'
   'ctrl-y': 'core:paste'
-  'ctrl-j': 'editor:newline'
-  'ctrl-m': 'editor:newline'
+  'ctrl-j': 'core:confirm'
+  'ctrl-m': 'core:confirm'
 
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-g': 'emacs:cancel'
