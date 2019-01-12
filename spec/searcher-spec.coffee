@@ -31,3 +31,10 @@ describe "Transient Emacs", ->
       transient_emacs.searcher.incrementSearch "a"
       transient_emacs.searcher.incrementSearch "r"
       expect(editor.getSelectedText()).toBe "bar"
+
+    it "search incrementally backward (legacy)", ->
+      atom.config.set("transient-emacs.useLegacySearch", true)
+      editor.setCursorBufferPosition [2, 0]
+      transient_emacs.searcher.search {}, false, true
+      transient_emacs.searcher.incrementSearch "f"
+      expect(editor.getSelectedText()).toBe "f"
