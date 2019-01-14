@@ -1,5 +1,4 @@
 {Range} = require 'atom'
-_ = require 'underscore-plus'
 
 module.exports =
 class Searcher
@@ -56,7 +55,7 @@ class Searcher
       @isearchTile = statusBar.addLeftTile(item: tile, priority: 10)
 
   createRegExp: (word)->
-    escaped = (_.map word, (c)->if c=="\\" then "\\\\" else "["+c+"]").join ""
+    escaped = (word.split('').map (c)->if c=="\\" then "\\\\" else "["+c+"]").join ""
     new RegExp(escaped)
 
   selectScroll: (editor, targets)->
