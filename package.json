@@ -10,7 +10,6 @@
     "atom": ">0.150.0"
   },
   "dependencies": {
-    "underscore-plus": "1.x",
     "dom-listener": "0.1.2"
   }
 }
