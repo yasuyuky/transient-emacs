@@ -168,15 +168,17 @@ module.exports =
     @isUserCommand = true
 
   yank: ->
+    @yankTexts @killring.top()
+
+  yankTexts: (texts)->
     editor = @getEditor()
     return unless editor
     editor.transact =>
       cursors = editor.getCursors()
-      top = @killring.top()
-      if cursors.length == top?.length
-        c.selection.insertText top[i] for c, i in cursors
-      else if top
-        c.selection.insertText top.join '\n' for c in cursors
+      if cursors.length == texts?.length
+        c.selection.insertText texts[i] for c, i in cursors
+      else if texts
+        c.selection.insertText texts.join '\n' for c in cursors
 
   enterControlCharacter: (code)->
     editor = @getEditor()
