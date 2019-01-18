@@ -26,6 +26,7 @@ module.exports =
       'emacs:set-mark': => @setMark()
       'emacs:yank': => @yank()
       'emacs:kill': => @kill()
+      'emacs:show-kill-ring': => @showKillRing()
       'emacs:kill-region': => @killRegion()
       'emacs:copy-region': => @copyRegion()
       'emacs:kill-backward-word': => @killBackwardWord()
@@ -169,6 +170,10 @@ module.exports =
 
   yank: ->
     @yankTexts @killring.top()
+
+  showKillRing: ->
+    @killring.show (item) ->
+      @yankTexts item.value
 
   yankTexts: (texts)->
     editor = @getEditor()

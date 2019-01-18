@@ -10,6 +10,7 @@
     "atom": ">0.150.0"
   },
   "dependencies": {
+    "atom-select-list": "^0.7.2",
     "dom-listener": "0.1.2"
   }
 }

@@ -38,6 +38,8 @@
   'ctrl-@': 'emacs:set-mark'
   'ctrl-`': 'emacs:set-mark'
   'ctrl-y': 'emacs:yank'
+  'alt-y': 'emacs:show-kill-ring'
+  'escape y': 'emacs:show-kill-ring'
   'ctrl-k': 'emacs:kill'
   'ctrl-w': 'emacs:kill-region-or-backward-word'
   'alt-w': 'emacs:copy-region'
