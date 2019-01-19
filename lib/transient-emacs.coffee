@@ -177,7 +177,7 @@ module.exports =
     @yankTexts @killring.top()
 
   showKillRing: ->
-    @killring.show (item) ->
+    @killring.show (item) =>
       @yankTexts item.value
 
   yankTexts: (texts)->
