@@ -55,7 +55,12 @@ module.exports =
     @searcher.addIsearchCommands()
     @addInputCtrlsCommands() if atom.config.get("transient-emacs.inputControlCharacter")
 
-    @killring = new KillRing()
+    @killring = if state and state.killring
+        atom.deserializers.deserialize(state.killring)
+      else
+        new KillRing([])
+
+  deserializeKillRing: ({buffer}) -> new KillRing(buffer)
 
   addInputCtrlsCommands: ->
     inputCtrlKeybindings = {}
@@ -81,7 +86,7 @@ module.exports =
     delete @killring
 
   serialize: ->
-    @killring.seal()
+    killring: @killring.serialize()
 
   cancel: ->
     editor = atom.workspace.getActiveTextEditor()
