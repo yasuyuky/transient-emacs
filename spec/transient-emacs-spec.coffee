@@ -12,7 +12,7 @@ describe "Transient Emacs", ->
 
   beforeEach ->
     transient_emacs.activate()
-    atom.config.set('transient-emacs', {killRing:{persistent:true}});
+    atom.config.set('transient-emacs', {killRing:{persistent:true, length:10}});
     waitsForPromise ->
       atom.workspace.open().then (e)-> editorBackground = e
       atom.workspace.open().then (e)-> editor = e

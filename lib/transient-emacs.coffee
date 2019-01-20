@@ -16,6 +16,10 @@ module.exports =
         persistent:
           type: 'boolean'
           default: true
+        length:
+          type: 'integer'
+          default: 10
+          minimum: 1
   killring: null
   commands: null
   eventListeners: []
