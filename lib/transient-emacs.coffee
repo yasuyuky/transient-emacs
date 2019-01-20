@@ -10,6 +10,12 @@ module.exports =
     inputControlCharacter:
       type: 'boolean'
       default: false
+    killRing:
+      type: 'object'
+      properties:
+        persistent:
+          type: 'boolean'
+          default: true
   killring: null
   commands: null
   eventListeners: []
