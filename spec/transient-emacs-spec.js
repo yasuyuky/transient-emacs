@@ -78,7 +78,7 @@ describe('Transient Emacs', () => {
       expect(editor.getText()).toBe('\n\nbaz\n');
     });
 
-    it('kill and yank with multi cursor', () => {
+    it('kill and yank with multi cursors', () => {
       editor.setCursorBufferPosition([0, 0]);
       editor.addCursorAtBufferPosition([1, 0]);
       transient_emacs.kill();

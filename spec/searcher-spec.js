@@ -45,5 +45,17 @@ describe('Transient Emacs', () => {
       transient_emacs.searcher.incrementSearch('f');
       expect(editor.getSelectedText()).toBe('f');
     });
+
+    it('search incrementally with multi cursors (legacy)', () => {
+      atom.config.set('transient-emacs.useLegacySearch', true);
+      editor.setCursorBufferPosition([0, 0]);
+      editor.addCursorAtBufferPosition([1, 0]);
+      transient_emacs.searcher.search({}, false, true);
+      transient_emacs.searcher.incrementSearch('b');
+      transient_emacs.searcher.incrementSearch('a');
+      const selected = editor.getSelections().map(sel => sel.getText());
+      expect(selected[0]).toBe('ba');
+      expect(selected[1]).toBe('ba');
+    });
   });
 });
