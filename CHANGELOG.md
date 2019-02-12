@@ -1,3 +1,11 @@
+## 0.11.0
+* Refactor
+* Add keybinds for editor:newline
+* Remove direct dependency to underscore-plus
+* Add show-kill-ring command
+* Decaffeinate
+* Fix some bugs
+
 ## 0.10.0
 * Add feature to input control character
 
