@@ -15,7 +15,7 @@ Features
 - [x] kill-ring with multiple cursors
 - [x] sync kill-ring with clipboard
 - [x] emacs like incremental search
-- [ ] yank text selected from kill-ring history
+- [x] yank text selected from kill-ring history
 
 Keybindings
 ===========
