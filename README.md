@@ -4,6 +4,7 @@ Transient Emacs for Atom Editor
 Emacs (transient mark mode) for Atom Editor.
 
 [![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
+[![dependencies Status](https://david-dm.org/yasuyuky/transient-emacs/status.svg)](https://david-dm.org/yasuyuky/transient-emacs)
 
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
