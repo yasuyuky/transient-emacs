@@ -1,6 +1,6 @@
 {
   "name": "transient-emacs",
-  "main": "./lib/transient-emacs",
+  "main": "./lib/entrypoint",
   "version": "0.11.0",
   "private": true,
   "description": "Emacs mode using transient mark",
