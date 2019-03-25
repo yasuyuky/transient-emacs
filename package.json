@@ -69,22 +69,22 @@
       {
         "key": "up",
         "command": "transient.cursorUp",
-        "when": "textInputFocus"
+        "when": "textInputFocus && !suggestWidgetVisible"
       },
       {
         "key": "ctrl+p",
         "command": "transient.cursorUp",
-        "when": "textInputFocus"
+        "when": "textInputFocus && !suggestWidgetVisible"
       },
       {
         "key": "down",
         "command": "transient.cursorDown",
-        "when": "textInputFocus"
+        "when": "textInputFocus && !suggestWidgetVisible"
       },
       {
         "key": "ctrl+n",
         "command": "transient.cursorDown",
-        "when": "textInputFocus"
+        "when": "textInputFocus && !suggestWidgetVisible"
       },
       {
         "key": "home",
