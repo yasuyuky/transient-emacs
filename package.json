@@ -1,16 +1,223 @@
 {
   "name": "transient-emacs",
-  "main": "./lib/transient-emacs",
+  "displayName": "transient-emacs",
+  "main": "./lib/entrypoint",
   "version": "0.11.0",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "transient.setMark",
+        "title": "setMark"
+      },
+      {
+        "command": "transient.yank",
+        "title": "yank"
+      },
+      {
+        "command": "transient.kill",
+        "title": "kill"
+      },
+      {
+        "command": "transient.killRegion",
+        "title": "killRegion"
+      },
+      {
+        "command": "transient.copyRegion",
+        "title": "copyRegion"
+      },
+      {
+        "command": "transient.killRegionOrBackwardWord",
+        "title": "killRegionOrBackwardWord"
+      },
+      {
+        "command": "transient.cancel",
+        "title": "cancel"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+enter",
+        "command": "transient.setMark",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "left",
+        "command": "transient.cursorLeft",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+b",
+        "command": "transient.cursorLeft",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "right",
+        "command": "transient.cursorRight",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+f",
+        "command": "transient.cursorRight",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "up",
+        "command": "transient.cursorUp",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+p",
+        "command": "transient.cursorUp",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "down",
+        "command": "transient.cursorDown",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+n",
+        "command": "transient.cursorDown",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "home",
+        "command": "transient.cursorHome",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+a",
+        "command": "transient.cursorHome",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "end",
+        "command": "transient.cursorEnd",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+e",
+        "command": "transient.cursorEnd",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+right",
+        "command": "transient.cursorWordRight",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+left",
+        "command": "transient.cursorWordLeft",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+right",
+        "command": "cursorWordRightSelect",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+left",
+        "command": "cursorWordLeftSelect",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+x ctrl+s",
+        "command": "workbench.action.files.save"
+      },
+      {
+        "key": "ctrl+s",
+        "command": "actions.find",
+        "when": "!findWidgetVisible"
+      },
+      {
+        "key": "ctrl+s",
+        "command": "editor.action.nextMatchFindAction",
+        "when": "findWidgetVisible"
+      },
+      {
+        "key": "ctrl+r",
+        "command": "actions.find",
+        "when": "!findWidgetVisible"
+      },
+      {
+        "key": "ctrl+r",
+        "command": "editor.action.previousMatchFindAction",
+        "when": "findWidgetVisible"
+      },
+      {
+        "key": "enter",
+        "command": "closeFindWidget",
+        "when": "findWidgetVisible"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "closeFindWidget",
+        "when": "findWidgetVisible"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "transient.cancel",
+        "when": "!findWidgetVisible"
+      },
+      {
+        "key": "ctrl+w",
+        "command": "transient.killRegionOrBackwardWord",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+k",
+        "command": "transient.kill",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+y",
+        "command": "transient.yank",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+up",
+        "command": "editor.action.insertCursorAbove",
+        "when": "textInputFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "tslint": "^5.12.1",
+    "@types/node": "^10.12.21",
+    "@types/mocha": "^2.2.42",
+    "@types/copy-paste": "^1.1.30"
+  },
   "private": true,
   "description": "Emacs mode using transient mark",
   "repository": "https://github.com/yasuyuky/transient-emacs",
   "license": "MIT",
   "engines": {
+    "vscode": "^1.32.3",
     "atom": ">0.150.0"
   },
   "dependencies": {
     "atom-select-list": "^0.7.2",
+    "copy-paste": "^1.3.0",
     "dom-listener": "0.1.2"
   },
   "deserializers": {
