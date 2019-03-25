@@ -1,5 +1,5 @@
 /* global atom document:true */
-import ncp = require('copy-paste');
+import clipboardy = require('clipboardy');
 
 export class KillRing {
   buffer: Array<Array<string>>;
@@ -21,7 +21,7 @@ export class KillRing {
 
   push(texts: Array<string>) {
     this.buffer.unshift(texts);
-    ncp.copy(texts.join('\n'));
+    clipboardy.writeSync(texts.join('\n'));
     while (this.buffer.length > 10) this.buffer.pop();
     this.sealed = false;
   }
@@ -41,6 +41,7 @@ export class KillRing {
 
   updateBuffer() {
     const lasts = this.buffer[0];
-    if (lasts ? lasts.join('\n') : '' !== ncp.paste()) this.push(ncp.paste().split('\n'));
+    let read = clipboardy.readSync();
+    if (lasts ? lasts.join('\n') : '' !== read) this.push(read.split('\n'));
   }
 }
