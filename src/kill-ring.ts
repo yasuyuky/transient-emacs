@@ -2,15 +2,15 @@
 import clipboardy = require('clipboardy');
 
 export class KillRing {
-  buffer: Array<Array<string>>;
+  buffer: string[][];
   sealed: boolean;
 
-  constructor(buffer: Array<Array<string>>) {
+  constructor(buffer: string[][]) {
     this.buffer = buffer;
     this.sealed = true;
   }
 
-  put(texts: Array<string>, forward: boolean = true) {
+  put(texts: string[], forward: boolean = true) {
     if (this.sealed) this.push(texts);
     else this.update(texts, forward);
   }
@@ -19,14 +19,14 @@ export class KillRing {
     this.sealed = true;
   }
 
-  push(texts: Array<string>) {
+  push(texts: string[]) {
     this.buffer.unshift(texts);
     clipboardy.writeSync(texts.join('\n'));
     while (this.buffer.length > 10) this.buffer.pop();
     this.sealed = false;
   }
 
-  update(texts: Array<string>, forward: boolean) {
+  update(texts: string[], forward: boolean) {
     const lasts = this.buffer.shift() || [];
     const newTexts = texts.map((t, i) =>
       forward ? lasts[i] + (t ? t : '') : (t ? t : '') + lasts[i]

@@ -151,7 +151,7 @@ function yank(editor: vscode.TextEditor) {
   yankTexts(editor, killRing.top());
 }
 
-function yankTexts(editor: vscode.TextEditor, texts: Array<string>) {
+function yankTexts(editor: vscode.TextEditor, texts: string[]) {
   editor
     .edit(edit => {
       const sels = editor.selections;
