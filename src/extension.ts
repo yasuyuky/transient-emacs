@@ -69,6 +69,7 @@ function clearSelections(editor: vscode.TextEditor): boolean {
 function consolidateSelections(editor: vscode.TextEditor): boolean {
   if (editor.selections.length > 1) {
     editor.selections = [editor.selection];
+    editor.revealRange(editor.selection.with());
     return true;
   }
   return false;
