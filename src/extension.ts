@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { TextEditor, Selection, Position } from 'vscode';
 import { KillRing } from './kill-ring';
 
 var markSet: boolean = false;
@@ -15,7 +16,11 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.killRegion', killRegion],
     ['transient.killRegionOrBackwardWord', killRegionOrBackwardWord],
     ['transient.killBackwardWord', killBackwardWord],
-    ['transient.copyRegion', copyRegion]
+    ['transient.copyRegion', copyRegion],
+    ['cursorParagraphUp', cursorParagraphUp],
+    ['cursorParagraphDown', cursorParagraphDown],
+    ['cursorParagraphUpSelect', cursorParagraphUpSelect],
+    ['cursorParagraphDownSelect', cursorParagraphDownSelect]
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -31,7 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
     'cursorTop',
     'cursorBottom',
     'cursorWordLeft',
-    'cursorWordRight'
+    'cursorWordRight',
+    'cursorParagraphUp',
+    'cursorParagraphDown'
   ];
 
   moves.forEach(move => {
@@ -47,6 +54,46 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
+
+function cursorParagraphDown(editor: TextEditor) {
+  let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
+  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, false);
+}
+
+function cursorParagraphDownSelect(editor: TextEditor) {
+  let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
+  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, false);
+}
+
+function cursorParagraphUp(editor: TextEditor) {
+  cursorParagraphMove(editor, l => l - 1, l => l >= 0, new Position(0, 0), false);
+}
+
+function cursorParagraphUpSelect(editor: TextEditor) {
+  cursorParagraphMove(editor, l => l - 1, l => l >= 0, new Position(0, 0), true);
+}
+
+function cursorParagraphMove(
+  editor: TextEditor,
+  next: (l: number) => number,
+  limit: (l: number) => boolean,
+  end: Position,
+  select: boolean
+) {
+  const doc = editor.document;
+  editor.selections = editor.selections.map(s => {
+    var l = s.active.line;
+    for (var flag = false; limit(l); l = next(l)) {
+      if (!doc.lineAt(l).isEmptyOrWhitespace) flag = true;
+      if (flag && doc.lineAt(l).isEmptyOrWhitespace) {
+        const p = new vscode.Position(l, 0);
+        return new vscode.Selection(select ? s.anchor : p, p);
+      }
+    }
+    return new Selection(select ? s.anchor : end, end);
+  });
+  editor.revealRange(editor.selections[editor.selections.length - 1].with());
+}
 
 function cancel(editor: vscode.TextEditor) {
   if (markSet) {

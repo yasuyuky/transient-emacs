@@ -127,6 +127,16 @@
         "when": "textInputFocus"
       },
       {
+        "key": "ctrl+up",
+        "command": "transient.cursorParagraphUp",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+down",
+        "command": "transient.cursorParagraphDown",
+        "when": "textInputFocus"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
