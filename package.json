@@ -137,6 +137,16 @@
         "when": "textInputFocus"
       },
       {
+        "key": "shift+alt+,",
+        "command": "transient.cursorTop",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "shift+alt+.",
+        "command": "transient.cursorBottom",
+        "when": "textInputFocus"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
