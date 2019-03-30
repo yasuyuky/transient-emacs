@@ -191,6 +191,11 @@
         "when": "textInputFocus"
       },
       {
+        "key": "alt+w",
+        "command": "transient.copyRegion",
+        "when": "textInputFocus"
+      },
+      {
         "key": "ctrl+k",
         "command": "transient.kill",
         "when": "textInputFocus"
