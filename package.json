@@ -151,6 +151,18 @@
         "command": "workbench.action.files.save"
       },
       {
+        "key": "ctrl+x ctrl+w",
+        "command": "workbench.action.files.saveAs"
+      },
+      {
+        "key": "ctrl+x k",
+        "command": "workbench.action.closeActiveEditor"
+      },
+      {
+        "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.quickOpen"
+      },
+      {
         "key": "ctrl+s",
         "command": "actions.find",
         "when": "!findWidgetVisible"
