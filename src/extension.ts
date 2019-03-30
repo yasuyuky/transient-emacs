@@ -48,9 +48,11 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(command);
   });
 
-  vscode.window.onDidChangeTextEditorSelection(() => {
-    if (isUserCommand) killRing.seal();
-  });
+  context.subscriptions.push(
+    vscode.window.onDidChangeTextEditorSelection(() => {
+      if (isUserCommand) killRing.seal();
+    })
+  );
 }
 
 export function deactivate() {}
