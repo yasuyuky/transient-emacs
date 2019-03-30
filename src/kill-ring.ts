@@ -41,7 +41,8 @@ export class KillRing {
 
   updateBuffer() {
     const lasts = this.buffer[0];
-    let read = clipboardy.readSync();
-    if (lasts ? lasts.join('\n') : '' !== read) this.push(read.split('\n'));
+    const laststr = lasts ? lasts.join('\n') : '';
+    const read = clipboardy.readSync();
+    if (laststr !== read) this.push(read.split('\n'));
   }
 }
