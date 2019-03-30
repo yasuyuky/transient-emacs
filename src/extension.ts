@@ -160,7 +160,8 @@ function killBackwardWord(editor: vscode.TextEditor) {
     .edit(edit => {
       editor.selections = editor.selections.map(s => {
         let wordRange = editor.document.getWordRangeAtPosition(s.active);
-        if (wordRange) return new vscode.Selection(wordRange.start, s.active);
+        if (wordRange && !wordRange.start.isEqual(s.active))
+          return new vscode.Selection(wordRange.start, s.active);
         const delimExp = /[`~!\@@#\%\^\&*()-\=+{}\|\;\:\'\"\,.\<>\/\?\s]+/g;
         let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
         if (delimRange) return new vscode.Selection(delimRange.start, s.active);
