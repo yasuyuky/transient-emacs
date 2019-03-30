@@ -151,7 +151,7 @@ function killRegion(editor: vscode.TextEditor) {
 
 function copyRegion(editor: vscode.TextEditor) {
   pushRegionToKillring(editor);
-  editor.selections.forEach(s => s.with(s.start, s.start));
+  editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
 }
 
 function killBackwardWord(editor: vscode.TextEditor) {
