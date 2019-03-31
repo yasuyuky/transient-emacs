@@ -36,6 +36,10 @@
         "title": "killRegionOrBackwardWord"
       },
       {
+        "command": "transient.showKillRing",
+        "title": "showKillRing"
+      },
+      {
         "command": "transient.cancel",
         "title": "cancel"
       }
@@ -215,6 +219,11 @@
       {
         "key": "ctrl+y",
         "command": "transient.yank",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "alt+y",
+        "command": "transient.showKillRing",
         "when": "textInputFocus"
       },
       {

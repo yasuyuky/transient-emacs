@@ -16,6 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.killRegion', killRegion],
     ['transient.killRegionOrBackwardWord', killRegionOrBackwardWord],
     ['transient.killBackwardWord', killBackwardWord],
+    ['transient.showKillRing', showKillRing],
     ['transient.copyRegion', copyRegion],
     ['cursorParagraphUp', cursorParagraphUp],
     ['cursorParagraphDown', cursorParagraphDown],
@@ -199,6 +200,13 @@ function kill(editor: vscode.TextEditor) {
 
 function yank(editor: vscode.TextEditor) {
   yankTexts(editor, killRing.top());
+}
+
+function showKillRing(editor: vscode.TextEditor) {
+  killRing.updateBuffer();
+  vscode.window
+    .showQuickPick(killRing.buffer.map(ss => ss.join('\n')))
+    .then(s => yankTexts(editor, (s || '').split('\n')));
 }
 
 function yankTexts(editor: vscode.TextEditor, texts: string[]) {
