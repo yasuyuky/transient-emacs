@@ -198,6 +198,26 @@
       },
       {
         "key": "ctrl+g",
+        "command": "closeReplaceInFilesWidget",
+        "when": "replaceInputBoxFocus && searchViewletVisible"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "closeReviewPanel",
+        "when": "reviewPanelVisible"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "search.action.cancel",
+        "when": "searchViewletVisible"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
+      },
+      {
+        "key": "ctrl+g",
         "command": "transient.cancel",
         "when": "!findWidgetVisible"
       },
