@@ -4,7 +4,7 @@
   "main": "./lib/entrypoint",
   "version": "0.11.0",
   "categories": [
-    "Other"
+    "Keymaps"
   ],
   "activationEvents": [
     "*"
