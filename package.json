@@ -13,35 +13,35 @@
     "commands": [
       {
         "command": "transient.setMark",
-        "title": "setMark"
+        "title": "Set Mark"
       },
       {
         "command": "transient.yank",
-        "title": "yank"
+        "title": "Yank"
       },
       {
         "command": "transient.kill",
-        "title": "kill"
+        "title": "Kill"
       },
       {
         "command": "transient.killRegion",
-        "title": "killRegion"
+        "title": "Kill Region"
       },
       {
         "command": "transient.copyRegion",
-        "title": "copyRegion"
+        "title": "Copy Region"
       },
       {
         "command": "transient.killRegionOrBackwardWord",
-        "title": "killRegionOrBackwardWord"
+        "title": "Kill Region Or Backward Word"
       },
       {
         "command": "transient.showKillRing",
-        "title": "showKillRing"
+        "title": "Show KillRing"
       },
       {
         "command": "transient.cancel",
-        "title": "cancel"
+        "title": "Cancel"
       }
     ],
     "keybindings": [
