@@ -1,5 +1,4 @@
-Transient Emacs for Atom Editor
-===============================
+# Transient Emacs for Atom Editor
 
 Emacs (transient mark mode) for Atom Editor.
 
@@ -9,8 +8,7 @@ Emacs (transient mark mode) for Atom Editor.
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
 
-Features
-========
+# Features
 
 - [x] emacs like keybindings
 - [x] kill-ring with multiple cursors
@@ -18,8 +16,7 @@ Features
 - [x] emacs like incremental search
 - [x] yank text selected from kill-ring history
 
-Keybindings
-===========
+# Keybindings
 
 See keymaps/transient-emacs.cson for detailed keybindings
 
