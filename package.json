@@ -270,7 +270,7 @@
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.13.0",
     "tslint": "^5.15.0",
-    "typescript": "^3.4.1",
+    "typescript": "^3.4.2",
     "vscode": "^1.1.28"
   },
   "private": true,
