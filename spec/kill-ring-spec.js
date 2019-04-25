@@ -1,5 +1,5 @@
 /* global describe it expect atom:true */
-const KillRing = require('../lib/kill-ring');
+const { KillRing } = require('../lib/kill-ring');
 
 describe('Kill Ring', () => {
   it('should be ["text"]', () => {

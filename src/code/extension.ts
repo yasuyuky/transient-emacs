@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { TextEditor, Selection, Position } from 'vscode';
-import { KillRing } from './kill-ring';
+import { KillRing } from '../kill-ring';
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
