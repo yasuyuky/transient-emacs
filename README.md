@@ -1,6 +1,6 @@
-# Transient Emacs for Atom Editor
+# Transient Emacs for Atom Editor / VS Code
 
-Emacs (transient mark mode) for Atom Editor.
+Emacs (transient mark mode) for Atom Editor / VS Code (Experimental).
 
 [![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
 [![dependencies Status](https://david-dm.org/yasuyuky/transient-emacs/status.svg)](https://david-dm.org/yasuyuky/transient-emacs)
