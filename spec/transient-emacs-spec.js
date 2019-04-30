@@ -1,5 +1,5 @@
 /* global describe it expect beforeEach waitsForPromise runs atom:true */
-const transient_emacs = require('../lib/atom/transient-emacs');
+const transient_emacs = require('../lib/atom/main');
 
 describe('Transient Emacs', () => {
   let editor = null;
