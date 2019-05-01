@@ -51,6 +51,11 @@
         "when": "textInputFocus"
       },
       {
+        "key": "ctrl+shift+2",
+        "command": "transient.setMark",
+        "when": "textInputFocus"
+      },
+      {
         "key": "left",
         "command": "transient.cursorLeft",
         "when": "textInputFocus"
