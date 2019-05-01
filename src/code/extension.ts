@@ -65,7 +65,7 @@ function cursorParagraphDown(editor: TextEditor) {
 
 function cursorParagraphDownSelect(editor: TextEditor) {
   let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
-  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, false);
+  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, true);
 }
 
 function cursorParagraphUp(editor: TextEditor) {
