@@ -34,6 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
     'cursorDown',
     'cursorHome',
     'cursorEnd',
+    'cursorPageUp',
+    'cursorPageDown',
     'cursorTop',
     'cursorBottom',
     'cursorWordLeft',
