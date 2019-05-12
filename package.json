@@ -260,6 +260,14 @@
         "key": "ctrl+shift+up",
         "command": "editor.action.insertCursorAbove",
         "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+x 2",
+        "command": "workbench.action.splitEditorDown"
+      },
+      {
+        "key": "ctrl+x 3",
+        "command": "workbench.action.splitEditorRight"
       }
     ]
   },
