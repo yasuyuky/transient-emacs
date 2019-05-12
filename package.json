@@ -156,6 +156,16 @@
         "when": "textInputFocus"
       },
       {
+        "key": "ctrl+v",
+        "command": "transient.cursorPageDown",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "alt+v",
+        "command": "transient.cursorPageUp",
+        "when": "textInputFocus"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
