@@ -52,8 +52,9 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(
-    vscode.window.onDidChangeTextEditorSelection(() => {
+    vscode.window.onDidChangeTextEditorSelection(e => {
       if (isUserCommand) killRing.seal();
+      if (e.textEditor.selection.isEmpty) vscode.commands.executeCommand('closeFindWidget');
     })
   );
 }
