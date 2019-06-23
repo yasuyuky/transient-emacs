@@ -92,8 +92,8 @@ function cursorParagraphMove(
     for (var flag = false; limit(l); l = next(l)) {
       if (!doc.lineAt(l).isEmptyOrWhitespace) flag = true;
       if (flag && doc.lineAt(l).isEmptyOrWhitespace) {
-        const p = new vscode.Position(l, 0);
-        return new vscode.Selection(select ? s.anchor : p, p);
+        const p = new Position(l, 0);
+        return new Selection(select ? s.anchor : p, p);
       }
     }
     return new Selection(select ? s.anchor : end, end);
@@ -101,7 +101,7 @@ function cursorParagraphMove(
   editor.revealRange(editor.selections[editor.selections.length - 1].with());
 }
 
-function cancel(editor: vscode.TextEditor) {
+function cancel(editor: TextEditor) {
   if (markSet) {
     clearSelections(editor);
     unsetMark(editor);
@@ -111,15 +111,15 @@ function cancel(editor: vscode.TextEditor) {
   if (consolidateSelections(editor)) return;
 }
 
-function clearSelections(editor: vscode.TextEditor): boolean {
+function clearSelections(editor: TextEditor): boolean {
   if (editor.selections.some(s => !s.isEmpty)) {
-    editor.selections = editor.selections.map(s => new vscode.Selection(s.active, s.active));
+    editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
     return true;
   }
   return false;
 }
 
-function consolidateSelections(editor: vscode.TextEditor): boolean {
+function consolidateSelections(editor: TextEditor): boolean {
   if (editor.selections.length > 1) {
     editor.selections = [editor.selection];
     editor.revealRange(editor.selection.with());
@@ -128,49 +128,49 @@ function consolidateSelections(editor: vscode.TextEditor): boolean {
   return false;
 }
 
-function setMark(editor: vscode.TextEditor) {
+function setMark(editor: TextEditor) {
   console.log('set mark');
   markSet = true;
 }
 
-function unsetMark(editor: vscode.TextEditor) {
+function unsetMark(editor: TextEditor) {
   console.log('unset mark');
   markSet = false;
 }
 
-function killRegionOrBackwardWord(editor: vscode.TextEditor) {
+function killRegionOrBackwardWord(editor: TextEditor) {
   if (editor.selection.isEmpty) killBackwardWord(editor);
   else killRegion(editor);
 }
 
-function pushRegionToKillring(editor: vscode.TextEditor) {
+function pushRegionToKillring(editor: TextEditor) {
   markSet = false;
   const texts = editor.selections.map(s => editor.document.getText(s));
   killRing.push(texts);
   killRing.seal();
 }
 
-function killRegion(editor: vscode.TextEditor) {
+function killRegion(editor: TextEditor) {
   pushRegionToKillring(editor);
   editor.edit(edit => editor.selections.forEach(s => (s.isEmpty ? false : edit.delete(s))));
 }
 
-function copyRegion(editor: vscode.TextEditor) {
+function copyRegion(editor: TextEditor) {
   pushRegionToKillring(editor);
   editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
 }
 
-function killBackwardWord(editor: vscode.TextEditor) {
+function killBackwardWord(editor: TextEditor) {
   isUserCommand = false;
   editor
     .edit(edit => {
       editor.selections = editor.selections.map(s => {
         let wordRange = editor.document.getWordRangeAtPosition(s.active);
         if (wordRange && !wordRange.start.isEqual(s.active))
-          return new vscode.Selection(wordRange.start, s.active);
+          return new Selection(wordRange.start, s.active);
         const delimExp = /[`~!\@@#\%\^\&*()-\=+{}\|\;\:\'\"\,.\<>\/\?\s]+/g;
         let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
-        if (delimRange) return new vscode.Selection(delimRange.start, s.active);
+        if (delimRange) return new Selection(delimRange.start, s.active);
         return s;
       });
       const texts = editor.selections.map(s => editor.document.getText(s));
@@ -182,15 +182,15 @@ function killBackwardWord(editor: vscode.TextEditor) {
     });
 }
 
-function kill(editor: vscode.TextEditor) {
+function kill(editor: TextEditor) {
   isUserCommand = false;
   editor
     .edit(edit => {
       editor.selections = editor.selections.map(s => {
         let line = editor.document.lineAt(s.active);
         if (line.isEmptyOrWhitespace)
-          return new vscode.Selection(s.active, line.rangeIncludingLineBreak.end);
-        return new vscode.Selection(s.active, line.range.end);
+          return new Selection(s.active, line.rangeIncludingLineBreak.end);
+        return new Selection(s.active, line.range.end);
       });
       const texts = editor.selections.map(s => editor.document.getText(s));
       killRing.put(texts, true);
@@ -201,18 +201,18 @@ function kill(editor: vscode.TextEditor) {
     });
 }
 
-function yank(editor: vscode.TextEditor) {
+function yank(editor: TextEditor) {
   yankTexts(editor, killRing.top());
 }
 
-function showKillRing(editor: vscode.TextEditor) {
+function showKillRing(editor: TextEditor) {
   killRing.updateBuffer();
   vscode.window
     .showQuickPick(killRing.buffer.map(ss => ss.join('\n')))
     .then(s => yankTexts(editor, (s || '').split('\n')));
 }
 
-function yankTexts(editor: vscode.TextEditor, texts: string[]) {
+function yankTexts(editor: TextEditor, texts: string[]) {
   editor
     .edit(edit => {
       const sels = editor.selections;
@@ -220,6 +220,6 @@ function yankTexts(editor: vscode.TextEditor, texts: string[]) {
       else if (texts) sels.forEach(s => edit.replace(s, texts.join('\n')));
     })
     .then(() => {
-      editor.selections = editor.selections.map(s => new vscode.Selection(s.active, s.active));
+      editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
     });
 }
