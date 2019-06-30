@@ -3,3 +3,4 @@ npm-debug.log
 node_modules
 lib/code
 *.js.map
+vscode.proposed.d.ts
