@@ -1,6 +1,11 @@
 trigger:
 - master
 
+pr:
+  branches:
+    include:
+    - '*'
+
 strategy:
   matrix:
     linux:
