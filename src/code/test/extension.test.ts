@@ -42,11 +42,12 @@ suite('Extension Tests', async () => {
     });
     let editor = await vscode.window.showTextDocument(doc);
     move(editor, [new Position(0, 0), new Position(1,0)]);
+    await sleep(100);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(200);
+    await sleep(300);
     assert.equal('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(200);
+    await sleep(300);
     assert.equal('', editor.document.getText());
   });
 
