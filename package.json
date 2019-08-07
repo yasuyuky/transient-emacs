@@ -300,7 +300,7 @@
     "mocha": "^6.2.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
-    "vscode-test": "^1.1.0"
+    "vscode-test": "^1.2.0"
   },
   "private": true,
   "description": "Emacs mode using transient mark",
