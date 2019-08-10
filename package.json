@@ -308,7 +308,7 @@
   "license": "MIT",
   "engines": {
     "vscode": "^1.37.0",
-    "atom": ">0.150.0"
+    "atom": "^1.39.0"
   },
   "dependencies": {
     "atom-select-list": "^0.7.2",
