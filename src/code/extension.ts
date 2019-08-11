@@ -168,7 +168,7 @@ function killBackwardWord(editor: TextEditor) {
         let wordRange = editor.document.getWordRangeAtPosition(s.active);
         if (wordRange && !wordRange.start.isEqual(s.active))
           return new Selection(wordRange.start, s.active);
-        const delimExp = /[`~!\@@#\%\^\&*()-\=+{}\|\;\:\'\"\,.\<>\/\?\s]+/g;
+        const delimExp = /[\\\[\]`~!\@@#\%\^\&*()-\=+{}\|\;\:\'\"\,.\<>\/\?\s]+/g;
         let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
         if (delimRange) return new Selection(delimRange.start, s.active);
         return s;
