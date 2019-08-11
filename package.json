@@ -237,6 +237,10 @@
         "when": "!findWidgetVisible"
       },
       {
+        "key": "ctrl+x u",
+        "command": "undo"
+      },
+      {
         "key": "ctrl+w",
         "command": "transient.killRegionOrBackwardWord",
         "when": "textInputFocus"
