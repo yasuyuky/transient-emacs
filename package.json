@@ -296,6 +296,10 @@
         "command": "workbench.action.splitEditorRight"
       },
       {
+        "key": "ctrl+x 0",
+        "command": "workbench.action.closeEditorsInGroup"
+      },
+      {
         "key": "ctrl+x o",
         "command": "workbench.action.focusNextGroup"
       }
