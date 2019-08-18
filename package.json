@@ -183,6 +183,10 @@
       },
       {
         "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.files.openFileFolder"
+      },
+      {
+        "key": "ctrl+x ctrl+b",
         "command": "workbench.action.quickOpen"
       },
       {
