@@ -190,6 +190,10 @@
         "command": "workbench.action.quickOpen"
       },
       {
+        "key": "ctrl+x ctrl+c",
+        "command": "workbench.action.quit"
+      },
+      {
         "key": "ctrl+s",
         "command": "actions.find",
         "when": "!findWidgetVisible"
