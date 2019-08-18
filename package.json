@@ -166,6 +166,10 @@
         "when": "textInputFocus"
       },
       {
+        "key": "alt+g g",
+        "command": "workbench.action.gotoLine"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
@@ -179,7 +183,15 @@
       },
       {
         "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.files.openFileFolder"
+      },
+      {
+        "key": "ctrl+x ctrl+b",
         "command": "workbench.action.quickOpen"
+      },
+      {
+        "key": "ctrl+x ctrl+c",
+        "command": "workbench.action.quit"
       },
       {
         "key": "ctrl+s",
@@ -284,8 +296,16 @@
         "command": "workbench.action.splitEditorRight"
       },
       {
+        "key": "ctrl+x 0",
+        "command": "workbench.action.closeEditorsInGroup"
+      },
+      {
         "key": "ctrl+x o",
         "command": "workbench.action.focusNextGroup"
+      },
+      {
+        "key": "alt+x",
+        "command": "workbench.action.showCommands"
       }
     ]
   },
