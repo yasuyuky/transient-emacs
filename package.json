@@ -302,6 +302,10 @@
       {
         "key": "ctrl+x o",
         "command": "workbench.action.focusNextGroup"
+      },
+      {
+        "key": "alt+x",
+        "command": "workbench.action.showCommands"
       }
     ]
   },
