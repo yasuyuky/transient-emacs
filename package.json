@@ -166,6 +166,10 @@
         "when": "textInputFocus"
       },
       {
+        "key": "alt+g g",
+        "command": "workbench.action.gotoLine"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
