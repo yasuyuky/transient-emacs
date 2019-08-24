@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.killBackwardWord', killBackwardWord],
     ['transient.showKillRing', showKillRing],
     ['transient.copyRegion', copyRegion],
+    ['transient.insertNewline', insertNewline],
     ['cursorParagraphUp', cursorParagraphUp],
     ['cursorParagraphDown', cursorParagraphDown],
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
@@ -210,6 +211,10 @@ function showKillRing(editor: TextEditor) {
   vscode.window
     .showQuickPick(killRing.buffer.map(ss => ss.join('\n')))
     .then(s => yankTexts(editor, (s || '').split('\n')));
+}
+
+function insertNewline(editor: TextEditor) {
+  yankTexts(editor, ['\n']);
 }
 
 function yankTexts(editor: TextEditor, texts: string[]) {
