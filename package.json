@@ -278,6 +278,11 @@
         "when": "textInputFocus"
       },
       {
+        "key": "ctrl+j",
+        "command": "transient.insertNewline",
+        "when": "textInputFocus"
+      },
+      {
         "key": "ctrl+shift+down",
         "command": "editor.action.insertCursorBelow",
         "when": "textInputFocus"
