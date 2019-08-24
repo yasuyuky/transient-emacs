@@ -203,21 +203,21 @@ function kill(editor: TextEditor) {
 }
 
 function yank(editor: TextEditor) {
-  yankTexts(editor, killRing.top());
+  insertTexts(editor, killRing.top());
 }
 
 function showKillRing(editor: TextEditor) {
   killRing.updateBuffer();
   vscode.window
     .showQuickPick(killRing.buffer.map(ss => ss.join('\n')))
-    .then(s => yankTexts(editor, (s || '').split('\n')));
+    .then(s => insertTexts(editor, (s || '').split('\n')));
 }
 
 function insertNewline(editor: TextEditor) {
-  yankTexts(editor, ['\n']);
+  insertTexts(editor, ['\n']);
 }
 
-function yankTexts(editor: TextEditor, texts: string[]) {
+function insertTexts(editor: TextEditor, texts: string[]) {
   editor
     .edit(edit => {
       const sels = editor.selections;
