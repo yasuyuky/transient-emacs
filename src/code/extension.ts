@@ -19,6 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.showKillRing', showKillRing],
     ['transient.copyRegion', copyRegion],
     ['transient.insertNewline', insertNewline],
+    ['transient.insertTab', editor => insertTexts(editor, ['\t'])],
     ['cursorParagraphUp', cursorParagraphUp],
     ['cursorParagraphDown', cursorParagraphDown],
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
