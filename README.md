@@ -21,7 +21,7 @@ This package emulate Emacs'
 
 # Keybindings
 
-See keymaps/transient-emacs.cson for detailed keybindings
+See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detailed keybindings
 
 | keybindng          | Atom Commands                                  |
 | ------------------ | ---------------------------------------------- |
