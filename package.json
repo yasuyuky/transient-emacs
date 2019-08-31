@@ -316,6 +316,10 @@
       {
         "key": "alt+x",
         "command": "workbench.action.showCommands"
+      },
+      {
+        "key": "alt+.",
+        "command": "workbench.action.gotoSymbol"
       }
     ]
   },
