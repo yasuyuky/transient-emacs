@@ -41,7 +41,7 @@ suite('Extension Tests', async () => {
       content: 'foo bar\nbaz\n'
     });
     let editor = await vscode.window.showTextDocument(doc);
-    move(editor, [new Position(0, 0), new Position(1,0)]);
+    move(editor, [new Position(0, 0), new Position(1, 0)]);
     await sleep(100);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
