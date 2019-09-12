@@ -333,7 +333,7 @@
     "@types/clipboardy": "^2.0.1",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.4",
+    "@types/node": "^12.7.5",
     "@types/vscode": "^1.38.0",
     "mocha": "^6.2.0",
     "tslint": "^5.20.0",
