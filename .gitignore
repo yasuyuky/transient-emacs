@@ -5,3 +5,4 @@ lib/code
 *.js.map
 vscode.proposed.d.ts
 .vscode-test
+*.vsix
