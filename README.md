@@ -23,73 +23,66 @@ This package emulate Emacs'
 
 See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detailed keybindings
 
-| keybindng          | Atom Commands                                  |
-| ------------------ | ---------------------------------------------- |
-| **files**          |                                                |
-| `ctrl-x ctrl-b`    | fuzzy-finder:toggle-file-finder                |
-| `ctrl-x b`         | fuzzy-finder:toggle-buffer-finder              |
-| `ctrl-x ctrl-f`    | application:open                               |
-| `ctrl-x ctrl-c`    | application:quit                               |
-| `ctrl-x ctrl-s`    | core:save                                      |
-| `ctrl-x ctrl-w`    | core:save-as                                   |
-| `ctrl-x k`         | core:close                                     |
-| **general**        |                                                |
-| `ctrl-j`           | core:confirm                                   |
-| `ctrl-m`           | core:confirm                                   |
-| `ctrl-g`           | cancels                                        |
-| `ctrl-x u`         | core:undo                                      |
-| **mark**           |                                                |
-| `ctrl-@`           | emacs:set-mark                                 |
-| `` ctrl-` ``       | emacs:set-mark                                 |
-| **edit**           |                                                |
-| `ctrl-y`           | emacs:yank                                     |
-| `alt-y`            | emacs:show-kill-ring                           |
-| `escape y`         | emacs:show-kill-ring                           |
-| `ctrl-k`           | emacs:kill                                     |
-| `ctrl-w`           | emacs:kill-region-or-backward-word             |
-| `alt-w`            | emacs:copy-region                              |
-| `escape w`         | emacs:copy-region                              |
-| `ctrl-j`           | editor:newline                                 |
-| `ctrl-m`           | editor:newline                                 |
-| `ctrl-d`           | core:delete                                    |
-| `backspace`        | emacs:backspace                                |
-| `ctrl-h`           | emacs:backspace                                |
-| `ctrl-j`           | editor:newline                                 |
-| `ctrl-m`           | editor:newline                                 |
-| **move**           |                                                |
-| `ctrl-n`           | core:move-down                                 |
-| `ctrl-p`           | core:move-up                                   |
-| `ctrl-f`           | core:move-right                                |
-| `ctrl-b`           | core:move-left                                 |
-| `ctrl-l`           | editor:scroll-to-cursor                        |
-| `ctrl-a`           | editor:move-to-first-character-of-line         |
-| `ctrl-e`           | editor:move-to-end-of-line                     |
-| `ctrl-right`       | editor:move-to-beginning-of-next-word          |
-| `ctrl-left`        | editor:move-to-beginning-of-word               |
-| `ctrl-up`          | editor:move-to-beginning-of-previous-paragraph |
-| `ctrl-down`        | editor:move-to-beginning-of-next-paragraph     |
-| `ctrl-shift-right` | editor:select-to-beginning-of-next-word        |
-| `ctrl-shift-left`  | editor:select-to-beginning-of-word             |
-| `ctrl-v`           | core:page-down                                 |
-| `alt-v`            | core:page-up                                   |
-| `escape v`         | core:page-up                                   |
-| `alt-<`            | core:move-to-top                               |
-| `escape <`         | core:move-to-top                               |
-| `alt->`            | core:move-to-bottom                            |
-| `escape >`         | core:move-to-bottom                            |
-| `alt-g g`          | go-to-line:toggle                              |
-| **search**         |                                                |
-| `ctrl-s`           | emacs:isearch                                  |
-| `ctrl-r`           | emacs:backward-isearch                         |
-| `ctrl-alt-s`       | emacs:isearch-regexp                           |
-| `ctrl-alt-r`       | emacs:backward-isearch-regexp                  |
-| **pane**           |                                                |
-| `ctrl-x 2`         | pane:split-down                                |
-| `ctrl-x 3`         | pane:split-right                               |
-| `ctrl-x 0`         | pane:close                                     |
-| `ctrl-x o`         | window:focus-next-pane                         |
-| **misc**           |                                                |
-| `alt-x`            | command-palette:toggle                         |
-| `escape x`         | command-palette:toggle                         |
-| `alt-/`            | autocomplete:toggle                            |
-| `alt-.`            | symbols-view:toggle-file-symbols               |
+| keybindngs         | Atom Editor Commands                           | VS Code Commands                                   |
+| ------------------ | ---------------------------------------------- | -------------------------------------------------- |
+| **files**          |                                                |                                                    |
+| `ctrl-x ctrl-b`    | fuzzy-finder:toggle-file-finder                | workbench.action.quickOpen                         |
+| `ctrl-x b`         | fuzzy-finder:toggle-buffer-finder              | workbench.action.openNextRecentlyUsedEditorInGroup |
+| `ctrl-x ctrl-f`    | application:open                               | workbench.action.files.openFileFolder              |
+| `ctrl-x ctrl-c`    | application:quit                               | workbench.action.quit                              |
+| `ctrl-x ctrl-s`    | core:save                                      | workbench.action.files.save                        |
+| `ctrl-x ctrl-w`    | core:save-as                                   | workbench.action.files.saveAs                      |
+| `ctrl-x k`         | core:close                                     | workbench.action.closeActiveEditor                 |
+| **general**        |                                                |                                                    |
+| `ctrl-j`           | core:confirm                                   | transient.insertNewLine                            |
+| `ctrl-m`           | core:confirm                                   |                                                    |
+| `ctrl-g`           | cancels                                        | (cancels)                                          |
+| `ctrl-x u`         | core:undo                                      | undo                                               |
+| **mark**           |                                                |                                                    |
+| `ctrl-enter`       |                                                | transient.setMark                                  |
+| `ctrl-@`           | emacs:set-mark                                 | transient.setMark                                  |
+| `` ctrl-` ``       | emacs:set-mark                                 |                                                    |
+| **edit**           |                                                |                                                    |
+| `ctrl-y`           | emacs:yank                                     | transient.yank                                     |
+| `alt-y`            | emacs:show-kill-ring                           | transient.showKillRing                             |
+| `ctrl-k`           | emacs:kill                                     | transient.kill                                     |
+| `ctrl-w`           | emacs:kill-region-or-backward-word             | transient.killRegionOrBackwardWord                 |
+| `alt-w`            | emacs:copy-region                              | transient.copyRegion                               |
+| `ctrl-j`           | editor:newline                                 | transient.insertNewline                            |
+| `ctrl-m`           | editor:newline                                 |                                                    |
+| `ctrl-d`           | core:delete                                    | deleteRight (default)                              |
+| `backspace`        | emacs:backspace                                | deleteLeft (default)                               |
+| `ctrl-h`           | emacs:backspace                                | deleteLeft (default)                               |
+| **move**           |                                                |                                                    |
+| `ctrl-n`           | core:move-down                                 | transient.cursorDown                               |
+| `ctrl-p`           | core:move-up                                   | transient.cursorUp                                 |
+| `ctrl-f`           | core:move-right                                | transient.cursorRight                              |
+| `ctrl-b`           | core:move-left                                 | transient.cursorLeft                               |
+| `ctrl-l`           | editor:scroll-to-cursor                        |                                                    |
+| `ctrl-a`           | editor:move-to-first-character-of-line         | transient.cursorHome                               |
+| `ctrl-e`           | editor:move-to-end-of-line                     | transient.cursorEnd                                |
+| `ctrl-right`       | editor:move-to-beginning-of-next-word          | transient.cursorWordRight                          |
+| `ctrl-left`        | editor:move-to-beginning-of-word               | transient.cursorWordLeft                           |
+| `ctrl-up`          | editor:move-to-beginning-of-previous-paragraph | transient.cursorParagraphUp                        |
+| `ctrl-down`        | editor:move-to-beginning-of-next-paragraph     | transient.cursorParagraphDown                      |
+| `ctrl-shift-right` | editor:select-to-beginning-of-next-word        | cursorWordRightSelect                              |
+| `ctrl-shift-left`  | editor:select-to-beginning-of-word             | cursorWordLeftSelect                               |
+| `ctrl-v`           | core:page-down                                 | transient.cursorPageDown                           |
+| `alt-v`            | core:page-up                                   | transient.cursorPageUp                             |
+| `alt-<`            | core:move-to-top                               | transient.cursorTop                                |
+| `alt->`            | core:move-to-bottom                            | transient.cursorBottom                             |
+| `alt-g g`          | go-to-line:toggle                              | workbench.action.gotoLine                          |
+| **search**         |                                                |                                                    |
+| `ctrl-s`           | emacs:isearch                                  | actions.find                                       |
+| `ctrl-r`           | emacs:backward-isearch                         | actions.find (reverse search)                      |
+| `ctrl-alt-s`       | emacs:isearch-regexp                           |                                                    |
+| `ctrl-alt-r`       | emacs:backward-isearch-regexp                  |                                                    |
+| **pane**           |                                                |                                                    |
+| `ctrl-x 2`         | pane:split-down                                | workbench.action.splitEditorDown                   |
+| `ctrl-x 3`         | pane:split-right                               | workbench.action.splitEditorRight                  |
+| `ctrl-x 0`         | pane:close                                     | workbench.action.closeEditorsInGroup               |
+| `ctrl-x o`         | window:focus-next-pane                         | workbench.action.focusNextGroup                    |
+| **misc**           |                                                |                                                    |
+| `alt-x`            | command-palette:toggle                         | workbench.action.showCommands                      |
+| `alt-/`            | autocomplete:toggle                            |                                                    |
+| `alt-.`            | symbols-view:toggle-file-symbols               | workbench.action.gotoSymbol                        |
