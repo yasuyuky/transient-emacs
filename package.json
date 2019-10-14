@@ -345,7 +345,7 @@
   "repository": "https://github.com/yasuyuky/transient-emacs",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.37.0",
+    "vscode": "^1.38.0",
     "atom": "^1.39.0"
   },
   "dependencies": {
