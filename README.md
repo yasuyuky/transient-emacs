@@ -1,6 +1,6 @@
 # Transient Emacs for Atom Editor / VS Code
 
-<img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/master/image/icon.svg?sanitize=true" width="128px">
+<img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/master/image/icon.png" width="128px">
 
 Emacs (transient mark mode) for Atom Editor / VS Code (Experimental).
 
