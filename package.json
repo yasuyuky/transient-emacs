@@ -346,6 +346,7 @@
     "type": "git",
     "url": "https://github.com/yasuyuky/transient-emacs"
   },
+  "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
     "vscode": "^1.39.0",
