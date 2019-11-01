@@ -175,6 +175,10 @@
         "command": "workbench.action.files.save"
       },
       {
+        "key": "ctrl+x ctrl+r",
+        "command": "workbench.action.files.saveWithoutFormatting"
+      },
+      {
         "key": "ctrl+x ctrl+w",
         "command": "workbench.action.files.saveAs"
       },
