@@ -337,12 +337,12 @@
     "@types/clipboardy": "^2.0.1",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.11.7",
+    "@types/node": "^12.12.3",
     "@types/vscode": "^1.39.0",
     "mocha": "^6.2.2",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
-    "vscode-test": "^1.2.0"
+    "vscode-test": "^1.2.2"
   },
   "private": true,
   "description": "Emacs mode using transient mark",
