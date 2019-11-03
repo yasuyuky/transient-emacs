@@ -32,6 +32,7 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `ctrl-x ctrl-c`    | application:quit                               | workbench.action.quit                              |
 | `ctrl-x ctrl-s`    | core:save                                      | workbench.action.files.save                        |
 | `ctrl-x ctrl-w`    | core:save-as                                   | workbench.action.files.saveAs                      |
+| `ctrl-x ctrl-r`    |                                                | workbench.action.files.saveWithoutFormatting       |
 | `ctrl-x k`         | core:close                                     | workbench.action.closeActiveEditor                 |
 | **general**        |                                                |                                                    |
 | `ctrl-j`           | core:confirm                                   | transient.insertNewLine                            |
