@@ -87,3 +87,9 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `alt-x`            | command-palette:toggle                         | workbench.action.showCommands                      |
 | `alt-/`            | autocomplete:toggle                            |                                                    |
 | `alt-.`            | symbols-view:toggle-file-symbols               | workbench.action.gotoSymbol                        |
+
+# Release flow
+
+1. Update CHANGELOG
+2. `apm publish (major|minor|patch)`
+3. `vsce package && vsce publish`
