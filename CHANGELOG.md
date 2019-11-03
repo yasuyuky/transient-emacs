@@ -1,3 +1,9 @@
+## 0.12.1
+
+- Update dependencies
+- Add icons
+- Add a command to save without formatting
+
 ## 0.12.0
 
 - Massive refactoring
