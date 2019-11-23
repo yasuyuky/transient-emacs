@@ -4,6 +4,9 @@
 
 Emacs (transient mark mode) for Atom Editor / VS Code
 
+- [for Atom Editor](https://atom.io/packages/transient-emacs)
+- [for VS Code](https://marketplace.visualstudio.com/items?itemName=yasuyuky.transient-emacs)
+
 [![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
 [![Build Status](https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=master)](https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=master)
 [![dependencies Status](https://david-dm.org/yasuyuky/transient-emacs/status.svg)](https://david-dm.org/yasuyuky/transient-emacs)
