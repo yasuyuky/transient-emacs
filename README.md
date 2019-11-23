@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/master/image/icon.png" width="128px">
 
-Emacs (transient mark mode) for Atom Editor / VS Code (Experimental).
+Emacs (transient mark mode) for Atom Editor / VS Code
 
 [![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
 [![Build Status](https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=master)](https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=master)
