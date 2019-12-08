@@ -76,6 +76,8 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `alt-<`            | core:move-to-top                               | transient.cursorTop                                |
 | `alt->`            | core:move-to-bottom                            | transient.cursorBottom                             |
 | `alt-g g`          | go-to-line:toggle                              | workbench.action.gotoLine                          |
+| `alt-g n`          |                                                | editor.action.marker.next                          |
+| `alt-g p`          |                                                | editor.action.marker.prev                          |
 | **search**         |                                                |                                                    |
 | `ctrl-s`           | emacs:isearch                                  | actions.find                                       |
 | `ctrl-r`           | emacs:backward-isearch                         | actions.find (reverse search)                      |
