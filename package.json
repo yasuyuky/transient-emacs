@@ -176,6 +176,11 @@
         "when": "editorTextFocus && !editorReadonly"
       },
       {
+        "key": "alt+g p",
+        "command": "editor.action.marker.prev",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
