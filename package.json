@@ -171,6 +171,11 @@
         "command": "workbench.action.gotoLine"
       },
       {
+        "key": "alt+g n",
+        "command": "editor.action.marker.next",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
       },
