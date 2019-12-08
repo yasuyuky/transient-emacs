@@ -1,3 +1,8 @@
+## 0.13.0
+
+- Add command to go next/prev problem (for vscode)
+- Update dependencies
+
 ## 0.12.2
 
 - Update dependencies
