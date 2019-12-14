@@ -66,20 +66,44 @@ export function deactivate() {}
 
 function cursorParagraphDown(editor: TextEditor) {
   let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
-  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, false);
+  cursorParagraphMove(
+    editor,
+    l => l + 1,
+    l => l < editor.document.lineCount,
+    end,
+    false
+  );
 }
 
 function cursorParagraphDownSelect(editor: TextEditor) {
   let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
-  cursorParagraphMove(editor, l => l + 1, l => l < editor.document.lineCount, end, true);
+  cursorParagraphMove(
+    editor,
+    l => l + 1,
+    l => l < editor.document.lineCount,
+    end,
+    true
+  );
 }
 
 function cursorParagraphUp(editor: TextEditor) {
-  cursorParagraphMove(editor, l => l - 1, l => l >= 0, new Position(0, 0), false);
+  cursorParagraphMove(
+    editor,
+    l => l - 1,
+    l => l >= 0,
+    new Position(0, 0),
+    false
+  );
 }
 
 function cursorParagraphUpSelect(editor: TextEditor) {
-  cursorParagraphMove(editor, l => l - 1, l => l >= 0, new Position(0, 0), true);
+  cursorParagraphMove(
+    editor,
+    l => l - 1,
+    l => l >= 0,
+    new Position(0, 0),
+    true
+  );
 }
 
 function cursorParagraphMove(
