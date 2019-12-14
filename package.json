@@ -167,6 +167,11 @@
         "when": "textInputFocus"
       },
       {
+        "key": "ctrl+l",
+        "command": "transient.adjustToCenter",
+        "when": "textInputFocus"
+      },
+      {
         "key": "alt+g g",
         "command": "workbench.action.gotoLine"
       },
