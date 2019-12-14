@@ -23,7 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
     ['cursorParagraphUp', cursorParagraphUp],
     ['cursorParagraphDown', cursorParagraphDown],
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
-    ['cursorParagraphDownSelect', cursorParagraphDownSelect]
+    ['cursorParagraphDownSelect', cursorParagraphDownSelect],
+    ['transient.adjustToCenter', adjustToCenter]
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -101,6 +102,13 @@ function cursorParagraphMove(
     return new Selection(select ? s.anchor : end, end);
   });
   editor.revealRange(editor.selections[editor.selections.length - 1].with());
+}
+
+function adjustToCenter(editor: TextEditor) {
+  vscode.commands.executeCommand('revealLine', {
+    lineNumber: editor.selection.start.line,
+    at: 'center'
+  });
 }
 
 function cancel(editor: TextEditor) {
