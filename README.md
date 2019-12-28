@@ -62,7 +62,7 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `ctrl-p`           | core:move-up                                   | transient.cursorUp                                 |
 | `ctrl-f`           | core:move-right                                | transient.cursorRight                              |
 | `ctrl-b`           | core:move-left                                 | transient.cursorLeft                               |
-| `ctrl-l`           | editor:scroll-to-cursor                        |                                                    |
+| `ctrl-l`           | editor:scroll-to-cursor                        | transient.adjustToCenter                           |
 | `ctrl-a`           | editor:move-to-first-character-of-line         | transient.cursorHome                               |
 | `ctrl-e`           | editor:move-to-end-of-line                     | transient.cursorEnd                                |
 | `ctrl-right`       | editor:move-to-beginning-of-next-word          | transient.cursorWordRight                          |
