@@ -162,12 +162,12 @@ function consolidateSelections(editor: TextEditor): boolean {
   return false;
 }
 
-function setMark(editor: TextEditor) {
+function setMark(_editor: TextEditor) {
   console.log('set mark');
   markSet = true;
 }
 
-function unsetMark(editor: TextEditor) {
+function unsetMark(_editor: TextEditor) {
   console.log('unset mark');
   markSet = false;
 }
