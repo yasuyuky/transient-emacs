@@ -50,5 +50,4 @@ suite('Extension Tests', async () => {
     await sleep(300);
     assert.equal('', editor.document.getText());
   });
-
 });
