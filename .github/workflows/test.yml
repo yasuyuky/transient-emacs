@@ -3,8 +3,7 @@ name: Test
 on: push
 
 jobs:
-  build-ui:
-    needs: build-image
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
