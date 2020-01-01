@@ -1,3 +1,9 @@
+## 0.14.0
+
+- Add command to adjust screen
+- Update dependencies
+- Introduce GitHub Actions CI/CD
+
 ## 0.13.0
 
 - Add command to go next/prev problem (for vscode)
