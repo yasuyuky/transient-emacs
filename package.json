@@ -368,7 +368,7 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.40.0",
+    "vscode": "^1.41.0",
     "atom": "^1.39.0"
   },
   "dependencies": {
