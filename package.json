@@ -355,7 +355,7 @@
     "@types/node": "^13.1.8",
     "@types/vscode": "^1.41.0",
     "mocha": "^7.0.0",
-    "tslint": "^5.20.1",
+    "tslint": "^6.0.0",
     "typescript": "^3.7.5",
     "vscode-test": "^1.3.0"
   },
