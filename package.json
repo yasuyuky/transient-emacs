@@ -351,7 +351,7 @@
   "devDependencies": {
     "@types/clipboardy": "^2.0.1",
     "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^7.0.1",
     "@types/node": "^13.5.2",
     "@types/vscode": "^1.41.0",
     "mocha": "^7.0.1",
