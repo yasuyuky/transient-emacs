@@ -1,3 +1,7 @@
+## 0.14.1
+
+- Update dependencies
+
 ## 0.14.0
 
 - Add command to adjust screen
