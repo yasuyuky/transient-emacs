@@ -1,6 +1,6 @@
 {
   "name": "transient-emacs",
-  "displayName": "transient-emacs",
+  "displayName": "Transient Emacs",
   "publisher": "yasuyuky",
   "main": "./lib/entrypoint",
   "version": "0.14.1",
