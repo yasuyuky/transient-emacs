@@ -1,3 +1,8 @@
+## 0.14.2
+
+- Update dependencies
+- Change dispalay name
+
 ## 0.14.1
 
 - Update dependencies
