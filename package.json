@@ -373,7 +373,7 @@
   },
   "dependencies": {
     "atom-select-list": "^0.7.2",
-    "clipboardy": "^2.2.0"
+    "clipboardy": "^2.3.0"
   },
   "deserializers": {
     "KillRing": "deserializeKillRing"
