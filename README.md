@@ -7,10 +7,10 @@ Emacs (transient mark mode) for Atom Editor / VS Code
 - [for Atom Editor](https://atom.io/packages/transient-emacs)
 - [for VS Code](https://marketplace.visualstudio.com/items?itemName=yasuyuky.transient-emacs)
 
-[![Build Status](https://travis-ci.org/yasuyuky/transient-emacs.svg)](https://travis-ci.org/yasuyuky/transient-emacs)
-[![Build Status](https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=master)](https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=master)
-[![Actions Status](https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github)](https://github.com/yasuyuky/transient-emacs/actions)
-[![dependencies Status](https://david-dm.org/yasuyuky/transient-emacs/status.svg)](https://david-dm.org/yasuyuky/transient-emacs)
+[![Build Status][travis-ci status]][travis-ci]
+[![Build Status][azure pipelines status]][azure pipelines]
+[![Actions Status][github actions status]][github actions]
+[![Dependencies Status][david-dm status]][david-dm]
 
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
@@ -99,3 +99,12 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 1. Update CHANGELOG
 2. `apm publish (major|minor|patch)`
 3. `vsce package && vsce publish`
+
+[travis-ci status]: https://travis-ci.org/yasuyuky/transient-emacs.svg
+[travis-ci]: https://travis-ci.org/yasuyuky/transient-emacs
+[azure pipelines status]: https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=master
+[azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=master
+[github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
+[github actions]: https://github.com/yasuyuky/transient-emacs/actions
+[david-dm status]: https://david-dm.org/yasuyuky/transient-emacs/status.svg
+[david-dm]: https://david-dm.org/yasuyuky/transient-emacs
