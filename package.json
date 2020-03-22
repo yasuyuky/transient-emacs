@@ -270,7 +270,7 @@
       {
         "key": "ctrl+g",
         "command": "transient.cancel",
-        "when": "!findWidgetVisible"
+        "when": "!findWidgetVisible && !inQuickOpen && !reviewPanelVisible"
       },
       {
         "key": "ctrl+x u",
