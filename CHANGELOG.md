@@ -1,3 +1,8 @@
+## 0.15.0
+
+- Improve cancellation behavior (for vscode)
+- Update dependencies
+
 ## 0.14.3
 
 - Update dependecies (Including security fix)
