@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['cursorParagraphDown', cursorParagraphDown],
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
     ['cursorParagraphDownSelect', cursorParagraphDownSelect],
-    ['transient.adjustToCenter', adjustToCenter]
+    ['transient.adjustToCenter', adjustToCenter],
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
     'cursorWordLeft',
     'cursorWordRight',
     'cursorParagraphUp',
-    'cursorParagraphDown'
+    'cursorParagraphDown',
   ];
 
   moves.forEach(move => {
@@ -131,7 +131,7 @@ function cursorParagraphMove(
 function adjustToCenter(editor: TextEditor) {
   vscode.commands.executeCommand('revealLine', {
     lineNumber: editor.selection.start.line,
-    at: 'center'
+    at: 'center',
   });
 }
 
