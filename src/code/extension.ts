@@ -194,23 +194,26 @@ function copyRegion(editor: TextEditor) {
   editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
 }
 
+function selectWordRange(editor: TextEditor, s: Selection) {
+  let config = vscode.workspace.getConfiguration('transientEmacs');
+  let wordExp = /[\w\d]+/g;
+  let wordRange = config.get('codeWordRange')
+    ? editor.document.getWordRangeAtPosition(s.active)
+    : editor.document.getWordRangeAtPosition(s.active, wordExp);
+  if (wordRange && !wordRange.start.isEqual(s.active))
+    return new Selection(wordRange.start, s.active);
+  const delimExp = /[^\w\d]+/g;
+  let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
+  if (delimRange) return new Selection(delimRange.start, s.active);
+  return s;
+}
+
 function killBackwardWord(editor: TextEditor) {
   isUserCommand = false;
   editor
     .edit(edit => {
-      editor.selections = editor.selections.map(s => {
-        let config = vscode.workspace.getConfiguration('transientEmacs');
-        let wordExp = /[\w\d]+/g;
-        let wordRange = config.get('codeWordRange')
-          ? editor.document.getWordRangeAtPosition(s.active)
-          : editor.document.getWordRangeAtPosition(s.active, wordExp);
-        if (wordRange && !wordRange.start.isEqual(s.active))
-          return new Selection(wordRange.start, s.active);
-        const delimExp = /[^\w\d]+/g;
-        let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
-        if (delimRange) return new Selection(delimRange.start, s.active);
-        return s;
-      });
+      let selectRange = selectWordRange.bind(null, editor);
+      editor.selections = editor.selections.map(selectRange);
       const texts = editor.selections.map(s => editor.document.getText(s));
       killRing.put(texts, false);
       editor.selections.forEach(s => (s.isEmpty ? false : edit.delete(s)));
