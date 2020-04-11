@@ -199,7 +199,11 @@ function killBackwardWord(editor: TextEditor) {
   editor
     .edit(edit => {
       editor.selections = editor.selections.map(s => {
-        let wordRange = editor.document.getWordRangeAtPosition(s.active);
+        let config = vscode.workspace.getConfiguration('transientEmacs');
+        let wordExp = /[\w\d]+/g;
+        let wordRange = config.get('codeWordRange')
+          ? editor.document.getWordRangeAtPosition(s.active)
+          : editor.document.getWordRangeAtPosition(s.active, wordExp);
         if (wordRange && !wordRange.start.isEqual(s.active))
           return new Selection(wordRange.start, s.active);
         const delimExp = /[^\w\d]+/g;

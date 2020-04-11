@@ -340,6 +340,18 @@
         "key": "alt+.",
         "command": "workbench.action.gotoSymbol"
       }
+    ],
+    "configuration": [
+      {
+        "title": "Transient Emacs",
+        "properties": {
+          "transientEmacs.codeWordRange": {
+            "type": "boolean",
+            "default": false,
+            "description": "Use the word range provided by vscode (if available)"
+          }
+        }
+      }
     ]
   },
   "scripts": {
