@@ -196,13 +196,13 @@ function copyRegion(editor: TextEditor) {
 
 function selectWordRange(editor: TextEditor, s: Selection) {
   let config = vscode.workspace.getConfiguration('transientEmacs');
-  let wordExp = /[\w\d]+/g;
+  let wordExp = new RegExp(config.get('wordRegex') || '[\\w\\d]+');
   let wordRange = config.get('codeWordRange')
     ? editor.document.getWordRangeAtPosition(s.active)
     : editor.document.getWordRangeAtPosition(s.active, wordExp);
   if (wordRange && !wordRange.start.isEqual(s.active))
     return new Selection(wordRange.start, s.active);
-  const delimExp = /[^\w\d]+/g;
+  let delimExp = new RegExp(config.get('delimRegex') || '[^\\w\\d]+').;
   let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
   if (delimRange) return new Selection(delimRange.start, s.active);
   return s;
