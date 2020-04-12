@@ -202,7 +202,7 @@ function selectWordRange(editor: TextEditor, s: Selection) {
     : editor.document.getWordRangeAtPosition(s.active, wordExp);
   if (wordRange && !wordRange.start.isEqual(s.active))
     return new Selection(wordRange.start, s.active);
-  let delimExp = new RegExp(config.get('delimRegex') || '[^\\w\\d]+').;
+  let delimExp = new RegExp(config.get('delimRegex') || '[^\\w\\d]+');
   let delimRange = editor.document.getWordRangeAtPosition(s.active, delimExp);
   if (delimRange) return new Selection(delimRange.start, s.active);
   return s;
