@@ -1,3 +1,8 @@
+## 0.16.0
+
+- Improve kill-backward-word behavior
+- Update depnedencies
+
 ## 0.15.0
 
 - Improve cancellation behavior (for vscode)
