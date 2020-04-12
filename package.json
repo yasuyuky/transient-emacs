@@ -349,6 +349,16 @@
             "type": "boolean",
             "default": false,
             "description": "Use the word range provided by vscode (if available)"
+          },
+          "transientEmacs.wordRegex": {
+            "type": "string",
+            "default": "[\\w\\d]+",
+            "description": "Word regex"
+          },
+          "transientEmacs.delimRegex": {
+            "type": "string",
+            "default": "[^\\w\\d]+",
+            "description": "Delimiter regex"
           }
         }
       }
