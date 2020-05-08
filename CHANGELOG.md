@@ -1,7 +1,11 @@
+## 0.16.1
+
+- Update dependencies
+
 ## 0.16.0
 
 - Improve kill-backward-word behavior
-- Update depnedencies
+- Update dependencies
 
 ## 0.15.0
 
