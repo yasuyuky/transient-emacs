@@ -3,7 +3,7 @@
   "displayName": "Transient Emacs",
   "publisher": "yasuyuky",
   "main": "./lib/entrypoint",
-  "version": "0.16.2",
+  "version": "0.16.3",
   "categories": [
     "Keymaps"
   ],
