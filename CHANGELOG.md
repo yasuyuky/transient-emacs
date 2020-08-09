@@ -1,5 +1,8 @@
 # Unreleased
 
+- Update dependencies
+- Fail over clipboard sync
+
 # Released
 
 ## 0.16.3
