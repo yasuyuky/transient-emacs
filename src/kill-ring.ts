@@ -21,7 +21,11 @@ export class KillRing {
 
   push(texts: string[]) {
     this.buffer.unshift(texts);
-    clipboardy.writeSync(texts.join('\n'));
+    try {
+      clipboardy.writeSync(texts.join('\n'));
+    } catch (e) {
+      console.log(e);
+    }
     while (this.buffer.length > 10) this.buffer.pop();
     this.sealed = false;
   }
@@ -42,7 +46,11 @@ export class KillRing {
   updateBuffer() {
     const lasts = this.buffer[0];
     const laststr = lasts ? lasts.join('\n') : '';
-    const read = clipboardy.readSync();
-    if (laststr !== read) this.push(read.split('\n'));
+    try {
+      const read = clipboardy.readSync();
+      if (laststr !== read) this.push(read.split('\n'));
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
