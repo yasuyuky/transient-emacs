@@ -1,4 +1,3 @@
-/* global atom document:true */
 import clipboardy = require('clipboardy');
 
 export class KillRing {
