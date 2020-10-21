@@ -49,5 +49,5 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
     assert.strictEqual('', editor.document.getText());
-  });
+  }).timeout(3000);
 });
