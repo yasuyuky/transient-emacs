@@ -30,10 +30,10 @@ suite('Extension Tests', async () => {
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(150);
-    assert.equal('\nbaz\n', editor.document.getText());
+    assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
     await sleep(150);
-    assert.equal('baz\n', editor.document.getText());
+    assert.strictEqual('baz\n', editor.document.getText());
   });
 
   await test('transient.kill with multi cursor', async () => {
@@ -45,9 +45,9 @@ suite('Extension Tests', async () => {
     await sleep(100);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
-    assert.equal('\n\n', editor.document.getText());
+    assert.strictEqual('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
-    assert.equal('', editor.document.getText());
+    assert.strictEqual('', editor.document.getText());
   });
 });
