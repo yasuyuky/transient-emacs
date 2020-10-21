@@ -24,30 +24,30 @@ suite('Extension Tests', async () => {
   // Defines a Mocha unit test
   await test('transient.kill', async () => {
     let doc = await vscode.workspace.openTextDocument({
-      content: 'foo bar\nbaz\n'
+      content: 'foo bar\nbaz\n',
     });
     let editor = await vscode.window.showTextDocument(doc);
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(150);
-    assert.equal('\nbaz\n', editor.document.getText());
+    assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
     await sleep(150);
-    assert.equal('baz\n', editor.document.getText());
+    assert.strictEqual('baz\n', editor.document.getText());
   });
 
   await test('transient.kill with multi cursor', async () => {
     let doc = await vscode.workspace.openTextDocument({
-      content: 'foo bar\nbaz\n'
+      content: 'foo bar\nbaz\n',
     });
     let editor = await vscode.window.showTextDocument(doc);
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await sleep(100);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
-    assert.equal('\n\n', editor.document.getText());
+    assert.strictEqual('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
-    assert.equal('', editor.document.getText());
-  });
+    assert.strictEqual('', editor.document.getText());
+  }).timeout(3000);
 });
