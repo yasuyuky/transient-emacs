@@ -2,6 +2,12 @@
 
 # Released
 
+## 0.17.0
+
+- Change to use the api native clipboard on vscode
+- Improve some tests
+- Update dependecies
+
 ## 0.16.4
 
 - Update dependencies
