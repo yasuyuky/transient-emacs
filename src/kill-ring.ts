@@ -3,10 +3,18 @@ import clipboardy = require('clipboardy');
 export class KillRing {
   buffer: string[][];
   sealed: boolean;
+  readClipboard: () => Thenable<string>;
+  writeClipboard: (s: string) => Thenable<void>;
 
-  constructor(buffer: string[][]) {
+  constructor(
+    buffer: string[][],
+    readClipboard: null | (() => Thenable<string>),
+    writeClipboard: null | ((s: string) => Thenable<void>)
+  ) {
     this.buffer = buffer;
     this.sealed = true;
+    this.readClipboard = readClipboard ? readClipboard : clipboardy.read;
+    this.writeClipboard = writeClipboard ? writeClipboard : clipboardy.write;
   }
 
   put(texts: string[], forward: boolean = true) {
@@ -21,7 +29,7 @@ export class KillRing {
   push(texts: string[]) {
     this.buffer.unshift(texts);
     try {
-      clipboardy.writeSync(texts.join('\n'));
+      this.writeClipboard(texts.join('\n'));
     } catch (e) {
       console.log(e);
     }
@@ -46,8 +54,9 @@ export class KillRing {
     const lasts = this.buffer[0];
     const laststr = lasts ? lasts.join('\n') : '';
     try {
-      const read = clipboardy.readSync();
-      if (laststr !== read) this.push(read.split('\n'));
+      this.readClipboard().then(s => {
+        if (laststr !== s) this.push(s.split('\n'));
+      });
     } catch (e) {
       console.log(e);
     }
