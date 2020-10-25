@@ -4,7 +4,11 @@ import { KillRing } from '../kill-ring';
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
-var killRing: KillRing = new KillRing([]);
+var killRing: KillRing = new KillRing(
+  [],
+  vscode.env.clipboard.readText,
+  vscode.env.clipboard.writeText
+);
 
 export function activate(context: vscode.ExtensionContext) {
   let commands = new Map<string, (...args: any[]) => any>([
