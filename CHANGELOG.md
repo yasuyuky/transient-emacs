@@ -1,5 +1,7 @@
 # Unreleased
 
+- Add commands to execute a shell command
+
 # Released
 
 ## 0.17.0

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { TextEditor, Selection, Position } from 'vscode';
 import { KillRing } from '../kill-ring';
+import { execSync } from 'child_process';
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
@@ -29,6 +30,10 @@ export function activate(context: vscode.ExtensionContext) {
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
     ['cursorParagraphDownSelect', cursorParagraphDownSelect],
     ['transient.adjustToCenter', adjustToCenter],
+    ['transient.shellCommand', shellCommand],
+    ['transient.shellCommandOnRegion', shellCommandOnRegion],
+    ['transient.shellCommandAndInsert', shellCommandAndInsert],
+    ['transient.shellCommandOnRegionAndReplace', shellCommandOnRegionAndReplace],
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -267,4 +272,36 @@ function insertTexts(editor: TextEditor, texts: string[]) {
     .then(() => {
       editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
     });
+}
+
+function showCommandOutput(_editor: TextEditor, command: string) {
+  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
+  vscode.workspace
+    .openTextDocument({ content: execSync(command, { cwd }).toString() })
+    .then(doc => vscode.window.showTextDocument(doc));
+}
+
+function insertCommandOutput(editor: TextEditor, command: string) {
+  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
+  insertTexts(editor, [execSync(command, { cwd }).toString()]);
+}
+
+function shellCommand(editor: TextEditor) {
+  vscode.window.showInputBox({ placeHolder: 'input command' }).then(command => {
+    if (command) showCommandOutput(editor, command);
+  });
+}
+
+function shellCommandOnRegion(editor: TextEditor) {
+  showCommandOutput(editor, editor.document.getText(editor.selection));
+}
+
+function shellCommandAndInsert(editor: TextEditor) {
+  vscode.window.showInputBox({ placeHolder: 'input command' }).then(command => {
+    if (command) insertCommandOutput(editor, command);
+  });
+}
+
+function shellCommandOnRegionAndReplace(editor: TextEditor) {
+  insertCommandOutput(editor, editor.document.getText(editor.selection));
 }
