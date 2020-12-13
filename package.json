@@ -45,6 +45,10 @@
         "title": "Cancel"
       },
       {
+        "command": "transient.shellCommand",
+        "title": "Shell Command"
+      },
+      {
         "command": "transient.shellCommandOnRegion",
         "title": "Shell Command On Region"
       }
@@ -343,6 +347,11 @@
       {
         "key": "alt+.",
         "command": "workbench.action.gotoSymbol"
+      },
+      {
+        "key": "shift+alt+1",
+        "command": "transient.shellCommand",
+        "when": "textInputFocus"
       },
       {
         "key": "shift+alt+\\",
