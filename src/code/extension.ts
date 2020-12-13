@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { TextEditor, Selection, Position } from 'vscode';
 import { KillRing } from '../kill-ring';
+import { execSync } from "child_process";
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
@@ -29,6 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
     ['cursorParagraphDownSelect', cursorParagraphDownSelect],
     ['transient.adjustToCenter', adjustToCenter],
+    ['transient.shellCommandOnRegion', shellCommandOnRegion],
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -66,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-export function deactivate() {}
+export function deactivate() { }
 
 function cursorParagraphDown(editor: TextEditor) {
   let end = editor.document.lineAt(editor.document.lineCount - 1).range.end;
@@ -267,4 +269,13 @@ function insertTexts(editor: TextEditor, texts: string[]) {
     .then(() => {
       editor.selections = editor.selections.map(s => new Selection(s.active, s.active));
     });
+}
+
+function insertCommandOutput(editor: TextEditor, command: string) {
+  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
+  insertTexts(editor, [execSync(command, {cwd}).toString()])
+}
+
+function shellCommandOnRegion(editor: TextEditor) {
+  insertCommandOutput(editor, editor.document.getText(editor.selection))
 }
