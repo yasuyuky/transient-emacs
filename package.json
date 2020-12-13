@@ -43,6 +43,10 @@
       {
         "command": "transient.cancel",
         "title": "Cancel"
+      },
+      {
+        "command": "transient.shellCommandOnRegion",
+        "title": "Shell Command On Region"
       }
     ],
     "keybindings": [
@@ -339,6 +343,11 @@
       {
         "key": "alt+.",
         "command": "workbench.action.gotoSymbol"
+      },
+      {
+        "key": "shift+alt+\\",
+        "command": "transient.shellCommandOnRegion",
+        "when": "textInputFocus"
       }
     ],
     "configuration": [
