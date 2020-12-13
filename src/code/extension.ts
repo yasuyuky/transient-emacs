@@ -30,6 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['cursorParagraphUpSelect', cursorParagraphUpSelect],
     ['cursorParagraphDownSelect', cursorParagraphDownSelect],
     ['transient.adjustToCenter', adjustToCenter],
+    ['transient.shellCommand', shellCommand],
     ['transient.shellCommandOnRegion', shellCommandOnRegion],
   ]);
   commands.forEach((func, key) =>
@@ -274,6 +275,12 @@ function insertTexts(editor: TextEditor, texts: string[]) {
 function insertCommandOutput(editor: TextEditor, command: string) {
   let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
   insertTexts(editor, [execSync(command, { cwd }).toString()]);
+}
+
+function shellCommand(editor: TextEditor) {
+  vscode.window.showInputBox({ placeHolder: 'input command' }).then(command => {
+    if (command) insertCommandOutput(editor, command);
+  });
 }
 
 function shellCommandOnRegion(editor: TextEditor) {
