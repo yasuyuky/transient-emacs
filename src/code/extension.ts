@@ -32,6 +32,8 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.adjustToCenter', adjustToCenter],
     ['transient.shellCommand', shellCommand],
     ['transient.shellCommandOnRegion', shellCommandOnRegion],
+    ['transient.shellCommandAndInsert', shellCommandAndInsert],
+    ['transient.shellCommandOnRegionAndReplace', shellCommandOnRegionAndReplace],
   ]);
   commands.forEach((func, key) =>
     context.subscriptions.push(vscode.commands.registerTextEditorCommand(key, func))
@@ -286,10 +288,20 @@ function insertCommandOutput(editor: TextEditor, command: string) {
 
 function shellCommand(editor: TextEditor) {
   vscode.window.showInputBox({ placeHolder: 'input command' }).then(command => {
-    if (command) insertCommandOutput(editor, command);
+    if (command) showCommandOutput(editor, command);
   });
 }
 
 function shellCommandOnRegion(editor: TextEditor) {
+  showCommandOutput(editor, editor.document.getText(editor.selection));
+}
+
+function shellCommandAndInsert(editor: TextEditor) {
+  vscode.window.showInputBox({ placeHolder: 'input command' }).then(command => {
+    if (command) insertCommandOutput(editor, command);
+  });
+}
+
+function shellCommandOnRegionAndReplace(editor: TextEditor) {
   insertCommandOutput(editor, editor.document.getText(editor.selection));
 }
