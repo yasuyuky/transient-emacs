@@ -51,6 +51,14 @@
       {
         "command": "transient.shellCommandOnRegion",
         "title": "Shell Command On Region"
+      },
+      {
+        "command": "transient.shellCommandAndInsert",
+        "title": "Shell Command and Insert"
+      },
+      {
+        "command": "transient.shellCommandOnRegionAndReplace",
+        "title": "Shell Command On Region and Replace"
       }
     ],
     "keybindings": [
@@ -356,6 +364,16 @@
       {
         "key": "shift+alt+\\",
         "command": "transient.shellCommandOnRegion",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+u shift+alt+1",
+        "command": "transient.shellCommandAndInsert",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+u shift+alt+\\",
+        "command": "transient.shellCommandOnRegionAndReplace",
         "when": "textInputFocus"
       }
     ],
