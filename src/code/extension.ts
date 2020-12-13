@@ -272,6 +272,13 @@ function insertTexts(editor: TextEditor, texts: string[]) {
     });
 }
 
+function showCommandOutput(_editor: TextEditor, command: string) {
+  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
+  vscode.workspace
+    .openTextDocument({ content: execSync(command, { cwd }).toString() })
+    .then(doc => vscode.window.showTextDocument(doc));
+}
+
 function insertCommandOutput(editor: TextEditor, command: string) {
   let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
   insertTexts(editor, [execSync(command, { cwd }).toString()]);
