@@ -1,8 +1,11 @@
 # Unreleased
 
-- Add commands to execute a shell command
-
 # Released
+
+## 0.18.0
+
+- Add commands to execute a shell command
+- Update dependencies
 
 ## 0.17.0
 
