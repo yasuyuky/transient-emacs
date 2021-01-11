@@ -6,6 +6,7 @@ Emacs (transient mark mode) for Atom Editor / VS Code
 
 - [for Atom Editor](https://atom.io/packages/transient-emacs)
 - [for VS Code](https://marketplace.visualstudio.com/items?itemName=yasuyuky.transient-emacs)
+- [available on Open VSX Registry](https://open-vsx.org/extension/yasuyuky/transient-emacs)
 
 [![Build Status][travis-ci status]][travis-ci]
 [![Build Status][azure pipelines status]][azure pipelines]
