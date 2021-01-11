@@ -1,6 +1,6 @@
 # Transient Emacs for Atom Editor / VS Code
 
-<img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/master/image/icon.png" width="128px">
+<img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/main/image/icon.png" width="128px">
 
 Emacs (transient mark mode) for Atom Editor / VS Code
 
@@ -109,8 +109,8 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 
 [travis-ci status]: https://travis-ci.org/yasuyuky/transient-emacs.svg
 [travis-ci]: https://travis-ci.org/yasuyuky/transient-emacs
-[azure pipelines status]: https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=master
-[azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=master
+[azure pipelines status]: https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=main
+[azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=main
 [github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
 [david-dm status]: https://david-dm.org/yasuyuky/transient-emacs/status.svg
