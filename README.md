@@ -104,6 +104,7 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 1. Update CHANGELOG
 2. `apm publish (major|minor|patch)`
 3. `vsce package && vsce publish`
+4. `npx ovsx publish transient-emacs-$(jq -r .version package.json).vsix -p $OVSX_TOKEN`
 
 [travis-ci status]: https://travis-ci.org/yasuyuky/transient-emacs.svg
 [travis-ci]: https://travis-ci.org/yasuyuky/transient-emacs
