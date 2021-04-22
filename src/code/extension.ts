@@ -183,7 +183,8 @@ function unsetMark(_editor: TextEditor) {
 }
 
 function clearKillRing(_editor: TextEditor) {
-  killRing.push([]);
+  killRing.push(['']);
+  killRing.seal();
 }
 
 function killRegionOrBackwardWord(editor: TextEditor) {
