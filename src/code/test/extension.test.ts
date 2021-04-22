@@ -58,8 +58,6 @@ suite('Extension Tests', async () => {
     let editor = await vscode.window.showTextDocument(doc);
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(150);
-    assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
     await sleep(150);
     assert.strictEqual('baz\n', editor.document.getText());
