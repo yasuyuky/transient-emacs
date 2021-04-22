@@ -21,6 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
     ['transient.killRegion', killRegion],
     ['transient.killRegionOrBackwardWord', killRegionOrBackwardWord],
     ['transient.killBackwardWord', killBackwardWord],
+    ['transient.clearKillRing', clearKillRing],
     ['transient.showKillRing', showKillRing],
     ['transient.copyRegion', copyRegion],
     ['transient.insertNewline', editor => insertTexts(editor, ['\n'])],
@@ -179,6 +180,10 @@ function setMark(_editor: TextEditor) {
 function unsetMark(_editor: TextEditor) {
   console.log('unset mark');
   markSet = false;
+}
+
+function clearKillRing(_editor: TextEditor) {
+  killRing.push([]);
 }
 
 function killRegionOrBackwardWord(editor: TextEditor) {
