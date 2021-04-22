@@ -29,10 +29,10 @@ suite('Extension Tests', async () => {
     let editor = await vscode.window.showTextDocument(doc);
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(150);
+    await sleep(300);
     assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(150);
+    await sleep(300);
     assert.strictEqual('baz\n', editor.document.getText());
   });
 
@@ -59,10 +59,10 @@ suite('Extension Tests', async () => {
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(150);
+    await sleep(300);
     assert.strictEqual('baz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(150);
+    await sleep(300);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
   });
 });
