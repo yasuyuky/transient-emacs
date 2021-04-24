@@ -27,6 +27,7 @@ suite('Extension Tests', async () => {
       content: 'foo bar\nbaz\n',
     });
     let editor = await vscode.window.showTextDocument(doc);
+    await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
     await sleep(300);
@@ -41,6 +42,7 @@ suite('Extension Tests', async () => {
       content: 'foo bar\nbaz\n',
     });
     let editor = await vscode.window.showTextDocument(doc);
+    await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await sleep(100);
     await vscode.commands.executeCommand('transient.kill');
