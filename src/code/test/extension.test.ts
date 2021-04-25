@@ -119,7 +119,7 @@ suite('Extension Tests', async () => {
     assert.strictEqual('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
-    assert.strictEqual('bar\nbaz\n', editor.document.getText());
+    assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
   });
 
   await test('kill, consolidate and yank with multi cursors', async () => {
