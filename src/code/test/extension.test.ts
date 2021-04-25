@@ -104,6 +104,8 @@ suite('Extension Tests', async () => {
     await sleep(300);
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
+    await vscode.commands.executeCommand('transient.yank');
+    await sleep(300);
     assert.strictEqual('\n\nbaz\n', editor.document.getText());
   });
 
