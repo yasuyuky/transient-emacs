@@ -153,4 +153,19 @@ suite('Extension Tests', async () => {
     await sleep(300);
     assert.strictEqual('baz\nfoo bar\n\n', editor.document.getText());
   });
+
+  await test('kill, consolidate, add cursor and yank with multi cursors', async () => {
+    let doc = await vscode.workspace.openTextDocument({
+      content: 'foo bar\nbaz\n',
+    });
+    let editor = await vscode.window.showTextDocument(doc);
+    await vscode.commands.executeCommand('transient.clearKillRing');
+    move(editor, [new Position(0, 0), new Position(1, 0)]);
+    await vscode.commands.executeCommand('transient.kill');
+    await sleep(300);
+    move(editor, [new Position(0, 0), new Position(1, 0)]);
+    await vscode.commands.executeCommand('transient.yank');
+    await sleep(300);
+    assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
+  });
 });
