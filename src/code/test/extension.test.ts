@@ -178,6 +178,7 @@ suite('Extension Tests', async () => {
     move(editor, [new Position(0, 7)]);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
     await sleep(300);
+    assert.strictEqual('foo \nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
     await vscode.commands.executeCommand('transient.yank');
