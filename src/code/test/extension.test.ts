@@ -204,4 +204,25 @@ suite('Extension Tests', async () => {
     await sleep(300);
     assert.strictEqual('foo barfoo bar\nbaz\n', editor.document.getText());
   });
+
+  await test('kill-backword-word 3times and yank twice', async () => {
+    let doc = await vscode.workspace.openTextDocument({
+      content: 'foo bar\nbaz\n',
+    });
+    let editor = await vscode.window.showTextDocument(doc);
+    await vscode.commands.executeCommand('transient.clearKillRing');
+    move(editor, [new Position(0, 7)]);
+    await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
+    await sleep(300);
+    await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
+    await sleep(300);
+    await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
+    await sleep(300);
+    assert.strictEqual('\nbaz\n', editor.document.getText());
+    await vscode.commands.executeCommand('transient.yank');
+    await sleep(300);
+    await vscode.commands.executeCommand('transient.yank');
+    await sleep(300);
+    assert.strictEqual('foo barfoo bar\nbaz\n', editor.document.getText());
+  });
 });
