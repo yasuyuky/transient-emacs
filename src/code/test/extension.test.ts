@@ -197,12 +197,12 @@ suite('Extension Tests', async () => {
     await sleep(300);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
     await sleep(300);
-    assert.strictEqual('\nbaz\n', editor.document.getText());
+    assert.strictEqual('foo\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
-    assert.strictEqual('foo barfoo bar\nbaz\n', editor.document.getText());
+    assert.strictEqual('foo bar bar\nbaz\n', editor.document.getText());
   });
 
   await test('kill-backword-word 3times and yank twice', async () => {
@@ -241,12 +241,12 @@ suite('Extension Tests', async () => {
     await sleep(100);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
     await sleep(300);
-    assert.strictEqual('\nbaz\n', editor.document.getText());
+    assert.strictEqual('foo\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
     assert.strictEqual('foo \nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
-    assert.strictEqual('foo foo \nbaz\n', editor.document.getText());
+    assert.strictEqual('foo  \nbaz\n', editor.document.getText());
   });
 });
