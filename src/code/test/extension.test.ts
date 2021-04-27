@@ -244,7 +244,7 @@ suite('Extension Tests', async () => {
     assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
-    assert.strictEqual('foo foo \nbaz\n', editor.document.getText());
+    assert.strictEqual('foo \nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
     await sleep(300);
     assert.strictEqual('foo foo \nbaz\n', editor.document.getText());
