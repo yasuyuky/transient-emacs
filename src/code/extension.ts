@@ -5,11 +5,9 @@ import { execSync } from 'child_process';
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
-var killRing: KillRing = new KillRing(
-  [],
-  vscode.env.clipboard.readText,
-  vscode.env.clipboard.writeText
-);
+var killRing: KillRing = vscode.workspace.getConfiguration('transientEmacs').get('syncClipboard')
+  ? new KillRing([], vscode.env.clipboard.readText, vscode.env.clipboard.writeText)
+  : new KillRing([]);
 
 export function activate(context: vscode.ExtensionContext) {
   let commands = new Map<string, (...args: any[]) => any>([
