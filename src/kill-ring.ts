@@ -3,18 +3,18 @@ import clipboardy = require('clipboardy');
 export class KillRing {
   buffer: string[][];
   sealed: boolean;
-  readClipboard: () => Thenable<string>;
-  writeClipboard: (s: string) => Thenable<void>;
+  readClipboard: undefined | (() => Thenable<string>);
+  writeClipboard: undefined | ((s: string) => Thenable<void>);
 
   constructor(
     buffer: string[][],
-    readClipboard: null | (() => Thenable<string>),
-    writeClipboard: null | ((s: string) => Thenable<void>)
+    readClipboard?: () => Thenable<string>,
+    writeClipboard?: (s: string) => Thenable<void>
   ) {
     this.buffer = buffer;
     this.sealed = true;
-    this.readClipboard = readClipboard ? readClipboard : clipboardy.read;
-    this.writeClipboard = writeClipboard ? writeClipboard : clipboardy.write;
+    this.readClipboard = readClipboard;
+    this.writeClipboard = writeClipboard;
   }
 
   put(texts: string[], forward: boolean = true) {
@@ -29,7 +29,7 @@ export class KillRing {
   push(texts: string[]) {
     this.buffer.unshift(texts);
     try {
-      this.writeClipboard(texts.join('\n'));
+      if (this.writeClipboard) this.writeClipboard(texts.join('\n'));
     } catch (e) {
       console.log(e);
     }
@@ -53,12 +53,13 @@ export class KillRing {
   updateBuffer() {
     const lasts = this.buffer[0];
     const laststr = lasts ? lasts.join('\n') : '';
-    try {
-      this.readClipboard().then(s => {
-        if (laststr !== s) this.push(s.split('\n'));
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    if (this.readClipboard)
+      try {
+        this.readClipboard().then(s => {
+          if (laststr !== s) this.push(s.split('\n'));
+        });
+      } catch (e) {
+        console.log(e);
+      }
   }
 }
