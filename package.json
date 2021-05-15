@@ -395,6 +395,11 @@
             "type": "string",
             "default": "[^\\w\\d]+",
             "description": "Delimiter regex"
+          },
+          "transientEmacs.syncClipboard": {
+            "type": "boolean",
+            "default": true,
+            "description": "Sync clipboard"
           }
         }
       }

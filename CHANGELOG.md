@@ -1,5 +1,7 @@
 # Unreleased
 
+- Add a setting to configure clipboard sync
+
 # Released
 
 ## 0.18.0
