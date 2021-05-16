@@ -1,6 +1,8 @@
 # Unreleased
 
 - Add a setting to configure clipboard sync
+- Add some tests
+- Update dependencies
 
 # Released
 
