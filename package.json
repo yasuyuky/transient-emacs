@@ -433,7 +433,7 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.51.0",
+    "vscode": "^1.56.0",
     "atom": "^1.39.0"
   },
   "dependencies": {
