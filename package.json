@@ -406,7 +406,7 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm install --production && npm run compile",
+    "vscode:prepublish": "npm install && npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "npm run compile && node ./lib/code/test/run.js"
