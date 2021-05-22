@@ -1,10 +1,12 @@
 # Unreleased
 
+# Released
+
+## 0.19.0
+
 - Add a setting to configure clipboard sync
 - Add some tests
 - Update dependencies
-
-# Released
 
 ## 0.18.0
 
