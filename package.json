@@ -437,7 +437,7 @@
     "atom": "^1.39.0"
   },
   "dependencies": {
-    "atom-select-list": "^0.8.0",
+    "atom-select-list": "^0.8.1",
     "clipboardy": "^2.3.0"
   },
   "deserializers": {
