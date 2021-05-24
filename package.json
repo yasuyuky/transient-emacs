@@ -419,7 +419,7 @@
     "@types/vscode": "^1.56.0",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^4.24.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.27.0",
     "mocha": "^8.4.0",
     "typescript": "^4.2.4",
     "vscode-test": "^1.5.2"
