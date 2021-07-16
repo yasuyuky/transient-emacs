@@ -422,7 +422,7 @@
     "eslint": "^7.30.0",
     "mocha": "^9.0.2",
     "typescript": "^4.3.5",
-    "vscode-test": "^1.5.2"
+    "vscode-test": "^1.6.1"
   },
   "private": true,
   "description": "Emacs mode using transient mark",
