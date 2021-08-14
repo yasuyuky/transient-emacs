@@ -14,51 +14,51 @@
     "commands": [
       {
         "command": "transient.setMark",
-        "title": "Set Mark"
+        "title": "Transient: Set Mark"
       },
       {
         "command": "transient.yank",
-        "title": "Yank"
+        "title": "Transient: Yank"
       },
       {
         "command": "transient.kill",
-        "title": "Kill"
+        "title": "Transient: Kill"
       },
       {
         "command": "transient.killRegion",
-        "title": "Kill Region"
+        "title": "Transient: Kill Region"
       },
       {
         "command": "transient.copyRegion",
-        "title": "Copy Region"
+        "title": "Transient: Copy Region"
       },
       {
         "command": "transient.killRegionOrBackwardWord",
-        "title": "Kill Region Or Backward Word"
+        "title": "Transient: Kill Region Or Backward Word"
       },
       {
         "command": "transient.showKillRing",
-        "title": "Show KillRing"
+        "title": "Transient: Show KillRing"
       },
       {
         "command": "transient.cancel",
-        "title": "Cancel"
+        "title": "Transient: Cancel"
       },
       {
         "command": "transient.shellCommand",
-        "title": "Shell Command"
+        "title": "Transient: Shell Command"
       },
       {
         "command": "transient.shellCommandOnRegion",
-        "title": "Shell Command On Region"
+        "title": "Transient: Shell Command On Region"
       },
       {
         "command": "transient.shellCommandAndInsert",
-        "title": "Shell Command and Insert"
+        "title": "Transient: Shell Command and Insert"
       },
       {
         "command": "transient.shellCommandOnRegionAndReplace",
-        "title": "Shell Command On Region and Replace"
+        "title": "Transient: Shell Command On Region and Replace"
       }
     ],
     "keybindings": [
