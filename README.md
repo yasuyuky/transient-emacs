@@ -33,7 +33,7 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | **files**            |                                                |                                                    |
 | `ctrl-x ctrl-b`      | fuzzy-finder:toggle-file-finder                | workbench.action.quickOpen                         |
 | `ctrl-x b`           | fuzzy-finder:toggle-buffer-finder              | workbench.action.openNextRecentlyUsedEditorInGroup |
-| `ctrl-x ctrl-f`      | application:open                               | workbench.action.files.openFileFolder              |
+| `ctrl-x ctrl-f`      | application:open                               | workbench.action.files.openFile                    |
 | `ctrl-x ctrl-c`      | application:quit                               | workbench.action.quit                              |
 | `ctrl-x ctrl-s`      | core:save                                      | workbench.action.files.save                        |
 | `ctrl-x ctrl-w`      | core:save-as                                   | workbench.action.files.saveAs                      |
