@@ -1,5 +1,8 @@
 # Unreleased
 
+- Improve command titles
+- Fix the keybind of ctrl+x ctrl+f
+
 # Released
 
 ## 0.19.0
