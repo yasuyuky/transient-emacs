@@ -10,8 +10,7 @@ script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.
 git:
   depth: 10
 
-sudo: false
-dist: xenial
+dist: bionic
 addons:
   apt:
     packages:
@@ -19,4 +18,3 @@ addons:
       - fakeroot
       - git
       - libsecret-1-dev
-      - libgconf2-4 # @TODO: Remove once Atom v1.39 is stable
