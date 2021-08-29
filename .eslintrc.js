@@ -10,7 +10,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    '@typescript-eslint/class-name-casing': 'warn',
+    '@typescript-eslint/naming-convention': 'warn',
     '@typescript-eslint/member-delimiter-style': [
       'warn',
       {
