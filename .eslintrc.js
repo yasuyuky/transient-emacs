@@ -1,12 +1,12 @@
 module.exports = {
   env: {
     es6: true,
-    node: true
+    node: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
   rules: {
@@ -16,19 +16,19 @@ module.exports = {
       {
         multiline: {
           delimiter: 'semi',
-          requireLast: true
+          requireLast: true,
         },
         singleline: {
           delimiter: 'semi',
-          requireLast: false
-        }
-      }
+          requireLast: false,
+        },
+      },
     ],
     '@typescript-eslint/semi': ['warn', 'always'],
     curly: 'off',
     eqeqeq: ['warn', 'always'],
     'no-redeclare': 'warn',
     'no-throw-literal': 'warn',
-    'no-unused-expressions': 'warn'
-  }
+    'no-unused-expressions': 'warn',
+  },
 };
