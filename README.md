@@ -11,7 +11,6 @@ Emacs (transient mark mode) for Atom Editor / VS Code
 [![Build Status][travis-ci status]][travis-ci]
 [![Build Status][azure pipelines status]][azure pipelines]
 [![Actions Status][github actions status]][github actions]
-[![Dependencies Status][david-dm status]][david-dm]
 
 This package emulate Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
