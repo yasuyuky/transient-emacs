@@ -106,8 +106,8 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 3. `vsce package && vsce publish`
 4. `npx ovsx publish transient-emacs-$(jq -r .version package.json).vsix -p $OVSX_TOKEN`
 
-[travis-ci status]: https://travis-ci.org/yasuyuky/transient-emacs.svg
-[travis-ci]: https://travis-ci.org/yasuyuky/transient-emacs
+[travis-ci status]: https://app.travis-ci.com/yasuyuky/transient-emacs.svg?branch=main
+[travis-ci]: https://app.travis-ci.com/yasuyuky/transient-emacs
 [azure pipelines status]: https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=main
 [azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=main
 [github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
