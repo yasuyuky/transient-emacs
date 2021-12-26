@@ -65,127 +65,127 @@
       {
         "key": "ctrl+enter",
         "command": "transient.setMark",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+2",
         "command": "transient.setMark",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "left",
         "command": "transient.cursorLeft",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+b",
         "command": "transient.cursorLeft",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "right",
         "command": "transient.cursorRight",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+f",
         "command": "transient.cursorRight",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "up",
         "command": "transient.cursorUp",
-        "when": "textInputFocus && !suggestWidgetVisible"
+        "when": "editorTextFocus && !suggestWidgetVisible"
       },
       {
         "key": "ctrl+p",
         "command": "transient.cursorUp",
-        "when": "textInputFocus && !suggestWidgetVisible"
+        "when": "editorTextFocus && !suggestWidgetVisible"
       },
       {
         "key": "down",
         "command": "transient.cursorDown",
-        "when": "textInputFocus && !suggestWidgetVisible"
+        "when": "editorTextFocus && !suggestWidgetVisible"
       },
       {
         "key": "ctrl+n",
         "command": "transient.cursorDown",
-        "when": "textInputFocus && !suggestWidgetVisible"
+        "when": "editorTextFocus && !suggestWidgetVisible"
       },
       {
         "key": "home",
         "command": "transient.cursorHome",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+a",
         "command": "transient.cursorHome",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "end",
         "command": "transient.cursorEnd",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+e",
         "command": "transient.cursorEnd",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+right",
         "command": "transient.cursorWordRight",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+left",
         "command": "transient.cursorWordLeft",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+right",
         "command": "cursorWordRightSelect",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+left",
         "command": "cursorWordLeftSelect",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+up",
         "command": "transient.cursorParagraphUp",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+down",
         "command": "transient.cursorParagraphDown",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "shift+alt+,",
         "command": "transient.cursorTop",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "shift+alt+.",
         "command": "transient.cursorBottom",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+v",
         "command": "transient.cursorPageDown",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "alt+v",
         "command": "transient.cursorPageUp",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+l",
         "command": "transient.adjustToCenter",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "alt+g g",
@@ -295,42 +295,42 @@
       {
         "key": "ctrl+w",
         "command": "transient.killRegionOrBackwardWord",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "alt+w",
         "command": "transient.copyRegion",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+k",
         "command": "transient.kill",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+y",
         "command": "transient.yank",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "alt+y",
         "command": "transient.showKillRing",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+j",
         "command": "transient.insertNewline",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+down",
         "command": "editor.action.insertCursorBelow",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+up",
         "command": "editor.action.insertCursorAbove",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+x 2",
@@ -359,22 +359,22 @@
       {
         "key": "shift+alt+1",
         "command": "transient.shellCommand",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "shift+alt+\\",
         "command": "transient.shellCommandOnRegion",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+u shift+alt+1",
         "command": "transient.shellCommandAndInsert",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       },
       {
         "key": "ctrl+u shift+alt+\\",
         "command": "transient.shellCommandOnRegionAndReplace",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
       }
     ],
     "configuration": [
