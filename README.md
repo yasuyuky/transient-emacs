@@ -112,5 +112,3 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 [azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=main
 [github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
-[david-dm status]: https://david-dm.org/yasuyuky/transient-emacs/status.svg
-[david-dm]: https://david-dm.org/yasuyuky/transient-emacs
