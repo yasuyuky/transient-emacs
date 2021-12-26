@@ -2,6 +2,7 @@
 
 - Improve command titles
 - Fix the keybind of ctrl+x ctrl+f
+- Use editorTextFocus for contexts
 
 # Released
 
