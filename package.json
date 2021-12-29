@@ -222,6 +222,11 @@
         "command": "workbench.action.files.openFile"
       },
       {
+        "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.files.openFileFolder",
+        "when": "isMacNative && openFolderWorkspaceSupport"
+      },
+      {
         "key": "ctrl+x ctrl+b",
         "command": "workbench.action.quickOpen"
       },
