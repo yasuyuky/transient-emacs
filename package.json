@@ -144,12 +144,12 @@
       },
       {
         "key": "ctrl+shift+right",
-        "command": "cursorWordRightSelect",
+        "command": "transient.cursorWordRightSelect",
         "when": "editorTextFocus"
       },
       {
         "key": "ctrl+shift+left",
-        "command": "cursorWordLeftSelect",
+        "command": "transient.cursorWordLeftSelect",
         "when": "editorTextFocus"
       },
       {
