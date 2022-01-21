@@ -431,7 +431,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "eslint": "^7.32.0",
     "mocha": "^9.1.4",
-    "typescript": "^4.5.4",
+    "typescript": "^4.5.5",
     "vscode-test": "^1.6.1"
   },
   "private": true,
