@@ -57,9 +57,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   moves.forEach(move => {
     let key = 'transient.' + move;
-    let f = () => vscode.commands.executeCommand(markSet ? move + 'Select' : move);
-    let command = vscode.commands.registerTextEditorCommand(key, f);
+    let moveFunction = () => vscode.commands.executeCommand(markSet ? move + 'Select' : move);
+    let command = vscode.commands.registerTextEditorCommand(key, moveFunction);
     context.subscriptions.push(command);
+    let selectFunction = () => vscode.commands.executeCommand(move + 'Select');
+    let selectCommand = vscode.commands.registerTextEditorCommand(key + 'Select', selectFunction);
+    context.subscriptions.push(selectCommand);
   });
 
   context.subscriptions.push(
