@@ -60,6 +60,9 @@ export function activate(context: vscode.ExtensionContext) {
     let f = () => vscode.commands.executeCommand(markSet ? move + 'Select' : move);
     let command = vscode.commands.registerTextEditorCommand(key, f);
     context.subscriptions.push(command);
+    let g = () => vscode.commands.executeCommand(move + 'Select');
+    let selectCommand = vscode.commands.registerTextEditorCommand(key + 'Select', g);
+    context.subscriptions.push(selectCommand);
   });
 
   context.subscriptions.push(
