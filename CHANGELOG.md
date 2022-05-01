@@ -1,11 +1,14 @@
 # Unreleased
 
+# Released
+
+## 0.20.0
+
 - Improve command titles
 - Fix the keybind of ctrl+x ctrl+f
 - Use editorTextFocus for contexts
 - Add some missing functions to select
-
-# Released
+- Update dependencies
 
 ## 0.19.0
 
