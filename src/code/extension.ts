@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { TextEditor, Selection, Position } from 'vscode';
 import { KillRing } from '../kill-ring';
-import { execSync } from 'child_process';
+import { v4 as uuidv4 } from 'uuid';
 
 var markSet: boolean = false;
 var isUserCommand: boolean = true;
@@ -69,6 +69,16 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.onDidChangeTextEditorSelection(e => {
       if (isUserCommand) killRing.seal();
       if (e.textEditor.selection.isEmpty) vscode.commands.executeCommand('closeFindWidget');
+    })
+  );
+  context.subscriptions.push(
+    vscode.tasks.onDidEndTask(async e => {
+      let shellInsert = e.execution.task.definition.transientShellInsert;
+      if (shellInsert) {
+        const data = await vscode.workspace.fs.readFile(shellInsert.tmpfile);
+        insertTexts(shellInsert.editor, data.toString().split('\n'));
+        vscode.workspace.fs.delete(shellInsert.tmpfile);
+      }
     })
   );
 }
@@ -281,16 +291,35 @@ function insertTexts(editor: TextEditor, texts: string[]) {
     });
 }
 
-function showCommandOutput(_editor: TextEditor, command: string) {
-  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
-  vscode.workspace
-    .openTextDocument({ content: execSync(command, { cwd }).toString() })
-    .then(doc => vscode.window.showTextDocument(doc));
+function showCommandOutput(editor: TextEditor, command: string) {
+  let shexec = new vscode.ShellExecution(`${command}`);
+  let task = new vscode.Task(
+    { type: 'transient-emacs.shell' },
+    vscode.workspace.getWorkspaceFolder(editor.document.uri)!,
+    'Show command output',
+    'transient-emacs',
+    shexec
+  );
+  vscode.tasks.executeTask(task);
 }
 
 function insertCommandOutput(editor: TextEditor, command: string) {
-  let cwd = vscode.workspace.workspaceFolders![0].uri.fsPath;
-  insertTexts(editor, [execSync(command, { cwd }).toString()]);
+  let dirs = vscode.workspace.workspaceFolders;
+  if (dirs) {
+    const dir = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
+    const tmpfile = vscode.Uri.file(dir + '/.transienttemp-' + uuidv4());
+    let shexec = new vscode.ShellExecution(
+      `touch ${tmpfile.fsPath} && ${command} > ${tmpfile.fsPath}`
+    );
+    let task = new vscode.Task(
+      { type: 'transient-emacs.shell', transientShellInsert: { tmpfile, editor } },
+      vscode.workspace.getWorkspaceFolder(editor.document.uri)!,
+      'Insert command output',
+      'transient-emacs',
+      shexec
+    );
+    vscode.tasks.executeTask(task);
+  }
 }
 
 function shellCommand(editor: TextEditor) {
