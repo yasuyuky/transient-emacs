@@ -10,10 +10,9 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import { Position, Selection } from 'vscode';
-import * as util from 'util';
 
 async function sleep(ms: number) {
-  return util.promisify(setTimeout)(ms);
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function move(editor: vscode.TextEditor, ps: Position[]) {

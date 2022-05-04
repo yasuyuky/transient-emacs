@@ -1,5 +1,3 @@
-import clipboardy = require('clipboardy');
-
 export class KillRing {
   buffer: string[][];
   sealed: boolean;
