@@ -426,6 +426,7 @@
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.31",
+    "@types/uuid": "^8.3.4",
     "@types/vscode": "^1.66.0",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
@@ -448,7 +449,8 @@
   },
   "dependencies": {
     "atom-select-list": "^0.8.1",
-    "clipboardy": "^3.0.0"
+    "clipboardy": "^3.0.0",
+    "uuid": "^8.3.2"
   },
   "deserializers": {
     "KillRing": "deserializeKillRing"
