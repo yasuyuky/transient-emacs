@@ -3,6 +3,7 @@
   "displayName": "Transient Emacs",
   "publisher": "yasuyuky",
   "main": "./lib/entrypoint",
+  "browser": "./lib/web/extension",
   "version": "0.20.0",
   "categories": [
     "Keymaps"
@@ -416,10 +417,13 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm install && npm run compile",
+    "vscode:prepublish": "npm install && npm run compile && npm run package-web",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "npm run compile && node ./lib/code/test/run.js"
+    "test": "npm run compile && node ./lib/code/test/run.js",
+    "compile-web": "webpack",
+    "watch-web": "webpack --watch",
+    "package-web": "webpack --mode production --devtool hidden-source-map"
   },
   "devDependencies": {
     "@types/clipboardy": "^2.0.1",
