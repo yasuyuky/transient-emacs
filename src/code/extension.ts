@@ -300,7 +300,7 @@ function showCommandOutput(editor: TextEditor, command: string) {
     'transient-emacs',
     shexec
   );
-  vscode.tasks.executeTask(task);
+  vscode.tasks.executeTask(task).then(undefined, err => vscode.window.showErrorMessage(err));
 }
 
 function insertCommandOutput(editor: TextEditor, command: string) {
@@ -318,7 +318,7 @@ function insertCommandOutput(editor: TextEditor, command: string) {
       'transient-emacs',
       shexec
     );
-    vscode.tasks.executeTask(task);
+    vscode.tasks.executeTask(task).then(undefined, err => vscode.window.showErrorMessage(err));
   }
 }
 
