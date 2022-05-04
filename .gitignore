@@ -2,6 +2,7 @@
 npm-debug.log
 node_modules
 lib/code
+lib/web
 *.js.map
 vscode.proposed.d.ts
 .vscode-test
