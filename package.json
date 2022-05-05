@@ -4,7 +4,7 @@
   "publisher": "yasuyuky",
   "main": "./lib/entrypoint",
   "browser": "./lib/web/extension",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "categories": [
     "Keymaps"
   ],
