@@ -1,9 +1,11 @@
 # Unreleased
 
+# Released
+
+## 0.21.0
+
 - Add compatibility for vscode web extension
 - Improve the performance of the extension
-
-# Released
 
 ## 0.20.0
 
