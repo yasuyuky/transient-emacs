@@ -11,3 +11,10 @@ updates:
   - dependency-name: "@types/node"
     versions:
     - 15.0.0
+
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+    time: '09:00'
+    timezone: Asia/Tokyo
