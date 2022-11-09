@@ -433,7 +433,7 @@
     "@types/uuid": "^8.3.4",
     "@types/vscode": "^1.73.0",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
     "mocha": "^10.1.0",
     "ts-loader": "^9.4.1",
