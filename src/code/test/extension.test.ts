@@ -35,7 +35,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.kill');
     await sleep(500);
     assert.strictEqual('baz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('transient.kill with multi cursor', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -51,7 +51,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.kill');
     await sleep(500);
     assert.strictEqual('', editor.document.getText());
-  }).timeout(3000);
+  }).timeout(5000);
 
   await test('kill and yank', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -67,7 +67,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill and yank twice', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -85,7 +85,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar\nfoo bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill, move, kill and yank', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -107,7 +107,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('\n\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill and yank with multi cursors', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -122,7 +122,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill, consolidate and yank with multi cursors', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -137,7 +137,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar\nbaz\n\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill, consolidate and yank with inversed multi cursors', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -152,7 +152,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('baz\nfoo bar\n\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill, consolidate, add cursor and yank with multi cursors', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -167,7 +167,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill-backword-word and yank twice', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -184,7 +184,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo barbar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill-backword-word twice and yank twice', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -203,7 +203,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo bar bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill-backword-word 3times and yank twice', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -224,7 +224,7 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo barfoo bar\nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 
   await test('kill-backword-word, move, kill-backword-word and yank twice', async () => {
     let doc = await vscode.workspace.openTextDocument({
@@ -248,5 +248,5 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.yank');
     await sleep(500);
     assert.strictEqual('foo  \nbaz\n', editor.document.getText());
-  });
+  }).timeout(5000);
 });
