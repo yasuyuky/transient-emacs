@@ -103,5 +103,5 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 3. `vsce package && vsce publish`
 4. `npx ovsx publish transient-emacs-$(jq -r .version package.json).vsix -p $OVSX_TOKEN`
 
-[github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
+[github actions status]: https://img.shields.io/github/actions/workflow/status/yasuyuky/transient-emacs/test.yml?branch=main
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
