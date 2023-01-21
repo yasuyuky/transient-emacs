@@ -37,13 +37,11 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `ctrl-x k`           | workbench.action.closeActiveEditor                 |
 | **general**          |                                                    |
 | `ctrl-j`             | transient.insertNewLine                            |
-| `ctrl-m`             |                                                    |
 | `ctrl-g`             | (cancels)                                          |
 | `ctrl-x u`           | undo                                               |
 | **mark**             |                                                    |
 | `ctrl-enter`         | transient.setMark                                  |
 | `ctrl-@`             | transient.setMark                                  |
-| `` ctrl-` ``         |                                                    |
 | **edit**             |                                                    |
 | `ctrl-y`             | transient.yank                                     |
 | `alt-y`              | transient.showKillRing                             |
@@ -51,7 +49,6 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `ctrl-w`             | transient.killRegionOrBackwardWord                 |
 | `alt-w`              | transient.copyRegion                               |
 | `ctrl-j`             | transient.insertNewline                            |
-| `ctrl-m`             |                                                    |
 | `ctrl-d`             | deleteRight (default)                              |
 | `backspace`          | deleteLeft (default)                               |
 | `ctrl-h`             | deleteLeft (default)                               |
@@ -79,8 +76,6 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | **search**           |                                                    |
 | `ctrl-s`             | actions.find                                       |
 | `ctrl-r`             | actions.find (reverse search)                      |
-| `ctrl-alt-s`         |                                                    |
-| `ctrl-alt-r`         |                                                    |
 | **pane**             |                                                    |
 | `ctrl-x 2`           | workbench.action.splitEditorDown                   |
 | `ctrl-x 3`           | workbench.action.splitEditorRight                  |
@@ -88,9 +83,7 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 | `ctrl-x o`           | workbench.action.focusNextGroup                    |
 | **misc**             |                                                    |
 | `alt-x`              | workbench.action.showCommands                      |
-| `alt-/`              |                                                    |
 | `alt-.`              | workbench.action.gotoSymbol                        |
-| `alt-.`              |                                                    |
 | `shift+alt+1`        | transient.shellCommand                             |
 | `ctrl+u shift+alt+1` | transient.shellCommandAndInsert                    |
 | `shift+alt+\`        | transient.shellCommandOnRegion                     |
