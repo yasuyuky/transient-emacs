@@ -2,17 +2,14 @@
 
 <img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/main/image/icon.png" width="128px">
 
-Emacs (transient mark mode) for Atom Editor / VS Code
+Emacs (transient mark mode) for VS Code (and formaly Atom Editor)
 
-- [for Atom Editor](https://atom.io/packages/transient-emacs)
 - [for VS Code](https://marketplace.visualstudio.com/items?itemName=yasuyuky.transient-emacs)
 - [available on Open VSX Registry](https://open-vsx.org/extension/yasuyuky/transient-emacs)
 
-[![Build Status][travis-ci status]][travis-ci]
-[![Build Status][azure pipelines status]][azure pipelines]
 [![Actions Status][github actions status]][github actions]
 
-This package emulate Emacs'
+This package emulates Emacs'
 [transient-mark-mode](http://www.emacswiki.org/emacs/TransientMarkMode).
 
 # Features
@@ -106,9 +103,5 @@ See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detai
 3. `vsce package && vsce publish`
 4. `npx ovsx publish transient-emacs-$(jq -r .version package.json).vsix -p $OVSX_TOKEN`
 
-[travis-ci status]: https://app.travis-ci.com/yasuyuky/transient-emacs.svg?branch=main
-[travis-ci]: https://app.travis-ci.com/yasuyuky/transient-emacs
-[azure pipelines status]: https://dev.azure.com/yasuyuky/transient-emacs/_apis/build/status/yasuyuky.transient-emacs?branchName=main
-[azure pipelines]: https://dev.azure.com/yasuyuky/transient-emacs/_build/latest?definitionId=1&branchName=main
 [github actions status]: https://img.shields.io/github/workflow/status/yasuyuky/transient-emacs/Test.svg?logo=github
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
