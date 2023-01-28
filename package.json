@@ -2,7 +2,7 @@
   "name": "transient-emacs",
   "displayName": "Transient Emacs",
   "publisher": "yasuyuky",
-  "main": "./lib/entrypoint",
+  "main": "./lib/code/extension",
   "browser": "./lib/web/extension",
   "version": "0.21.0",
   "categories": [
