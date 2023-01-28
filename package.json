@@ -451,8 +451,7 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.66.0",
-    "atom": "^1.39.0"
+    "vscode": "^1.66.0"
   },
   "dependencies": {
     "atom-select-list": "^0.8.1",
