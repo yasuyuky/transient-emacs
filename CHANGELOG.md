@@ -1,5 +1,7 @@
 # Unreleased
 
+- Drop atom compatibility
+
 # Released
 
 ## 0.21.0
