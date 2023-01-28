@@ -4,13 +4,9 @@
 .git
 .vscode/**
 .vscode-test/**
-keymaps
-lib/atom/**
 lib/*/test/**
 node_modules
 !node_modules/uuid
-spec
-styles
 src/**
 .gitignore
 **/tsconfig.json

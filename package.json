@@ -2,7 +2,7 @@
   "name": "transient-emacs",
   "displayName": "Transient Emacs",
   "publisher": "yasuyuky",
-  "main": "./lib/entrypoint",
+  "main": "./lib/code/extension",
   "browser": "./lib/web/extension",
   "version": "0.21.0",
   "categories": [
@@ -426,7 +426,6 @@
     "package-web": "webpack --mode production --devtool hidden-source-map"
   },
   "devDependencies": {
-    "@types/clipboardy": "^2.0.1",
     "@types/glob": "^8.0.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
@@ -451,15 +450,9 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.66.0",
-    "atom": "^1.39.0"
+    "vscode": "^1.66.0"
   },
   "dependencies": {
-    "atom-select-list": "^0.8.1",
-    "clipboardy": "^3.0.0",
     "uuid": "^9.0.0"
-  },
-  "deserializers": {
-    "KillRing": "deserializeKillRing"
   }
 }
