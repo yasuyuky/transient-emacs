@@ -1,4 +1,4 @@
-# Transient Emacs for Atom Editor / VS Code
+# Transient Emacs for VS Code
 
 <img src="https://raw.githubusercontent.com/yasuyuky/transient-emacs/main/image/icon.png" width="128px">
 
@@ -21,8 +21,6 @@ This package emulates Emacs'
 - [x] yank text selected from kill-ring history
 
 # Keybindings
-
-See keymaps/transient-emacs.cson (for atom) or package.json (for code) for detailed keybindings
 
 | keybindngs           | VS Code Commands                                   |
 | -------------------- | -------------------------------------------------- |
