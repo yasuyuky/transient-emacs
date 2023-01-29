@@ -89,10 +89,9 @@ This package emulates Emacs'
 
 # Release flow
 
-1. Update CHANGELOG
-2. `apm publish (major|minor|patch)`
-3. `vsce package && vsce publish`
-4. `npx ovsx publish transient-emacs-$(jq -r .version package.json).vsix -p $OVSX_TOKEN`
+1. Update the CHANGELOG.md
+2. Increment the version of package.json and package-lock.json
+3. Push the tag named `v(new version)`
 
 [github actions status]: https://img.shields.io/github/actions/workflow/status/yasuyuky/transient-emacs/test.yml?branch=main
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
