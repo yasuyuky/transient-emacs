@@ -1,0 +1,48 @@
+name: release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get date
+        id: get_date
+        run: |
+          date +'%Y.%m.%d'
+          echo date=$(date +'%Y.%m.%d') >>$GITHUB_OUTPUT
+
+      - name: Get the version
+        id: ver
+        run: |
+          VERSION=$(jq -r '.version' package.json)
+          echo ${VERSION}
+          echo version=${VERSION} >>$GITHUB_OUTPUT
+          echo v=v${VERSION} >>$GITHUB_OUTPUT
+          test ${GITHUB_REF/refs\/tags\//} = v${VERSION}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.ver.outputs.v }}
+          release_name: Release ${{ steps.ver.outputs.v }} (${{ steps.get_date.outputs.date }})
+          body: Automated release
+          draft: false
+          prerelease: false
+
+      - name: Publish
+        run: |
+          npx vsce package
+          npx vsce publish
+          npx ovsx publish transient-emacs-${{ steps.ver.outputs.version }}.vsix -p $OVSX_TOKEN
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
