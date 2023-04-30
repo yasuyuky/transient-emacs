@@ -30,10 +30,10 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('baz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -46,10 +46,10 @@ suite('Extension Tests', async () => {
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await sleep(300);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('', editor.document.getText());
   }).timeout(5000);
 
@@ -61,11 +61,11 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -77,13 +77,13 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar\nfoo bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -95,17 +95,17 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.cursorDown');
     await sleep(300);
     await vscode.commands.executeCommand('transient.cursorUp');
     await sleep(300);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('\n\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -117,10 +117,10 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('\n\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -132,10 +132,10 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar\nbaz\n\n', editor.document.getText());
   }).timeout(5000);
 
@@ -147,10 +147,10 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(1, 0), new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     move(editor, [new Position(0, 0)]);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('baz\nfoo bar\n\n', editor.document.getText());
   }).timeout(5000);
 
@@ -162,10 +162,10 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await vscode.commands.executeCommand('transient.kill');
-    await sleep(500);
+    await sleep(750);
     move(editor, [new Position(0, 0), new Position(1, 0)]);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -177,12 +177,12 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 7)]);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo \nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo barbar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -194,14 +194,14 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 7)]);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo bar bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -213,16 +213,16 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 7)]);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo barfoo bar\nbaz\n', editor.document.getText());
   }).timeout(5000);
 
@@ -234,19 +234,19 @@ suite('Extension Tests', async () => {
     await vscode.commands.executeCommand('transient.clearKillRing');
     move(editor, [new Position(0, 7)]);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     await vscode.commands.executeCommand('transient.cursorDown');
     await sleep(300);
     await vscode.commands.executeCommand('transient.cursorUp');
     await sleep(300);
     await vscode.commands.executeCommand('transient.killRegionOrBackwardWord');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo\nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo \nbaz\n', editor.document.getText());
     await vscode.commands.executeCommand('transient.yank');
-    await sleep(500);
+    await sleep(750);
     assert.strictEqual('foo  \nbaz\n', editor.document.getText());
   }).timeout(5000);
 });
