@@ -146,7 +146,8 @@ function cursorParagraphMove(
     }
     return new Selection(select ? s.anchor : end, end);
   });
-  editor.revealRange(editor.selections[editor.selections.length - 1].with());
+  const last = editor.selections[editor.selections.length - 1];
+  editor.revealRange(last.with(last.active, last.active));
 }
 
 function adjustToCenter(editor: TextEditor) {
