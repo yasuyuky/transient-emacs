@@ -1,8 +1,12 @@
 # Unreleased
 
-- Drop atom compatibility
-
 # Released
+
+## 0.22.0
+
+- Updated VSCode engine requirement to version 1.77.0
+- Improved cursorParagraphMove to reveal the last selection's active position
+- Drop atom compatibility
 
 ## 0.21.0
 
