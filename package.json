@@ -430,7 +430,7 @@
     "@types/mocha": "^10.0.9",
     "@types/node": "^22.8.4",
     "@types/uuid": "^10.0.0",
-    "@types/vscode": "^1.94.0",
+    "@types/vscode": "^1.95.0",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "@vscode/test-electron": "^2.4.1",
