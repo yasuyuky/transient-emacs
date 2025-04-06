@@ -1,6 +1,6 @@
-# Unreleased
-
 # Released
+
+See release notes on GitHub for 0.23.0 and later.
 
 ## 0.22.0
 
