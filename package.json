@@ -450,7 +450,7 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.78.0"
+    "vscode": "^1.98.0"
   },
   "dependencies": {
     "uuid": "^11.1.0"
