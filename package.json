@@ -435,7 +435,7 @@
     "@typescript-eslint/parser": "^8.46.3",
     "@vscode/test-electron": "^2.5.2",
     "eslint": "^9.39.1",
-    "mocha": "^11.7.4",
+    "mocha": "^11.7.5",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "webpack": "^5.102.1",
