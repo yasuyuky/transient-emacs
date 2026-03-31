@@ -426,20 +426,20 @@
     "package-web": "webpack --mode production --devtool hidden-source-map"
   },
   "devDependencies": {
-    "@types/glob": "^8.1.0",
+    "@types/glob": "^9.0.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^24.0.3",
-    "@types/uuid": "^10.0.0",
-    "@types/vscode": "^1.101.0",
-    "@typescript-eslint/eslint-plugin": "^8.35.0",
-    "@typescript-eslint/parser": "^8.35.0",
+    "@types/node": "^25.5.0",
+    "@types/uuid": "^11.0.0",
+    "@types/vscode": "^1.110.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.0",
+    "@typescript-eslint/parser": "^8.58.0",
     "@vscode/test-electron": "^2.5.2",
-    "eslint": "^9.29.0",
-    "mocha": "^11.7.0",
-    "ts-loader": "^9.5.2",
-    "typescript": "^5.8.3",
-    "webpack": "^5.99.9",
-    "webpack-cli": "^6.0.1"
+    "eslint": "^10.1.0",
+    "mocha": "^11.7.5",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2"
   },
   "private": true,
   "description": "Emacs mode using transient mark",
@@ -453,6 +453,6 @@
     "vscode": "^1.98.0"
   },
   "dependencies": {
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   }
 }
