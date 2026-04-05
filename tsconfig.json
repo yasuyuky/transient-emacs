@@ -4,6 +4,7 @@
     "target": "es6",
     "outDir": "lib",
     "lib": ["es6", "dom"],
+    "types": ["node"],
     "sourceMap": true,
     "rootDir": "src",
     "strict": true /* enable all strict type-checking options */,
