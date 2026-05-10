@@ -89,9 +89,13 @@ This package emulates Emacs'
 
 # Release flow
 
-1. Update the CHANGELOG.md
-2. Increment the version of package.json and package-lock.json
-3. Push the tag named `v(new version)`
+Releases are normally automated. The release workflow checks `main` weekly
+and creates a patch release when the latest `v*` tag is at least 4 weeks old
+and there are commits since that tag. GitHub generates the release notes from
+merged pull requests and commits.
+
+Manual releases still work by incrementing the version of `package.json` and
+`package-lock.json`, then pushing the tag named `v(new version)`.
 
 [github actions status]: https://img.shields.io/github/actions/workflow/status/yasuyuky/transient-emacs/test.yml?branch=main
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
