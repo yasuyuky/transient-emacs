@@ -4,45 +4,154 @@ on:
   push:
     tags:
       - v*
+  schedule:
+    # GitHub cron cannot express "every 4 weeks", so run weekly and gate below.
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Release even when the latest release is newer than 4 weeks
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'push' && github.ref || github.event.repository.default_branch }}
+
+      - name: Check release window
+        id: release_window
+        shell: bash
+        env:
+          FORCE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+          RELEASE_INTERVAL_SECONDS: 2419200
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" = "push" ]]; then
+            echo "mode=tag" >>"$GITHUB_OUTPUT"
+            echo "should_release=true" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          latest_tag=$(git describe --tags --match 'v[0-9]*' --abbrev=0 2>/dev/null || true)
+          if [[ -z "$latest_tag" ]]; then
+            echo "mode=scheduled" >>"$GITHUB_OUTPUT"
+            echo "should_release=true" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          commits=$(git rev-list "${latest_tag}..HEAD" --count)
+          if [[ "$commits" -eq 0 ]]; then
+            echo "No changes since ${latest_tag}."
+            echo "should_release=false" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          last_release=$(git log -1 --format=%ct "$latest_tag")
+          now=$(date +%s)
+          age=$((now - last_release))
+          if [[ "$FORCE_RELEASE" != "true" && "$age" -lt "$RELEASE_INTERVAL_SECONDS" ]]; then
+            echo "${latest_tag} is newer than 4 weeks."
+            echo "should_release=false" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "mode=scheduled" >>"$GITHUB_OUTPUT"
+          echo "should_release=true" >>"$GITHUB_OUTPUT"
 
       - name: Get date
         id: get_date
+        if: steps.release_window.outputs.should_release == 'true'
         run: |
           date +'%Y.%m.%d'
           echo date=$(date +'%Y.%m.%d') >>$GITHUB_OUTPUT
 
-      - name: Get the version
+      - uses: actions/setup-node@v6
+        if: steps.release_window.outputs.should_release == 'true'
+        with:
+          node-version: '20.x'
+
+      - name: Get tag version
         id: ver
+        if: steps.release_window.outputs.mode == 'tag'
         run: |
           VERSION=$(jq -r '.version' package.json)
           echo ${VERSION}
           echo version=${VERSION} >>$GITHUB_OUTPUT
           echo v=v${VERSION} >>$GITHUB_OUTPUT
-          test ${GITHUB_REF/refs\/tags\//} = v${VERSION}
+          test "${GITHUB_REF#refs/tags/}" = "v${VERSION}"
+
+      - name: Bump patch version
+        id: bump
+        if: steps.release_window.outputs.mode == 'scheduled'
+        run: |
+          npm version patch --no-git-tag-version
+          VERSION=$(jq -r '.version' package.json)
+          TAG=v${VERSION}
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::error::${TAG} already exists"
+            exit 1
+          fi
+
+          echo version=${VERSION} >>$GITHUB_OUTPUT
+          echo v=${TAG} >>$GITHUB_OUTPUT
+
+      - name: Start xvfb
+        if: steps.release_window.outputs.mode == 'scheduled'
+        run: |
+          /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          echo ">>> Started xvfb"
+
+      - name: Test scheduled release
+        if: steps.release_window.outputs.mode == 'scheduled'
+        run: |
+          npm ci
+          npm test
+        env:
+          DISPLAY: ':99.0'
+
+      - name: Push scheduled release tag
+        if: steps.release_window.outputs.mode == 'scheduled'
+        env:
+          TAG: ${{ steps.bump.outputs.v }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Release ${TAG}"
+          git tag "$TAG"
+          git push --atomic origin "HEAD:${{ github.event.repository.default_branch }}" "$TAG"
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+        if: steps.release_window.outputs.should_release == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.ver.outputs.v }}
-          release_name: Release ${{ steps.ver.outputs.v }} (${{ steps.get_date.outputs.date }})
-          body: Automated release
-          draft: false
-          prerelease: false
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.ver.outputs.v || steps.bump.outputs.v }}
+          DATE: ${{ steps.get_date.outputs.date }}
+        run: |
+          gh release create "$TAG" \
+            --title "Release ${TAG} (${DATE})" \
+            --generate-notes
 
       - name: Publish
+        if: steps.release_window.outputs.should_release == 'true'
         run: |
           npx vsce package
           npx vsce publish
-          npx ovsx publish transient-emacs-${{ steps.ver.outputs.version }}.vsix -p $OVSX_TOKEN
+          npx ovsx publish transient-emacs-${VERSION}.vsix -p $OVSX_TOKEN
         env:
+          VERSION: ${{ steps.ver.outputs.version || steps.bump.outputs.version }}
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
           OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
