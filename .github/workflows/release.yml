@@ -108,6 +108,36 @@ jobs:
           echo version=${VERSION} >>$GITHUB_OUTPUT
           echo v=${TAG} >>$GITHUB_OUTPUT
 
+      - name: Sync VS Code engine
+        if: steps.release_window.outputs.should_release == 'true'
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
+          const writeJson = (file, data) => {
+            fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+          };
+
+          const manifest = readJson('package.json');
+          const vscode = manifest.devDependencies?.['@types/vscode'];
+
+          if (!vscode) {
+            throw new Error('@types/vscode is missing from devDependencies');
+          }
+
+          manifest.engines ??= {};
+          manifest.engines.vscode = vscode;
+          writeJson('package.json', manifest);
+
+          const lock = readJson('package-lock.json');
+          lock.packages ??= {};
+          lock.packages[''] ??= {};
+          lock.packages[''].engines ??= {};
+          lock.packages[''].engines.vscode = vscode;
+          writeJson('package-lock.json', lock);
+          NODE
+
       - name: Start xvfb
         if: steps.release_window.outputs.mode == 'scheduled'
         run: |
