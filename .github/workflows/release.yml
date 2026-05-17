@@ -14,6 +14,25 @@ on:
         required: false
         default: false
         type: boolean
+      publish_only:
+        description: Publish an existing release without creating a new tag or GitHub release
+        required: false
+        default: false
+        type: boolean
+      tag:
+        description: Existing release tag for publish_only; defaults to the latest v* tag
+        required: false
+        default: ''
+        type: string
+      publish_target:
+        description: Marketplace to publish in publish_only mode
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - vsce
+          - ovsx
 
 permissions:
   contents: write
@@ -36,8 +55,46 @@ jobs:
         shell: bash
         env:
           FORCE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+          PUBLISH_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_only }}
+          PUBLISH_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || '' }}
+          PUBLISH_TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_only && inputs.publish_target || 'all' }}
           RELEASE_INTERVAL_SECONDS: 2419200
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "publish_target=${PUBLISH_TARGET}" >>"$GITHUB_OUTPUT"
+
+          if [[ "$GITHUB_EVENT_NAME" = "workflow_dispatch" && "$PUBLISH_ONLY" = "true" ]]; then
+            tag="${PUBLISH_TAG#refs/tags/}"
+            if [[ -z "$tag" ]]; then
+              tag=$(git describe --tags --match 'v[0-9]*' --abbrev=0 2>/dev/null || true)
+            fi
+
+            if [[ -z "$tag" ]]; then
+              echo "::error::No v* tag found for publish_only"
+              exit 1
+            fi
+
+            if [[ "$tag" != v* ]]; then
+              echo "::error::publish_only tag must start with v"
+              exit 1
+            fi
+
+            if ! git rev-parse --verify --quiet "refs/tags/${tag}" >/dev/null; then
+              echo "::error::${tag} does not exist"
+              exit 1
+            fi
+
+            if ! gh release view "$tag" >/dev/null; then
+              echo "::error::GitHub release ${tag} does not exist"
+              exit 1
+            fi
+
+            echo "mode=publish" >>"$GITHUB_OUTPUT"
+            echo "should_release=true" >>"$GITHUB_OUTPUT"
+            echo "v=${tag}" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           if [[ "$GITHUB_EVENT_NAME" = "push" ]]; then
             echo "mode=tag" >>"$GITHUB_OUTPUT"
             echo "should_release=true" >>"$GITHUB_OUTPUT"
@@ -70,9 +127,26 @@ jobs:
           echo "mode=scheduled" >>"$GITHUB_OUTPUT"
           echo "should_release=true" >>"$GITHUB_OUTPUT"
 
+      - name: Checkout publish tag
+        if: steps.release_window.outputs.mode == 'publish'
+        env:
+          TAG: ${{ steps.release_window.outputs.v }}
+        run: git checkout --detach "$TAG"
+
+      - name: Get publish version
+        id: publish_ver
+        if: steps.release_window.outputs.mode == 'publish'
+        env:
+          TAG: ${{ steps.release_window.outputs.v }}
+        run: |
+          VERSION=$(jq -r '.version' package.json)
+          echo ${VERSION}
+          echo version=${VERSION} >>$GITHUB_OUTPUT
+          test "$TAG" = "v${VERSION}"
+
       - name: Get date
         id: get_date
-        if: steps.release_window.outputs.should_release == 'true'
+        if: steps.release_window.outputs.should_release == 'true' && steps.release_window.outputs.mode != 'publish'
         run: |
           date +'%Y.%m.%d'
           echo date=$(date +'%Y.%m.%d') >>$GITHUB_OUTPUT
@@ -109,7 +183,7 @@ jobs:
           echo v=${TAG} >>$GITHUB_OUTPUT
 
       - name: Sync VS Code engine
-        if: steps.release_window.outputs.should_release == 'true'
+        if: steps.release_window.outputs.should_release == 'true' && steps.release_window.outputs.mode != 'publish'
         run: |
           node <<'NODE'
           const fs = require('fs');
@@ -165,7 +239,7 @@ jobs:
           git push --atomic origin "HEAD:${{ github.event.repository.default_branch }}" "$TAG"
 
       - name: Create Release
-        if: steps.release_window.outputs.should_release == 'true'
+        if: steps.release_window.outputs.should_release == 'true' && steps.release_window.outputs.mode != 'publish'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.ver.outputs.v || steps.bump.outputs.v }}
@@ -179,9 +253,14 @@ jobs:
         if: steps.release_window.outputs.should_release == 'true'
         run: |
           npx vsce package
-          npx vsce publish
-          npx ovsx publish transient-emacs-${VERSION}.vsix -p $OVSX_TOKEN
+          if [[ "$PUBLISH_TARGET" = "all" || "$PUBLISH_TARGET" = "vsce" ]]; then
+            npx vsce publish
+          fi
+          if [[ "$PUBLISH_TARGET" = "all" || "$PUBLISH_TARGET" = "ovsx" ]]; then
+            npx ovsx publish transient-emacs-${VERSION}.vsix -p $OVSX_TOKEN
+          fi
         env:
-          VERSION: ${{ steps.ver.outputs.version || steps.bump.outputs.version }}
+          VERSION: ${{ steps.ver.outputs.version || steps.bump.outputs.version || steps.publish_ver.outputs.version }}
+          PUBLISH_TARGET: ${{ steps.release_window.outputs.publish_target || 'all' }}
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
           OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}

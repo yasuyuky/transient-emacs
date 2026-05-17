@@ -97,5 +97,10 @@ merged pull requests and commits.
 Manual releases still work by incrementing the version of `package.json` and
 `package-lock.json`, then pushing the tag named `v(new version)`.
 
+If publish fails after a GitHub release already exists, run the release workflow
+manually with `publish_only` enabled. Set `tag` to the existing release tag, or
+leave it empty to use the latest `v*` tag. Use `publish_target` to retry only
+the failed marketplace when one publish already succeeded.
+
 [github actions status]: https://img.shields.io/github/actions/workflow/status/yasuyuky/transient-emacs/test.yml?branch=main
 [github actions]: https://github.com/yasuyuky/transient-emacs/actions
