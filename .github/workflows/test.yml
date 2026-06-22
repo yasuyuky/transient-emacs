@@ -10,7 +10,7 @@ jobs:
         os: [macOS-latest, windows-latest, ubuntu-latest]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
       - uses: actions/setup-node@v6.4.0
         with:
           node-version: '22.x'
