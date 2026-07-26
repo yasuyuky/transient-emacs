@@ -4,7 +4,7 @@
   "publisher": "yasuyuky",
   "main": "./lib/code/extension",
   "browser": "./lib/web/extension",
-  "version": "0.23.3",
+  "version": "0.23.4",
   "categories": [
     "Keymaps"
   ],
@@ -450,7 +450,7 @@
   "icon": "image/icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.120.0"
+    "vscode": "^1.125.0"
   },
   "dependencies": {
     "uuid": "^14.0.1"
