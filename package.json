@@ -453,7 +453,7 @@
     "vscode": "^1.125.0"
   },
   "dependencies": {
-    "uuid": "^14.0.1"
+    "uuid": "^14.0.2"
   },
   "overrides": {
     "mocha": {
